@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+<ion-title>Contest Description</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+ <ion-toolbar>
+   <ion-segment color="secondary" [(ngModel)]="gallery">
+  <ion-segment-button value="standard">
+    <ion-label>Standard</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="hybrid">
+    <ion-label>Hybrid</ion-label>
+  </ion-segment-button>
+</ion-segment>
+ </ion-toolbar>
+
+ <div [ngSwitch]="gallery">
+  <div *ngSwitchCase="'standard'">
+      <ion-list>
+    <ion-item>
+      <ion-row class="galleryrow">
+        <ion-col size="4" *ngFor="let item of items">
+          <ion-card>
+       <img src="../../assets/backpacks.jpg" alt="">
+     </ion-card>
+        </ion-col>
+      
+      </ion-row>
+     
+     
+    </ion-item>
+    
+  </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  </div>
+
+
+  
+   <ion-virtual-scroll [items]="items" approxItemHeight="320px" *ngSwitchCase="'hybrid'">
+    <ion-card *virtualItem="let item; let itemBounds = bounds;">
+      <div>
+        <ion-img [src]="item.imgSrc" style="height:200px" [alt]="item.name"></ion-img>
+      </div>
+    <ion-card-header>
+      <ion-card-title>{{ item.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>{{ item.name }}</ion-card-content>
+    </ion-card>
+  </ion-virtual-scroll>
+  
+</div>
+ 
+
+</ion-content>
