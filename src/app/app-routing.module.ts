@@ -26,6 +26,18 @@ const routes: Routes = [
   {
     path: 'imagemodal',
     loadChildren: () => import('./imagemodal/imagemodal.module').then( m => m.ImagemodalPageModule)
+  },
+  {
+    path: 'winners',
+    loadChildren: () => import('./winners/winners.module').then( m => m.WinnersPageModule)
+  },
+  {
+    path: 'addmodal',
+    loadChildren: () => import('./addmodal/addmodal.module').then( m => m.AddmodalPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   }
 ];
 @NgModule({

@@ -8,11 +8,20 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ImagemodalPage } from './imagemodal/imagemodal.page';
+import { ImagemodalPageModule } from './imagemodal/imagemodal.module';
+
+
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  entryComponents: [ImagemodalPage],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    ImagemodalPageModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,

@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonInfiniteScroll, ModalController } from '@ionic/angular';
-import { ImagemodalPage } from '../imagemodal/imagemodal.page';
-
+import { IonInfiniteScroll } from '@ionic/angular';
 const lorem =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, seddo eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
@@ -19,17 +17,18 @@ const images = [
 ];
 let rotateImg = 0;
 @Component({
-  selector: "app-enteries",
-  templateUrl: "./enteries.page.html",
-  styleUrls: ["./enteries.page.scss"]
+  selector: 'app-tabviewgallery',
+  templateUrl: './tabviewgallery.component.html',
+  styleUrls: ['./tabviewgallery.component.scss'],
 })
-export class EnteriesPage implements OnInit {
+export class TabviewgalleryComponent implements OnInit {
   items: any[] = [];
-  gallery: string = "standard";
-  @ViewChild(IonInfiniteScroll, { static: true })
-  infiniteScroll: IonInfiniteScroll;
-  constructor( private modalController:ModalController) {
-    for (let i = 0; i < 25; i++) {
+  // gallery: string = "standard";
+  // @ViewChild(IonInfiniteScroll, { static: true })
+  // infiniteScroll: IonInfiniteScroll;
+
+  constructor() { 
+     for (let i = 0; i < 25; i++) {
       this.items.push({
         name: i + " - " + images[rotateImg],
         imgSrc: this.getImgSrc(),
@@ -78,21 +77,9 @@ export class EnteriesPage implements OnInit {
         event.target.disabled = true;
       }
     }, 500);
-
-    // App logic to determine if all data is loaded
-    // and disable the infinite scroll
   }
+
   ngOnInit() {}
 
-  async openimageModal(){
- 
-    const modal = await this.modalController.create({
-      component: ImagemodalPage,
-      backdropDismiss:true,
-      cssClass:"my-modal"
-      
-    });
-    return await modal.present();
-  }
-  
+
 }
