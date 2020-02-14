@@ -10,7 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ImagemodalPage } from './imagemodal/imagemodal.page';
 import { ImagemodalPageModule } from './imagemodal/imagemodal.module';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { ForgotpasswordmodalPageModule } from './forgotpasswordmodal/forgotpasswordmodal.module';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -20,7 +22,10 @@ import { ImagemodalPageModule } from './imagemodal/imagemodal.module';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    ImagemodalPageModule
+    ImagemodalPageModule,
+    ReactiveFormsModule,
+    ForgotpasswordmodalPageModule,
+    BrowserAnimationsModule
   ],
   providers: [
     StatusBar,
