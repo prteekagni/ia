@@ -28,7 +28,7 @@ export class EnteriesPage implements OnInit {
   gallery: string = "standard";
   @ViewChild(IonInfiniteScroll, { static: true })
   infiniteScroll: IonInfiniteScroll;
-  constructor( private modalController:ModalController) {
+  constructor(private modalController: ModalController) {
     for (let i = 0; i < 25; i++) {
       this.items.push({
         name: i + " - " + images[rotateImg],
@@ -84,15 +84,12 @@ export class EnteriesPage implements OnInit {
   }
   ngOnInit() {}
 
-  async openimageModal(){
- 
+  async openimageModal() {
     const modal = await this.modalController.create({
       component: ImagemodalPage,
-      backdropDismiss:true,
-      cssClass:"my-modal"
-      
+      backdropDismiss: true
     });
     return await modal.present();
   }
-  
+
 }

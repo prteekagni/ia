@@ -32,7 +32,7 @@
 .side {
     position: absolute;
     text-align: center;
-    width: 95vw;
+    width: 100vw;
     height: 25vh;
     // padding: 20px 50px;
     color: #fff;
@@ -77,8 +77,9 @@
   border-radius: 20px;
 }
 .modal-wrapper {
-  --width: 90%;
-  --height: 50%;
+--width: 90%;
+    --height: 56vh;
+    --border-radius: 20px;
 }
 
 .my-modal .modal-wrapper {

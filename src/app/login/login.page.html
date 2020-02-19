@@ -1,3 +1,10 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
 <!-- <ion-row style="    margin-top: 15%;
     left: 50%;
     position: absolute;
@@ -16,7 +23,7 @@
   </ion-col>
   
 </ion-row> -->
-  <form #form="ngForm">
+  <form #form="ngForm" (ngSubmit)="login()">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
@@ -24,15 +31,21 @@
        <img src="../../../assets/icon/favicon.png" alt="" style="margin-top:10%" >
           </div>
           <div padding style="padding-top: 25px;"> 
-            <ion-item>
+            <ion-item lines="none">
               <ion-input name="email" type="email" placeholder="your@email.com" ngModel required></ion-input>
             </ion-item>
-            <ion-item>
+            <ion-item lines="none">
               <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
             </ion-item>
              
 
             
+          </div>
+          <div>
+            <ion-item button class="ion-text-right" lines="none">
+              <ion-label>Forgot Password</ion-label>
+
+            </ion-item>
           </div>
       
           <div padding>
@@ -42,15 +55,7 @@
       </ion-row>
     </ion-grid>
   </form>
-  <ion-row>
-    <ion-col size="6" text-left>
-       <a  style="padding-left: 16px;" (click)="createAccount()">Create Account</a>
-    </ion-col>
-    <ion-col size="6" class="ion-text-right">
-       <a style="padding-right: 16px;" (click)="forgotPassword()">Forgot Password</a>
-    </ion-col>
-  </ion-row>
-     
+ 
   <ion-row>
     <ion-col size="12" align-self-center>
        <div text-center> 
@@ -62,7 +67,16 @@
    <img src="../../../assets/icon/favicon.png" alt="" style="width: 40px;"> 
     </ion-col>
   </ion-row>
- 
+  <ion-row style="margin-top: 25px;">
+    <ion-col size="12" class="ion-text-center">
+      Don't have an account? 
+       <a  style="" (click)="createAccount()">Signup</a>
+    </ion-col>
+    <!-- <ion-col size="6" class="ion-text-right">
+       <a style="padding-right: 16px;" (click)="forgotPassword()">Forgot Password</a>
+    </ion-col> -->
+  </ion-row>
+     
 
 <!-- <ion-row>
   <ion-col size="12">
@@ -73,3 +87,4 @@
   </ion-col>
           
       </ion-row> -->
+</ion-content>

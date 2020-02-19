@@ -83,7 +83,7 @@ export class GalleryComponent implements OnInit {
     const modal = await this.modalController.create({
       component: ImagemodalPage,
       backdropDismiss: true,
-      cssClass: "my-modal"
+      
     });
     return await modal.present();
   }

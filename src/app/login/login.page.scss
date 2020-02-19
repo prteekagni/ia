@@ -1,0 +1,14 @@
+ion-item.sc-ion-input-md-h:not(.item-label), ion-item:not(.item-label) .sc-ion-input-md-h{
+    --padding-start:10px;
+    --border: 1px solid lightgray;
+    --border-radius: 10px;
+}
+
+.input-wrapper{
+    border-radius: 10px;
+}
+
+.sc-ion-input-md-h{
+    border: 1px solid gray;
+    border-radius: 10px;
+}

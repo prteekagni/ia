@@ -10,7 +10,7 @@ import { async } from '@angular/core/testing';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
+modalcontro;
   constructor( private router: Router , private route:ActivatedRoute , private modalController: ModalController) { }
 
   ngOnInit() {}
@@ -19,13 +19,16 @@ export class LoginComponent implements OnInit {
     this.router.navigate(["register"], { relativeTo: this.route.parent });
   }
   async forgotPassword(){
-    const modal = await this.modalController.create(
-      {
-        component:ForgotpasswordmodalPage,
-        
-        cssClass:"my-modal"
-      }
-    );
+    const modal = await this.modalController.create({
+      component: ForgotpasswordmodalPage,
+      animated:true,
+      cssClass: "my-modal"
+    });
+    this.modalcontro = modal;
       return await modal.present();
+  }
+
+  onDismiss(){
+this.modalcontro.dismiss();
   }
 }

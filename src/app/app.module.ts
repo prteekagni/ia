@@ -13,8 +13,8 @@ import { ImagemodalPageModule } from './imagemodal/imagemodal.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ForgotpasswordmodalPageModule } from './forgotpasswordmodal/forgotpasswordmodal.module';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-
-
+import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [ImagemodalPage],
@@ -25,12 +25,14 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     ImagemodalPageModule,
     ReactiveFormsModule,
     ForgotpasswordmodalPageModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Camera
   ],
   bootstrap: [AppComponent]
 })

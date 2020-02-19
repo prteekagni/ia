@@ -49,3 +49,15 @@ h4{
 ::-webkit-scrollbar {
   display: none;
 }
+
+.contestheading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: large;
+}
+.filterimage{
+    filter: brightness(0.8);
+}
