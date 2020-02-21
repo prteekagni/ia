@@ -32,11 +32,11 @@ span{
     width: 60px;
 }
 
-.header-md:after{
-    bottom: 0px !important;
-}
+// .header-md:after{
+//     bottom: 0px !important;
+// }
  ion-toolbar {
-    --background: transparent;
+    --background: white;
  }
 
  ion-header{
@@ -46,6 +46,23 @@ span{
   ::-webkit-scrollbar {
     --display: none;
   }
-ion-back-button{
-    --color:white
+
+  .conditioncard{
+      text-align: start;
+      width:94vw;
+  }
+super-tabs-toolbar{
+  --super-tabs-toolbar-background:white
+  
+}
+super-tab-button{
+--st-base-color-active:white;
+}
+
+.header-md:after{
+    bottom: 0px !important;
+}
+
+super-tab-button.hydrated.ion-activatable.ion-focusable.active{
+  background:lightgray;
 }

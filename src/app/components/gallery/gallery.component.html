@@ -1,15 +1,23 @@
- <ion-list>
-    <ion-item>
-      <ion-row class="galleryrow">
-        <ion-col size="4" *ngFor="let item of items">
-          <ion-card (click)="openimageModal()">
-       <img src="../../assets/backpacks.jpg" alt="">
-     </ion-card>
+ <ng-container *ngIf="!iswinner; else elseTemplate">
+         <ion-grid  class="grida">
+     <ion-row class="galleryrow">
+        <ion-col size="4" *ngFor="let item of items" style="padding:2px">
+          
+       <img src="../../assets/backpacks.jpg" alt="" (click)="openimageModal()">
+     
         </ion-col>
-      
       </ion-row>
+      </ion-grid>
+      </ng-container>
+      <ng-template #elseTemplate>
+               <ion-grid  class="grida">
+     <ion-row class="galleryrow">
+        <ion-col size="6" *ngFor="let item of items" style="padding:2px">
+          
+       <img src="../../assets/backpacks.jpg" alt="" (click)="openimageModal()">
      
-     
-    </ion-item>
-    
-  </ion-list>
+        </ion-col>
+      </ion-row>
+      </ion-grid>
+      </ng-template>
+      

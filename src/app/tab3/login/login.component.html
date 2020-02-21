@@ -19,49 +19,40 @@
   <form #form="ngForm">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12" class="ion-text-center">
           <div text-center>
-       <img src="../../../assets/icon/favicon.png" alt="" style="margin-top:10%" >
+            <ion-avatar style="margin-left: 50%;
+    transform: translate(-50%,20%);
+    width: 90px;
+    height: 90px;">
+              <img src="../../../assets/icon/favicon.png"  />
+            </ion-avatar>
+       <!-- <img  alt="" style="margin-top:10%" > -->
           </div>
           <div padding style="padding-top: 25px;"> 
             <ion-item>
-              <ion-input name="email" type="email" placeholder="your@email.com" ngModel required></ion-input>
+              <ion-input name="name" type="text" placeholder="your@email.com" ngModel required></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
+              <ion-input name="username" type="text" placeholder="username" ngModel required></ion-input>
             </ion-item>
+              
+             <ion-item>
+               <ion-textarea placeholder="Enter more information here..."></ion-textarea>
              
-
-            
+            </ion-item>
+              <ion-item>
+              <ion-input name="email" type="email" placeholder="username" ngModel required></ion-input>
+            </ion-item>
           </div>
-      
           <div padding>
-            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
+            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Update</ion-button>
           </div>
         </ion-col>
       </ion-row>
     </ion-grid>
   </form>
-  <ion-row>
-    <ion-col size="6" text-left>
-       <a  style="padding-left: 16px;" (click)="createAccount()">Create Account</a>
-    </ion-col>
-    <ion-col size="6" class="ion-text-right">
-       <a style="padding-right: 16px;" (click)="forgotPassword()">Forgot Password</a>
-    </ion-col>
-  </ion-row>
-     
-  <ion-row>
-    <ion-col size="12" align-self-center>
-       <div text-center> 
-            or signin with
-       </div>
-   
-    </ion-col>
-    <ion-col size="3" align-self-center size-md="6" size-lg="5" size-xs="12" offset="5">
-   <img src="../../../assets/icon/favicon.png" alt="" style="width: 40px;"> 
-    </ion-col>
-  </ion-row>
+ 
  
 
 <!-- <ion-row>

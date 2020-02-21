@@ -49,3 +49,71 @@
 .sc-ion-card-md-h{
   border-radius: 20px;
 }
+
+ion-slide {
+  height: calc(100vh - 127px);
+}
+
+.segment-button-indicator{
+  display: none !important;
+}
+
+.swiper-slide {
+    overflow-y: scroll;
+    display: block;
+}
+ion-scroll { white-space: nowrap; }
+
+.container{
+   position: relative;
+  text-align: center;
+  color: white;
+}
+.container img{
+  filter: brightness(0.8);
+}
+.centered {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: x-large;
+}
+.centeredsubheading{
+   position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: large;
+}
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+.bottomcentered {
+  position: absolute;
+  bottom:8px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+super-tabs-toolbar{
+  --super-tabs-toolbar-background:white
+  
+}
+super-tab-button{
+--st-base-color-active:white;
+}
+
+.header-md:after{
+    bottom: 0px !important;
+}
+
+super-tab-button.hydrated.ion-activatable.ion-focusable.active{
+  background:lightgray;
+}

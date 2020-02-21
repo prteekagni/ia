@@ -1,11 +1,11 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Contests</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
   <!-- <ion-header>
   <ion-toolbar>
@@ -15,7 +15,7 @@
   </ion-toolbar>
 </ion-header> -->
 
-<ion-content>
+<!-- <ion-content>
   
     <div style="position: relative;">
       
@@ -90,7 +90,7 @@
   </ion-row>
   </ion-grid>
   </div>
-</div>
+</div> -->
     <!-- <ion-list lines="none">
       <ion-list-header>
         <ion-label>Resources</ion-label>
@@ -132,4 +132,25 @@
 
 
 
-</ion-content>
+<!-- </ion-content> -->
+
+ <ion-list>
+        <ion-item *ngFor="let item of items ">
+          <ion-card  routerLink="/winners" style="height: 80vw;">
+            <div class="container">
+              <img src="../../assets/backpacks.jpg" alt="" />
+              <div class="centered">Colorful</div>
+              <div class="centeredsubheading">Prateek</div>
+              <div class="bottomcentered">
+                7days
+              </div>
+              <div class="bottom-left">
+                1000
+              </div>
+              <div class="bottom-right">
+                7days
+              </div>
+            </div>
+          </ion-card>
+        </ion-item>
+      </ion-list>

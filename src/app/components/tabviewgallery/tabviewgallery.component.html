@@ -1,4 +1,4 @@
-   <ion-virtual-scroll [items]="items" approxItemHeight="320px">
+   <!-- <ion-virtual-scroll [items]="items" approxItemHeight="320px">
     <ion-card *virtualItem="let item; let itemBounds = bounds;">
       <div>
         <ion-img [src]="item.imgSrc" style="height:200px" [alt]="item.name"></ion-img>
@@ -32,4 +32,43 @@
      
     </ion-card-content>
     </ion-card>
-  </ion-virtual-scroll>
+  </ion-virtual-scroll> -->
+   <ion-card *ngFor="let item of items">
+      <div>
+        <ion-img [src]="item.imgSrc" style="height:200px" [alt]="item.name"></ion-img>
+      </div>
+    <ion-card-header style="padding-bottom: 5px;">
+     
+      
+
+         <ion-row>
+           
+        <ion-col size="8" class="ion-text-left">
+      <ion-card-title>Prateek Agnihotri</ion-card-title>
+          
+        <p>26/26/2020</p>
+        </ion-col>
+        <ion-col size="4" >
+ <ion-button fill="outline">
+  <ion-icon slot="start" name="share"></ion-icon>
+ Share
+</ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card-header>
+    <!-- <ion-card-content>
+       <ion-row> -->
+        <!-- <ion-col size="6"> -->
+ <!-- <ion-button fill="outline">
+  <ion-icon slot="start" name="star"></ion-icon>
+ Vote
+</ion-button> -->
+<!-- <p>Votes: 2500</p>
+        </ion-col> -->
+<!--       
+      </ion-row>
+    
+     
+    </ion-card-content> -->
+    </ion-card>

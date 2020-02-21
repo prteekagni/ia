@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { CdescriptionPageRoutingModule } from './cdescription-routing.module';
 
 import { CdescriptionPage } from './cdescription.page';
-
+import { GalleryComponent } from '../components/gallery/gallery.component';
+import { TabviewgalleryComponent } from '../components/tabviewgallery/tabviewgallery.component';
+import { SuperTabsModule } from "@ionic-super-tabs/angular";
+import { FeaturecModule } from '../components/featurec.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CdescriptionPageRoutingModule
+    CdescriptionPageRoutingModule,
+    SuperTabsModule,FeaturecModule
   ],
   declarations: [CdescriptionPage]
 })

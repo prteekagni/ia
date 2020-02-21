@@ -62,6 +62,10 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'impageupload',
+    loadChildren: () => import('./impageupload/impageupload.module').then( m => m.ImpageuploadPageModule)
   }
 ];
 @NgModule({

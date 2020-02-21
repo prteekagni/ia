@@ -1,27 +1,190 @@
-<ion-header no-border style="height: 230px;">
+<ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+    <ion-back-button></ion-back-button>
+  </ion-buttons>
+  <ion-title>Back Button</ion-title>
     
-    <ion-buttons>
-      <ion-back-button class="light"></ion-back-button>
-    </ion-buttons>
   </ion-toolbar>
-   <img src="../../assets/backpacks.jpg" class="logo-size" alt="logo" style="top: -56px;
-    position: relative;height: 225px;"> 
+  <!-- <ion-toolbar>
+    <ion-segment (ionChange)="segmentChanged()" [(ngModel)]="segment">
+      <ion-segment-button value="0" layout="icon-start">
+        <ion-label>You</ion-label>
+        <ion-icon name="call"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="1" layout="icon-start">
+        <ion-icon name="cloud-upload"></ion-icon>
+        <ion-label>Photos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="2" layout="icon-start">
+        <ion-icon name="paper"></ion-icon>
+        <ion-label>Conditions</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar> -->
 </ion-header>
+<ion-content overflow-scroll="true">
+  <!-- <ion-slides #slider (ionSlideDidChange)="slideChanged()" mode="ios">
+    <ion-slide class="slide-1">
+       <ion-list>
+        <ion-item *ngFor="let item of items ">
+          <ion-card  routerLink="/contests/123" style="height: 80vw;">
+            <div class="container">
+              <img src="../../assets/backpacks.jpg" alt="" />
+              <div class="centered">Colorful</div>
+              <div class="centeredsubheading">Prateek</div>
+              <div class="bottomcentered">
+                7days
+              </div>
+              <div class="bottom-left">
+                1000
+              </div>
+              <div class="bottom-right">
+                7days
+              </div>
+            </div>
+          </ion-card>
+        </ion-item>
+      </ion-list> 
+       <app-tabviewgallery></app-tabviewgallery>
+    </ion-slide>
+    <ion-slide class="slide-2">
+      <app-gallery #gallery></app-gallery>
+    </ion-slide>
+    <ion-slide class="slide-3" style="height: 100vh;">
+      <ion-row>
+        <ion-col size="12">
+    <ion-row>
+        <ion-col size="12">
+             <ion-card style="padding:16px 0px 16px 0px" class="conditioncard">
+        <ion-card-content>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, delectus!</p>
+          <p>Lorem, ipsum.</p>
+        </ion-card-content>
+      </ion-card>
+        </ion-col>
+      </ion-row>
+       <ion-row>
+          <ion-row>
+     <ion-col size="12">
+  <ion-card style="padding:16px 0px 16px 0px" class="conditioncard">
+     <ion-card-header>
+    <ion-card-title>
 
+          <ion-icon slot="start" name="add"></ion-icon>
+         Prize</ion-card-title>
+  </ion-card-header>
+     
+        <ion-card-content>
+          <p>Hero, Top 5</p>
+        
+        </ion-card-content>
+      </ion-card>
+     </ion-col>
+   </ion-row>
+    
+     <ion-col size="12">
+  <ion-card style="padding:16px 0px 16px 0px" class="conditioncard">
+     <ion-card-header>
+    <ion-card-title>
 
-<ion-content  class="no-scroll">
+          <ion-icon slot="start" name="add"></ion-icon>
+          Photos Condition</ion-card-title>
+  </ion-card-header>
+     
+        <ion-card-content>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, delectus!</p>
+          <p>Lorem, ipsum.</p>
+        </ion-card-content>
+      </ion-card>
+     </ion-col>
+   </ion-row>
+    <ion-row>
+     <ion-col size="12">
+  <ion-card style="padding:16px 0px 16px 0px" class="conditioncard">
+     <ion-card-header>
+    <ion-card-title>
+
+          <ion-icon slot="start" name="add"></ion-icon>
+         Legal Terms</ion-card-title>
+  </ion-card-header>
+     
+        <ion-card-content>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+        
+        </ion-card-content>
+      </ion-card>
+     </ion-col>
+   </ion-row>
+    
+        </ion-col>
+      </ion-row>
+  
+  
+    </ion-slide>
+  </ion-slides> -->
+  <super-tabs>
+  <super-tabs-toolbar position="top" showIndicator="false">
+    <super-tab-button>
+       <!-- <ion-icon name="flame"></ion-icon> -->
+       <ion-label>Photos</ion-label>
+    </super-tab-button>
+    <super-tab-button>
+       <!-- <ion-icon name="call"></ion-icon> -->
+       <ion-label>Description</ion-label>
+    </super-tab-button>
+      <super-tab-button>
+       <!-- <ion-icon name="call"></ion-icon> -->
+       <ion-label>You</ion-label>
+    </super-tab-button>
+      <!-- <super-tab-button>
+       <ion-icon name="call"></ion-icon>
+       <ion-label>Heroes</ion-label>
+    </super-tab-button> -->
+  </super-tabs-toolbar>
+  <super-tabs-container>
+    <super-tab>
+      <ion-content>
+   <!-- <ion-list>
+        <ion-item *ngFor="let item of items ">
+          <ion-card  routerLink="/cdescription" style="height: 80vw;">
+            <div class="container">
+              <img src="../../assets/backpacks.jpg" alt="" />
+              <div class="centered">Colorful</div>
+              <div class="centeredsubheading">Prateek</div>
+              <div class="bottomcentered">
+                7days
+              </div>
+              <div class="bottom-left">
+                1000
+              </div>
+              <div class="bottom-right">
+                7days
+              </div>
+            </div>
+          </ion-card>
+        </ion-item>
+      </ion-list> -->
+      <app-gallery></app-gallery>
+      </ion-content>
+   
+    </super-tab>
+    <super-tab>
+       <!-- <ion-nav root="some page" ></ion-nav> -->
+    </super-tab>
+     <super-tab>
+       <!-- <ion-nav root="some page" ></ion-nav> -->
+    </super-tab>
+  </super-tabs-container>
+</super-tabs>
+</ion-content>
+
+<!-- <ion-content  class="no-scroll">
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="share"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-<!-- <ion-card>
- <img src="https://livewallpaperhd.com/wp-content/uploads/2017/07/Dark-Elegant-Wallpaper.jpg" alt="" style="	z-index: 2;
-	background-size: 100vh;
-  background-size: cover;">
-</ion-card> -->
-
   <ion-row style="margin-left: 10px;">
     <ion-col size="8" text-left>
     <h6>Contest Name</h6>
@@ -76,7 +239,6 @@
           <h5>2000</h5>
         </ion-col>
       </ion-row>
-      
     </ion-card>
     </ion-col>
   </ion-row>
@@ -89,79 +251,10 @@
   <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam, deserunt?</p>
   </ion-col>
 </ion-row>
-<ion-row class="description">
-  <ion-col size="12">
-  <span>
-    Description
-  </span>
-  <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam, deserunt?</p>
-  </ion-col>
-</ion-row>
-<ion-row class="description">
-  <ion-col size="12">
-  <span>
-    Description
-  </span>
-  <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam, deserunt?</p>
-  </ion-col>
-</ion-row>
-<ion-row class="description">
-  <ion-col size="12">
-  <span>
-    Description
-  </span>
-  <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam, deserunt?</p>
-  </ion-col>
-</ion-row>
-<ion-row class="description">
-  <ion-col size="12">
-  <span>
-    Description
-  </span>
-  <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam, deserunt?</p>
-  </ion-col>
-</ion-row>
-<ion-row class="description">
-  <ion-col size="12">
-  <span>
-    Description
-  </span>
-  <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam, deserunt?</p>
-  </ion-col>
-</ion-row>
-<ion-row class="description">
-  <ion-col size="12">
-  <span>
-    Description
-  </span>
-  <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam, deserunt?</p>
-  </ion-col>
-</ion-row>
-<ion-row class="description">
-  <ion-col size="12">
-  <span>
-    Description
-  </span>
-  <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam, deserunt?</p>
-  </ion-col>
-</ion-row>
-<ion-row class="description">
-  <ion-col size="12">
-  <span>
-    Description
-  </span>
-  <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam, deserunt?</p>
-  </ion-col>
-</ion-row>
-<ion-row class="ion-text-center">
-  <ion-col size="12">
-    <img [src]="imgUrl" alt="" *ngIf="imgUrl" style="width:150px">
-  </ion-col>
-</ion-row>
-
-</ion-content>
-<ion-footer>
-  <ion-toolbar>
+</ion-content> -->
+<ion-footer style="background: white;
+    padding: 5px;">
+  <!-- <ion-toolbar>
  <ion-tabs>
   <ion-tab-bar slot="bottom">
     <ion-tab-button (click)="goToTabBar()">
@@ -176,6 +269,7 @@
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
-  </ion-toolbar>
+  </ion-toolbar> -->
+<ion-button expand="block" style="text-transform:none" (click)="goToTabBar()">Upload Photo - Free</ion-button>
 </ion-footer>
 

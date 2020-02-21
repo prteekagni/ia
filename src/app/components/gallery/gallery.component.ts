@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ImagemodalPage } from 'src/app/imagemodal/imagemodal.page';
 const lorem =
@@ -24,6 +24,7 @@ let rotateImg = 0;
 })
 export class GalleryComponent implements OnInit {
   items: any[] = [];
+  @Input() iswinner;
   // gallery: string = "standard";
   // @ViewChild(IonInfiniteScroll, { static: true })
   // infiniteScroll: IonInfiniteScroll;

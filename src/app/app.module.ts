@@ -15,6 +15,10 @@ import { ForgotpasswordmodalPageModule } from './forgotpasswordmodal/forgotpassw
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 import { HttpClientModule } from "@angular/common/http";
+import { ImagePicker } from "@ionic-native/image-picker/ngx";
+import { Base64 } from "@ionic-native/base64/ngx";
+import {  SuperTabsModule } from "@ionic-super-tabs/angular";
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [ImagemodalPage],
@@ -26,13 +30,16 @@ import { HttpClientModule } from "@angular/common/http";
     ReactiveFormsModule,
     ForgotpasswordmodalPageModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    SuperTabsModule.forRoot()
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Camera
+    Camera,
+    ImagePicker,
+    Base64
   ],
   bootstrap: [AppComponent]
 })
