@@ -14,6 +14,7 @@ import { WinnersPage } from '../winners/winners.page';
 
 import { GalleryComponent } from './gallery/gallery.component';
 import { TabviewgalleryComponent } from './tabviewgallery/tabviewgallery.component';
+import { ImagefeedbackComponent } from './imagefeedback/imagefeedback.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,7 @@ import { TabviewgalleryComponent } from './tabviewgallery/tabviewgallery.compone
     FormsModule,
     // RouterModule.forChild([{ path: "", component: Tab1Page }])
   ],
-  declarations: [GalleryComponent , TabviewgalleryComponent],
-  exports:[GalleryComponent, TabviewgalleryComponent]
+  declarations: [GalleryComponent , TabviewgalleryComponent, ImagefeedbackComponent],
+  exports:[GalleryComponent, TabviewgalleryComponent, ImagefeedbackComponent]
 })
 export class FeaturecModule {}

@@ -18,6 +18,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { ImagePicker } from "@ionic-native/image-picker/ngx";
 import { Base64 } from "@ionic-native/base64/ngx";
 import {  SuperTabsModule } from "@ionic-super-tabs/angular";
+import { AddmodalPageModule } from './addmodal/addmodal.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,8 @@ import {  SuperTabsModule } from "@ionic-super-tabs/angular";
     ForgotpasswordmodalPageModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    SuperTabsModule.forRoot()
+    SuperTabsModule.forRoot(),
+    AddmodalPageModule
   ],
   providers: [
     StatusBar,

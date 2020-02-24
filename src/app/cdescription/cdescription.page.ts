@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
-import { ActionSheetController, IonSlides, ModalController } from "@ionic/angular";
+import { ActionSheetController, IonSlides, ModalController, PopoverController } from "@ionic/angular";
 import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 import { HttpClient } from "@angular/common/http";
 import { ImagePicker } from "@ionic-native/image-picker/ngx";
@@ -27,7 +27,8 @@ export class CdescriptionPage implements OnInit {
     public http: HttpClient,
     public imagePicker: ImagePicker,
     private base64: Base64,
-    private modalController:ModalController
+    private modalController: ModalController,
+    private popoverController: PopoverController
   ) {
     this.items = [
       { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
@@ -171,5 +172,9 @@ export class CdescriptionPage implements OnInit {
       backdropDismiss: true
     });
     return await modal.present();
+  }
+
+  dismissPopover() {
+    this.popoverController.dismiss();
   }
 }

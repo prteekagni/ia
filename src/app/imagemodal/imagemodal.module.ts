@@ -7,14 +7,19 @@ import { IonicModule } from '@ionic/angular';
 import { ImagemodalPageRoutingModule } from './imagemodal-routing.module';
 
 import { ImagemodalPage } from './imagemodal.page';
+import { FeaturecModule } from '../components/featurec.module';
+import { GalleryComponent } from '../components/gallery/gallery.component';
+import { ImagefeedbackComponent } from '../components/imagefeedback/imagefeedback.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ImagemodalPageRoutingModule
+    ImagemodalPageRoutingModule,
+    FeaturecModule
   ],
-  declarations: [ImagemodalPage]
+  declarations: [ImagemodalPage],
+  entryComponents:[ImagefeedbackComponent]
 })
 export class ImagemodalPageModule {}

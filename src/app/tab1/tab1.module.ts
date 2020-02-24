@@ -10,6 +10,7 @@ import { GalleryComponent } from '../components/gallery/gallery.component';
 import { FeaturecModule } from '../components/featurec.module';
 import { ContestsPageModule } from '../contests/contests.module';
 import { ContestsPage } from '../contests/contests.page';
+
 @NgModule({
   imports: [
     IonicModule,
@@ -17,8 +18,8 @@ import { ContestsPage } from '../contests/contests.page';
     FormsModule,
     RouterModule.forChild([{ path: "", component: Tab1Page }]),
     SuperTabsModule,
-    FeaturecModule
+    FeaturecModule,
   ],
-  declarations: [Tab1Page, ContestsPage]
+  declarations: [Tab1Page, ContestsPage],
 })
 export class Tab1PageModule {}
