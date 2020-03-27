@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
-import { GalleryComponent } from '../components/gallery/gallery.component';
-import { ImagefeedbackComponent } from '../components/imagefeedback/imagefeedback.component';
+import { Component, OnInit, Input } from "@angular/core";
+import { PopoverController, ModalController } from "@ionic/angular";
+import { GalleryComponent } from "../components/gallery/gallery.component";
+import { ImagefeedbackComponent } from "../components/imagefeedback/imagefeedback.component";
 
 @Component({
   selector: "app-imagemodal",
@@ -10,20 +10,29 @@ import { ImagefeedbackComponent } from '../components/imagefeedback/imagefeedbac
 })
 export class ImagemodalPage implements OnInit {
   popup;
-  constructor(private popoverController: PopoverController) {}
+  @Input() iswinner;
+  constructor(
+    private popoverController: PopoverController,
+    private modalController: ModalController
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: ImagefeedbackComponent,
-      event: ev,
-      
+      event: ev
     });
     this.popup = popover;
     return await popover.present();
   }
 
-  dismiss(){
-this.popup.dismiss();
+  dismiss() {
+    this.popup.dismiss();
+  }
+
+  closeImageModal(event) {
+    this.modalController.dismiss();
   }
 }

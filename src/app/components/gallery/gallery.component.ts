@@ -30,6 +30,7 @@ export class GalleryComponent implements OnInit {
   // infiniteScroll: IonInfiniteScroll;
 
   constructor(private modalController: ModalController) {
+
     for (let i = 0; i < 25; i++) {
       this.items.push({
         name: i + " - " + images[rotateImg],
@@ -81,14 +82,31 @@ export class GalleryComponent implements OnInit {
     }, 500);
   }
   async openimageModal() {
-    const modal = await this.modalController.create({
+    if(!this.iswinner){
+ const modal = await this.modalController.create({
       component: ImagemodalPage,
-      backdropDismiss: true,
-      
+      backdropDismiss: true,  
+    
     });
     return await modal.present();
   }
+    else {
 
-  ngOnInit() {}
+    
+    const modal = await this.modalController.create({
+      componentProps: {
+     'iswinner':'true'
+    },
+      component: ImagemodalPage,
+      backdropDismiss: true,  
+    cssClass:  "winner-modal"
+    });
+    return await modal.present();
+  }
+  }
+  ngOnInit() {
+    console.log(this.iswinner);
+    
+  }
 }
 

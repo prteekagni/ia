@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { AlertController } from "@ionic/angular";
 
 @Component({
   selector: "app-tab2",
@@ -8,8 +8,13 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ["tab2.page.scss"]
 })
 export class Tab2Page {
-  constructor(private router: Router, private alertController: AlertController) {}
- async onClick() {
+  constructor(
+    private router: Router,
+    private alertController: AlertController
+  ) {
+  
+  }
+  async onClick() {
     const alert = await this.alertController.create({
       header: "Logout",
       subHeader: "",
@@ -22,18 +27,53 @@ export class Tab2Page {
             this.router.navigate(["login"]);
           }
         },
-          {text: "Cancel",
+        {
+          text: "Cancel",
           handler: () => {
-         console.log("Cancelled");
-         
+            console.log("Cancelled");
           }
         }
-        
       ]
     });
 
     await alert.present();
+  }
 
-   
+  darkMode(ev) {
+
+    console.log(ev);
+    
+  //  const toggle = document.querySelector("#themeToggle");
+
+   // Listen for the toggle check/uncheck to toggle the dark class on the <body>
+  //  toggle.addEventListener("ionChange", ev => {
+  //  });
+     document.body.classList.toggle("dark", ev.detail.checked);
+
+
+   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+   // Listen for changes to the prefers-color-scheme media query
+  //  prefersDark.addListener(e => checkToggle(e.matches));
+
+   // Called when the app loads
+   function loadApp() {
+     checkToggle(prefersDark.matches);
+   }
+
+   // Called by the media query to check/uncheck the toggle
+   function checkToggle(shouldCheck) {
+     ev.detail.checked = shouldCheck;
+   }
+  }
+
+  ngAfterViewChecked(): void {
+    //Called after every check of the component's view. Applies to components only.
+    //Add 'implements AfterViewChecked' to the class.
+    
+
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+     
   }
 }

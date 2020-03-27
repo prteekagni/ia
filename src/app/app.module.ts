@@ -33,7 +33,8 @@ import { AddmodalPageModule } from './addmodal/addmodal.module';
     BrowserAnimationsModule,
     HttpClientModule,
     SuperTabsModule.forRoot(),
-    AddmodalPageModule
+    AddmodalPageModule,
+    
   ],
   providers: [
     StatusBar,

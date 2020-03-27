@@ -1,1 +1,21 @@
 
+ion-icon{
+  color: #C0C0C0;
+}
+
+ion-label{
+   color: #C0C0C0;
+}
+
+// activated icon class
+.tab-layout-icon-top.ion-activatable.ion-selectable.ion-focusable.hydrated.tab-selected ion-icon {
+ font-size: x-large;
+     color:#757575
+}
+.tab-layout-icon-top.ion-activatable.ion-selectable.ion-focusable.hydrated.tab-selected ion-label {
+ font-weight: x-large;
+     color:#757575
+}
+ion-tab-button{
+   --ripple-color:#757575;
+}

@@ -77,15 +77,30 @@
   border-radius: 20px;
 }
 .modal-wrapper {
---width: 90%;
-    --height: 364px;
-    --border-radius: 20px;
+    --width: 90%;
+    --height: 360px;
+    --border-radius: 10px;
 }
 
 .my-modal .modal-wrapper {
   --width: 100%;
   --height: 100%;
 }
+
+
+.add-modal .modal-wrapper {
+ --width: 90%;
+    --height: 275px;
+    border-radius: 10px;
+}
+
+.winner-modal .modal-wrapper{
+      --width: 90%;
+    --height: 303px;
+    --border-radius: 10px;
+}
+
+
 // .my-modal{
 //   z-index: 20001;
 //     height: 50vh;
@@ -123,3 +138,17 @@
 //     }
 //   }
 
+ion-button{
+  --background:#03A9F4;
+  color: white;
+  --border-color:#03A9F4;
+}
+
+.supertabtransparentbuttons {
+  --background: transparent;
+  --box-shadow: none;
+  color: var(--ion-toolbar-color,var(--ion-text-color,#757575));;
+  text-transform: none;
+   --ripple-color: transparent;
+   --color-activated: var(--ion-toolbar-color,var(--ion-text-color,#424242));
+}

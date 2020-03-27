@@ -1,21 +1,21 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-      <ion-icon
+    <ion-icon
       slot="start"
-      name="add"
+      name="notifications"
       style="margin-left: 15px;
     font-size: 20px;"
-      (click)="openAddModalPage()"
+     
     ></ion-icon>
     <ion-title class="ion-text-center">
       Home
     </ion-title>
     <ion-icon
       slot="end"
-      name="add"
+      name="gift"
       style="margin-right: 15px;
     font-size: 20px;"
-      (click)="presentPopover()"
+     (click)="openAddModalPage()"
     ></ion-icon>
   </ion-toolbar>
   <!-- <ion-toolbar>
@@ -66,7 +66,7 @@
     </ion-card>
 </ion-content> -->
 
-  <!--<ion-content overflow-scroll="true">
+<!--<ion-content overflow-scroll="true">
 
  <ion-slides #slider (ionSlideDidChange)="slideChanged()" mode="ios">
     <ion-slide class="slide-1">
@@ -101,55 +101,69 @@
 </ion-content>-->
 
 <ion-content>
-<super-tabs>
-  <super-tabs-toolbar position="top" showIndicator="false">
-    <super-tab-button>
-       
-       <ion-label>Contests</ion-label>
-    </super-tab-button>
-    <super-tab-button>
-       
-       <ion-label>Votes</ion-label>
-    </super-tab-button>
+  <super-tabs>
+    <super-tabs-toolbar position="top" showIndicator="true">
       <super-tab-button>
-       
-       <ion-label>Heroes</ion-label>
-    </super-tab-button>
-  </super-tabs-toolbar>
-  <super-tabs-container>
-    <super-tab>
-      <ion-content>
-   <ion-list>
-        <ion-item *ngFor="let item of items ">
-          <ion-card  routerLink="/cdescription" style="height: 80vw;">
-            <div class="container">
-              <img src="../../assets/backpacks.jpg" alt="" />
-              <div class="centered">Colorful</div>
-              <div class="centeredsubheading">Prateek</div>
-              <div class="bottomcentered">
-                7days
-              </div>
-              <div class="bottom-left">
-                1000
-              </div>
-              <div class="bottom-right">
-                7days
-              </div>
-            </div>
-          </ion-card>
-        </ion-item>
-      </ion-list>
-      </ion-content>
-   
-    </super-tab>
-    <super-tab>
-       <!-- <ion-nav root="enteries" ></ion-nav> -->
-    </super-tab>
-     <super-tab>
-       <app-contests></app-contests>
-      <!-- <app-winners></app-winners> -->
-    </super-tab>
-  </super-tabs-container>
-</super-tabs>
+        <!-- <ion-icon name="star"></ion-icon> -->
+        <!-- <ion-label>Contests</ion-label> -->
 
+        <ion-button
+        class="supertabtransparentbuttons"
+        >
+          <ion-icon slot="start" name="image" style="--color:#757575"></ion-icon>
+          Contest
+        </ion-button>
+      </super-tab-button>
+      <super-tab-button>
+          <ion-button
+        class="supertabtransparentbuttons"
+        >
+          <ion-icon slot="start" name="thumbs-up" style="--color:#757575"></ion-icon>
+          Votes
+        </ion-button>
+      </super-tab-button>
+      <super-tab-button>
+         <ion-button
+        class="supertabtransparentbuttons"
+        >
+          <ion-icon slot="start" name="people" style="--color:#757575"></ion-icon>
+          Heroes
+        </ion-button>
+      </super-tab-button>
+    </super-tabs-toolbar>
+    <super-tabs-container>
+      <super-tab>
+        <ion-content>
+          <ion-list>
+            <ion-item *ngFor="let item of items">
+              <ion-card routerLink="/cdescription" style="    height: 350px;
+    margin: 15px auto;" class="ion-align-items-center">
+                <div class="container" class="ion-text-center">
+                  <img src="../../assets/demoimage.jpg" alt="" style="height: 350px;" />
+                  <div class="centered">Colorful</div>
+                  <div class="centeredsubheading">Prateek</div>
+                  <div class="bottomcentered">
+                    &#8377; 1000
+                  </div>
+                  <div class="bottom-left">
+08 Days
+                  </div>
+                  <div class="bottom-right">
+       4175 photos
+                  </div>
+                </div>
+              </ion-card>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </super-tab>
+      <super-tab>
+        <!-- <ion-nav root="enteries" ></ion-nav> -->
+      </super-tab>
+      <super-tab>
+        <app-contests></app-contests>
+        <!-- <app-winners></app-winners> -->
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
 </ion-content>

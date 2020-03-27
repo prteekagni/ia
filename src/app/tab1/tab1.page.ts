@@ -47,7 +47,8 @@ export class Tab1Page {
   async openAddModalPage(){
    const modal = await this.modalController.create({
      component: AddmodalPage,
-     backdropDismiss: true
+     backdropDismiss: true,
+     cssClass:"add-modal"
    });
    return await modal.present();
   }

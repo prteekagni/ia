@@ -1,10 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-    <ion-back-button></ion-back-button>
-  </ion-buttons>
-  <ion-title>Back Button</ion-title>
-    
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Back Button</ion-title>
   </ion-toolbar>
   <!-- <ion-toolbar>
     <ion-segment (ionChange)="segmentChanged()" [(ngModel)]="segment">
@@ -124,285 +123,226 @@
     </ion-slide>
   </ion-slides> -->
   <super-tabs>
-  <super-tabs-toolbar position="top" showIndicator="false">
-    <super-tab-button>
-       <!-- <ion-icon name="flame"></ion-icon> -->
-       <ion-label>Photos</ion-label>
-    </super-tab-button>
-    <super-tab-button>
-       <!-- <ion-icon name="call"></ion-icon> -->
-       <ion-label>Description</ion-label>
-    </super-tab-button>
+    <super-tabs-toolbar position="top" showIndicator="false">
       <super-tab-button>
-       <!-- <ion-icon name="call"></ion-icon> -->
-       <ion-label>You</ion-label>
-    </super-tab-button>
-      <!-- <super-tab-button>
-       <ion-icon name="call"></ion-icon>
-       <ion-label>Heroes</ion-label>
-    </super-tab-button> -->
-  </super-tabs-toolbar>
-  <super-tabs-container>
-    <super-tab>
-      <ion-content>
-   <!-- <ion-list>
-        <ion-item *ngFor="let item of items ">
-          <ion-card  routerLink="/cdescription" style="height: 80vw;">
-            <div class="container">
-              <img src="../../assets/backpacks.jpg" alt="" />
-              <div class="centered">Colorful</div>
-              <div class="centeredsubheading">Prateek</div>
-              <div class="bottomcentered">
-                7days
-              </div>
-              <div class="bottom-left">
-                1000
-              </div>
-              <div class="bottom-right">
-                7days
-              </div>
-            </div>
-          </ion-card>
-        </ion-item>
-      </ion-list> -->
-      <app-gallery></app-gallery>
-      </ion-content>
-   
-    </super-tab>
-    <super-tab>
-      <ion-content>
-      
-      <ion-row class="ion-text-center" >
-        <ion-col size="12">
-          <ion-card>
-            
-          
-       <ion-row>
-        <ion-col size="12">
-          <h4>Contest Name</h4>
-          <h6>7 Days</h6>
-        </ion-col>
-        </ion-row>
+        <ion-button class="supertabtransparentbuttons">
+          <ion-icon
+            slot="start"
+            name="images"
+            style="--color:#757575"
+          ></ion-icon>
+          Photos
+        </ion-button>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-button class="supertabtransparentbuttons">
+          <ion-icon slot="start" name="book" style="--color:#757575"></ion-icon>
+          Description
+        </ion-button>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-button class="supertabtransparentbuttons">
+          <ion-icon
+            slot="start"
+            name="person"
+            style="--color:#757575"
+          ></ion-icon>
+          You
+        </ion-button>
+      </super-tab-button>
+    </super-tabs-toolbar>
+    <super-tabs-container>
+      <super-tab>
+        <ion-content>
+          <app-gallery></app-gallery>
+        </ion-content>
+      </super-tab>
+      <super-tab>
+        <ion-content>
         <ion-row>
-          
-        
-        <ion-col size="12">
-          <ion-row>
-               <ion-col size="4" text-left>
-    <ion-card style="margin:0px;padding:10px 5px">
-      <ion-row class="ion-text-center">
-        <ion-col size="4">
-          <img src="../../assets/icon/favicon.png" alt="" class="priceimage">
-        </ion-col>
-        <ion-col size="8">
-          <span style="font-size:x-small">1st Prize</span>
-          <h5>2000</h5>
-        </ion-col>
-      </ion-row>
-      
-    </ion-card>
-    </ion-col>
-    <ion-col size="4">
-    
-          <ion-card style="margin:0px;padding:10px 5px">
-      <ion-row class="ion-text-center">
-        <ion-col size="4">
-          <img src="../../assets/icon/favicon.png" alt="" class="priceimage">
-        </ion-col>
-        <ion-col size="8">
-          <span style="font-size:x-small">3rd Prize</span>
-          <h5>2000</h5>
-        </ion-col>
-      </ion-row>
-      
-    </ion-card>
-    </ion-col>
-    <ion-col size="4">
-    
-          <ion-card style="margin:0px;padding:10px 5px">
-      <ion-row class="ion-text-center">
-        <ion-col size="4">
-          <img src="../../assets/icon/favicon.png" alt="" class="priceimage">
-        </ion-col>
-        <ion-col size="8">
-          <span style="font-size:x-small">2nd Prize</span>
-          <h5>2000</h5>
-        </ion-col>
-      </ion-row>
-    </ion-card>
-    </ion-col>
+            <ion-col size="12">
+              <ion-card style="margin:10px 0px 0px 0px;border-radius:10px;box-shadow: none;">
+  <ion-row class="ion-text-center">
+                            <ion-col size="12" class="ion-text-center">
+                              <img
+                                src="../../assets/p.png"
+                                alt=""
+                                class=""
+                               
+                              />
+                            </ion-col>
+                          
+                       
+                       
+                              <ion-col size="12">
+                                <ion-row>
+                                  <ion-col size="4">
+                                    <span style="font-size:x-small">2<sup>nd</sup></span>
+                              <p> &#8377;600</p>
+                                  </ion-col>
+                                  <ion-col size="4">
+                                    <span style="font-size:x-small">1<sup>st</sup></span>
+                              <p> &#8377;1000</p>
+                                  </ion-col>
+                                  <ion-col size="4">
+                                    <span style="font-size:x-small">3<sup>rd</sup></span>
+                              <p> &#8377;450</p>
+                                  </ion-col>
+                                </ion-row>
+                              <!-- <span style="font-size:x-small">1st Prize</span> -->
+                              <!-- <h5>2000</h5> -->
+                            </ion-col>
+                          </ion-row>    
+                           <!-- <ion-row class="ion-text-center">
+                             <ion-col size="6">
+                               <ion-row>
+                                    <ion-col size="6" class="ion-align-self-end">
+                              <img
+                                src="../../assets/silver.png"
+                                alt=""
+                                class="ion-float-right"
+                                style="width: 60px;"
+                              />
+                            </ion-col>
+                          
+                       
+                       
+                              <ion-col size="6" class="ion-align-self-center">
+                              <span style="font-size:x-small">2nd Prize</span>
+                              <h5>2000</h5>
+                            </ion-col>
+                               </ion-row>
+                             </ion-col>
+                           <ion-col size="6">
+                               <ion-row>
+                                    <ion-col size="6" class="ion-text-center">
+                              <img
+                                src="../../assets/bronze.png"
+                                alt=""
+                                class="ion-float-right"
+                                style="width: 60px;"
+                              />
+                            </ion-col>
+                          
+                       
+                       
+                              <ion-col size="6" class="ion-align-self-center">
+                              <span style="font-size:x-small">3rd Prize</span>
+                              <h5>2000</h5>
+                            </ion-col>
+                               </ion-row>
+                             </ion-col>
+                          </ion-row>               -->
+              </ion-card>
+            </ion-col>
           </ion-row>
-        </ion-col>
- </ion-row>
- </ion-card>
- </ion-col>
-  </ion-row>
 
-  <ion-row>
-    <ion-col size="12">
-      <ion-card>
+          <ion-row>
+            <ion-col size="12">
+              <!-- <ion-card>
+                <ion-card-content> -->
+                  <ion-row>
+                    <ion-col size="12">
+                      <h3>Rules</h3>
+                    </ion-col>
+                    <ion-col size="12">
+                      <ion-item lines="none">
+                        <ion-label>
+                          <ion-icon
+                            slot="start"
+                            md="md-checkbox-outline"
+                            style="color:#03A9F4"
+                          ></ion-icon>
+                          Pizza
+                        </ion-label>
+                      </ion-item>
+
+                      <ion-item lines="none">
+                        <ion-label>
+                          <ion-icon
+                            slot="start"
+                            md="md-checkbox-outline"
+                            style="color:#03A9F4"
+                          ></ion-icon>
+                          Pizza
+                        </ion-label>
+                      </ion-item>
+                      <ion-item lines="none">
+                        <ion-label>
+                          <ion-icon
+                            slot="start"
+                            md="md-checkbox-outline"
+                            style="color:#03A9F4"
+                          ></ion-icon>
+                          Pizza
+                        </ion-label>
+                      </ion-item>
+                      <ion-item lines="none">
+                        <ion-label>
+                          <ion-icon
+                            slot="start"
+                            md="md-checkbox-outline"
+                            style="color:#03A9F4"
+                          ></ion-icon>
+                          Pizza
+                        </ion-label>
+                      </ion-item>
+                      <ion-item lines="none">
+                        <ion-label>
+                          <ion-icon
+                            slot="start"
+                            md="md-checkbox-outline"
+                            style="color:#03A9F4"
+                          ></ion-icon>
+                          Pizza
+                        </ion-label>
+                      </ion-item>
+                      <ion-item lines="none">
+                        <ion-label>
+                          <ion-icon
+                            slot="start"
+                            md="md-checkbox-outline"
+                            style="color:#03A9F4"
+                          ></ion-icon>
+                          Pizza
+                        </ion-label>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                <!-- </ion-card-content>
+              </ion-card> -->
+            </ion-col>
+          </ion-row> 
         
-      <ion-card-content>
-        <ion-row>
-          <ion-col size="12">
-  <h3>Rules</h3>
-          </ion-col>
-          <ion-col size="12">
-            <ion-item lines="none">
-             <ion-label>
-        <ion-icon slot="start" md="md-checkbox-outline" style="color:green"></ion-icon>
-        Pizza
-        
-      </ion-label>
-            </ion-item>
-             
-          <ion-item lines="none">
-             <ion-label>
-        <ion-icon slot="start" md="md-checkbox-outline" style="color:green"></ion-icon>
-        Pizza
-        
-      </ion-label>
-            </ion-item>
-          <ion-item lines="none">
-             <ion-label>
-        <ion-icon slot="start" md="md-checkbox-outline" style="color:green"></ion-icon>
-        Pizza
-        
-      </ion-label>
-            </ion-item>
-          <ion-item lines="none">
-             <ion-label>
-        <ion-icon slot="start" md="md-checkbox-outline" style="color:green"></ion-icon>
-        Pizza
-        
-      </ion-label>
-            </ion-item>
-          <ion-item lines="none">
-             <ion-label>
-        <ion-icon slot="start" md="md-checkbox-outline" style="color:green"></ion-icon>
-        Pizza
-        
-      </ion-label>
-            </ion-item>
-          <ion-item lines="none">
-             <ion-label>
-        <ion-icon slot="start" md="md-checkbox-outline" style="color:green"></ion-icon>
-        Pizza
-        
-      </ion-label>
-            </ion-item>
    
-          </ion-col>
-        </ion-row>
-      
-      
-    
-     
-   
-     </ion-card-content>
-</ion-card>
-    </ion-col>
-  </ion-row>
-  </ion-content>
-    </super-tab>
-     <super-tab>
-       <!-- <ion-nav root="some page" ></ion-nav> -->
-    </super-tab>
-  </super-tabs-container>
-</super-tabs>
+        
+        
+        
+        
+        
+        </ion-content>
+
+
+      </super-tab>
+      <super-tab>
+        <!-- <ion-nav root="some page" ></ion-nav> -->
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
 </ion-content>
-
-<!-- <ion-content  class="no-scroll">
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
-      <ion-icon name="share"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  <ion-row style="margin-left: 10px;">
-    <ion-col size="8" text-left>
-    <h6>Contest Name</h6>
-    <p>Time Left</p>      
-    </ion-col>
-    <ion-col size="4">
-    <h6>Total Prize</h6>
-    <p>1000</p>      
-    </ion-col>
-  </ion-row>
-
-
-  <ion-row class="nomarginheading">
-    <ion-col size="4" text-left>
-    <ion-card style="margin:0px;padding:10px 5px">
-      <ion-row class="ion-text-center">
-        <ion-col size="4">
-          <img src="../../assets/icon/favicon.png" alt="" class="priceimage">
-        </ion-col>
-        <ion-col size="8">
-          <span style="font-size:x-small">1st Prize</span>
-          <h5>2000</h5>
-        </ion-col>
-      </ion-row>
-      
-    </ion-card>
-    </ion-col>
-    <ion-col size="4">
-    
-          <ion-card style="margin:0px;padding:10px 5px">
-      <ion-row class="ion-text-center">
-        <ion-col size="4">
-          <img src="../../assets/icon/favicon.png" alt="" class="priceimage">
-        </ion-col>
-        <ion-col size="8">
-          <span style="font-size:x-small">3rd Prize</span>
-          <h5>2000</h5>
-        </ion-col>
-      </ion-row>
-      
-    </ion-card>
-    </ion-col>
-    <ion-col size="4">
-    
-          <ion-card style="margin:0px;padding:10px 5px">
-      <ion-row class="ion-text-center">
-        <ion-col size="4">
-          <img src="../../assets/icon/favicon.png" alt="" class="priceimage">
-        </ion-col>
-        <ion-col size="8">
-          <span style="font-size:x-small">2nd Prize</span>
-          <h5>2000</h5>
-        </ion-col>
-      </ion-row>
-    </ion-card>
-    </ion-col>
-  </ion-row>
-
-<ion-row class="description">
-  <ion-col size="12">
-  <span>
-    Description
-  </span>
-  <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam, deserunt?</p>
-  </ion-col>
-</ion-row>
-</ion-content> -->
-<ion-footer style="background: white;
-    padding: 5px;">
-  <!-- <ion-toolbar>
- <ion-tabs>
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button (click)="goToTabBar()">
-      <ion-icon name="calendar"></ion-icon>
-      <ion-label>Participate</ion-label>
-      <ion-badge>6</ion-badge>
-    </ion-tab-button>
-
-    <ion-tab-button (click)="onClick()">
-      <ion-icon name="contacts"></ion-icon>
-      <ion-label>Enteries</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
-  </ion-toolbar> -->
-<ion-button expand="block" style="text-transform:none" (click)="goToTabBar()">Upload Photo - Free</ion-button>
+<ion-footer
+  style="    background: white;
+    padding: 0px 0px 0px 0px;
+    height: 42px;
+    border-radius: 0px;"
+>
+  <ion-button
+    expand="block"
+    style="text-transform:none;    text-transform: none;
+    margin: 0px;
+    height: 40px;
+    --border-radius: 0px;"
+    (click)="goToTabBar()"
+    >Upload Photo - Free</ion-button
+  >
 </ion-footer>
-

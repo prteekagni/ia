@@ -29,15 +29,15 @@ span{
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 0px;
-    width: 60px;
+    width: 50px;
 }
 
 // .header-md:after{
 //     bottom: 0px !important;
 // }
- ion-toolbar {
-    --background: white;
- }
+//  ion-toolbar {
+//     --background: white;
+//  }
 
  ion-header{
      --height:200px;
@@ -52,7 +52,8 @@ span{
       width:94vw;
   }
 super-tabs-toolbar{
-  --super-tabs-toolbar-background:white
+  --super-tabs-toolbar-background: 
+  var(--ion-toolbar-background,var(--ion-background-color,#fff));
   
 }
 super-tab-button{
@@ -64,5 +65,9 @@ super-tab-button{
 }
 
 super-tab-button.hydrated.ion-activatable.ion-focusable.active{
-  background:lightgray;
+  background:rgba(211, 211, 211, 0.5);
+}
+
+.priceimage{
+         margin: 15px 10px;
 }
