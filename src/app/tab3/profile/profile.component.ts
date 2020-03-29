@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { EditProfileComponent } from '../editprofile/editprofile.component';
 
 @Component({
   selector: "app-profile",
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ["./profile.component.scss"]
 })
 export class ProfileComponent implements OnInit {
-  constructor() {}
+  constructor(private modalController : ModalController) {}
 
   ngOnInit() {}
 
   buttonClick() {}
-  onClick(){}
+  async onClick() {
+    const modal = await this.modalController.create({
+      component: EditProfileComponent,
+      backdropDismiss: true
+    });
+    return await modal.present();
+  }
 }

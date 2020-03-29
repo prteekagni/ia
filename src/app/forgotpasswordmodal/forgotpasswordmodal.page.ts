@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate, keyframes } from '@angular/animations';
 import { ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-forgotpasswordmodal",
@@ -74,7 +75,8 @@ import { ModalController } from '@ionic/angular';
 export class ForgotpasswordmodalPage implements OnInit {
   otprequested: boolean = false;
   currentModal = null;
-  constructor(private modalCtrl: ModalController) {}
+  @Input() mode;
+  constructor(private modalCtrl: ModalController , private router: Router) {}
 
   ngOnInit() {}
   requestOtp() {
@@ -86,5 +88,11 @@ export class ForgotpasswordmodalPage implements OnInit {
     this.modalCtrl.dismiss({
       dismissed: true
     });
+  }
+
+  register(){
+    this.modalCtrl.dismiss();
+      localStorage.setItem("Login", "true");
+      this.router.navigate(["tabs"]);
   }
 }

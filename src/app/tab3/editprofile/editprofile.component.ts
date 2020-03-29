@@ -5,30 +5,42 @@ import { ForgotpasswordmodalPage } from 'src/app/forgotpasswordmodal/forgotpassw
 import { async } from '@angular/core/testing';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: "app-editprofile",
+  templateUrl: "./editprofile.component.html",
+  styleUrls: ["./editprofile.component.scss"]
 })
-export class LoginComponent implements OnInit {
-modalcontro;
-  constructor( private router: Router , private route:ActivatedRoute , private modalController: ModalController) { }
+export class EditProfileComponent implements OnInit {
+  modalcontro;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private modalController: ModalController
+  ) {}
 
   ngOnInit() {}
 
-  createAccount(){
+  createAccount() {
     this.router.navigate(["register"], { relativeTo: this.route.parent });
   }
-  async forgotPassword(){
+  async forgotPassword() {
     const modal = await this.modalController.create({
       component: ForgotpasswordmodalPage,
-      animated:true,
+      animated: true,
       cssClass: "my-modal"
     });
     this.modalcontro = modal;
-      return await modal.present();
+    return await modal.present();
   }
 
-  onDismiss(){
-this.modalcontro.dismiss();
+  onDismiss() {
+    this.modalController.dismiss();
+  }
+
+  dismiss() {
+    this.modalController.dismiss();
+  }
+
+  uploadProfileImage(){
+    
   }
 }

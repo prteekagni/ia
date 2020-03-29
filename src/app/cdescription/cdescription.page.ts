@@ -169,7 +169,8 @@ export class CdescriptionPage implements OnInit {
   async openimageModal() {
     const modal = await this.modalController.create({
       component: ImagemodalPage,
-      backdropDismiss: true
+      backdropDismiss: true,
+      cssClass:"image-modal"
     });
     return await modal.present();
   }
