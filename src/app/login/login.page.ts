@@ -1,70 +1,64 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
-import { ForgotpasswordmodalPage } from '../forgotpasswordmodal/forgotpasswordmodal.page';
+import { Validators, FormBuilder } from '@angular/forms';
+
 declare var SMSReceive: any;
+
 @Component({
   selector: "app-login",
   templateUrl: "./login.page.html",
   styleUrls: ["./login.page.scss"]
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   modalcontro;
   Mobile;
   enterOTP: boolean = true;
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private modalController: ModalController,
-    private toastCtrl: ToastController
-  ) {}
-
-  // ngOnInit() {}
-  // createAccount() {
-  //   this.router.navigate(["register"], { relativeTo: this.route.parent });
-  // }
-  // async forgotPassword() {
-  //   const modal = await this.modalController.create({
-  //     component: ForgotpasswordmodalPage,
-  //     animated: true,
-  //     cssClass: "my-modal"
-  //   });
-  //   this.modalcontro = modal;
-  //   return await modal.present();
-  // }
-
-  // onDismiss() {
-  //   this.modalcontro.dismiss();
-  // }
-  // login() {
-  //   localStorage.setItem("Login", "true");
-  //   this.router.navigate(["tabs"]);
-  // }
-
-  // async usePhone() {
-  //   const modal = await this.modalController.create({
-  //     component: ForgotpasswordmodalPage,
-  //     componentProps: {
-  //       mode: "register"
-  //     },
-  //     animated: true,
-  //     cssClass: "my-modal"
-  //   });
-  //   this.modalcontro = modal;
-  //   return await modal.present();
-  // }
-
-  // requestOTP(){
-  //   this.enterOTP = !this.enterOTP;
-  // }
-
-  // submitOtp() {
-  //   this.enterOTP = !this.enterOTP;
-  // }
+  loginForm;
+  timer = 10;
   OTP: string = "";
   showOTPInput: boolean = false;
   OTPmessage: string =
     "An OTP is sent to your number. You should receive it in 15 s";
+  @ViewChild("ngOtpInput", { static: true }) ngOtpInput: any;
+  config = {
+    allowNumbersOnly: true,
+    length: 5,
+    isPasswordInput: false,
+    disableAutoFocus: false,
+    placeholder: "",
+    inputStyles: {
+      width: "50px",
+      height: "50px"
+    }
+  };
+  mobNumberPattern = "^((\\+91-?)|0)?[0-9]{10}$";
+  // mobNumberPattern = "/^([+]d{2}[ ])?d{10}$/";
+  isValidFormSubmitted = false;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private modalController: ModalController,
+    private toastCtrl: ToastController,
+    private fb: FormBuilder
+  ) {
+    console.log(this.ngOtpInput);
+    this.loginForm = this.fb.group({
+      Mobile: [
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(this.mobNumberPattern)
+        ])
+      ]
+    });
+  }
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.timer = 10;
+  }
 
   async presentToast(message, show_button, position, duration) {
     const toast = await this.toastCtrl.create({
@@ -76,7 +70,19 @@ export class LoginPage implements OnInit {
     toast.present();
   }
 
-  next() {
+  next(data) {
+    console.log(data);
+
+    var IntervalVar = setInterval(
+      function() {
+        this.timer--;
+
+        if (this.timer === 0) {
+          clearInterval(IntervalVar);
+        }
+      }.bind(this),
+      1000
+    );
     this.showOTPInput = true;
     this.start();
   }
@@ -109,8 +115,8 @@ export class LoginPage implements OnInit {
     SMSReceive.stopWatch(
       () => {
         console.log("watch stopped");
-          localStorage.setItem("Login", "true");
-          this.router.navigate(["tabs"]);
+        localStorage.setItem("Login", "true");
+        this.router.navigate(["tabs"]);
       },
       () => {
         console.log("watch stop failed");
@@ -124,8 +130,11 @@ export class LoginPage implements OnInit {
     // In this case, I am keeping the first 6 letters as OTP
     // const message = data.body;
     const message = data;
-    console.log(message);
     this.OTP = data.slice(0, 6);
+    setTimeout(() => {
+      this.ngOtpInput.setValue(this.OTP);
+      this.register();
+    }, 3000);
     if (message && message.indexOf("enappd_starters") != -1) {
       this.OTP = data.slice(0, 6);
       console.log(this.OTP);
@@ -140,28 +149,32 @@ export class LoginPage implements OnInit {
     } else {
       this.presentToast("Your OTP is not valid", false, "bottom", 1500);
     }
-
+    this.showOTPInput = false;
     localStorage.setItem("Login", "true");
     this.router.navigate(["tabs"]);
-  }
-
-  enterCode() {
-    this.OTP = "";
-  }
-
-  callmethod() {
-    console.log("Call Mehtod Clicked");
   }
 
   changeNumber() {
     this.showOTPInput = false;
   }
 
-    enter(event,next,prev){
-      console.log(event.target);
-      
-  console.log(event.detail.data);
-  this.OTP = this.OTP + event.detail.data;
-  console.log(this.OTP);
-    }
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.showOTPInput = false;
+    this.timer = 10;
+  }
+
+  ionViewWillLeave() {
+    this.timer = 10;
+  }
+
+  onOtpChange(data) {
+    console.log(data);
+  }
+
+  goBack(){
+    this.timer = 10;
+    this.showOTPInput = false;
+  }
 }

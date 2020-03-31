@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ImagemodalPage } from '../imagemodal/imagemodal.page';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: "app-winners",
@@ -8,9 +9,15 @@ import { ImagemodalPage } from '../imagemodal/imagemodal.page';
   styleUrls: ["./winners.page.scss"]
 })
 export class WinnersPage implements OnInit {
-  constructor(private modalController: ModalController) {}
+  constructor(private modalController: ModalController , private route: ActivatedRoute) {
 
-  ngOnInit() {}
+  }
+
+  ngOnInit() {
+    let id = this.route.snapshot.paramMap.get('id');
+    console.log(id);
+    
+  }
   async goToWinnerImage() {
     const modal = await this.modalController.create({
       component: ImagemodalPage,

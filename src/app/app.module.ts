@@ -19,10 +19,15 @@ import { ImagePicker } from "@ionic-native/image-picker/ngx";
 import { Base64 } from "@ionic-native/base64/ngx";
 import {  SuperTabsModule } from "@ionic-super-tabs/angular";
 import { AddmodalPageModule } from './addmodal/addmodal.module';
-
+import { NgOtpInputModule } from "ng-otp-input";
+import { TextMaskModule } from "angular2-text-mask";
+import { BrMaskerModule } from "br-mask";
+import { NgxMaskIonicModule } from "ngx-mask-ionic";
+import { NotificationPage } from './notification/notification.page';
+import { NotificationPageModule } from './notification/notification.module';
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [ImagemodalPage],
+  entryComponents: [ImagemodalPage , NotificationPage],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -34,7 +39,10 @@ import { AddmodalPageModule } from './addmodal/addmodal.module';
     HttpClientModule,
     SuperTabsModule.forRoot(),
     AddmodalPageModule,
-    
+    NgOtpInputModule,
+    BrMaskerModule,
+    NgxMaskIonicModule.forRoot(),
+    NotificationPageModule
   ],
   providers: [
     StatusBar,

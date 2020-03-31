@@ -5,7 +5,7 @@
       name="notifications"
       style="margin-left: 15px;
     font-size: 20px;"
-     
+     (click)="openNotificationModal()"
     ></ion-icon>
     <ion-title class="ion-text-center">
       Home
@@ -136,7 +136,7 @@
         <ion-content>
           <ion-list>
             <ion-item *ngFor="let item of items">
-              <ion-card routerLink="/cdescription" style="    height: 350px;
+              <ion-card routerLink="/cdescription/{{item.position}}" style="    height: 350px;
     margin: 15px auto;" class="ion-align-items-center">
                 <div class="container" class="ion-text-center">
                   <img src="../../assets/demoimage.jpg" alt="" style="height: 350px;" />

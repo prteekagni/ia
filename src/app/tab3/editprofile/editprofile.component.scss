@@ -33,9 +33,12 @@ ion-avatar{
 }
 ion-item.sc-ion-input-md-h:not(.item-label), ion-item:not(.item-label) .sc-ion-input-md-h{
    --padding-start: 10px;
-    --border: 1px solid lightgray;
-    --border-radius: 10px;
-    background: rgb(220,220,220,0.4);
+    // --border: 1px solid lightgray;
+    // --border-radius: 10px;
+    // background: rgb(220,220,220,0.4);
+      border: 1px solid rgb(210, 210, 210);
+  border-radius: 9px;
+  font-size: 1.2rem !important;
 }
 
 .input-wrapper{
@@ -49,4 +52,11 @@ ion-item.sc-ion-input-md-h:not(.item-label), ion-item:not(.item-label) .sc-ion-i
 
 ion-item{
     padding-bottom: 10px;
+}
+
+.input {
+  // background-color: rgb(240, 240, 240);
+  border: 1px solid rgb(210, 210, 210);
+  border-radius: 9px;
+  font-size: 1.2rem !important;
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { ActionSheetController, IonSlides, ModalController, PopoverController } from "@ionic/angular";
 import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 import { HttpClient } from "@angular/common/http";
@@ -19,6 +19,7 @@ export class CdescriptionPage implements OnInit {
   segment = 0;
   items;
   gallery;
+  title;
   @ViewChild("slider", { static: true }) slider: IonSlides;
   constructor(
     private router: Router,
@@ -28,7 +29,8 @@ export class CdescriptionPage implements OnInit {
     public imagePicker: ImagePicker,
     private base64: Base64,
     private modalController: ModalController,
-    private popoverController: PopoverController
+    private popoverController: PopoverController,
+    private route:ActivatedRoute
   ) {
     this.items = [
       { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
@@ -41,7 +43,11 @@ export class CdescriptionPage implements OnInit {
     ];
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+      // this.route.paramMap()
+       let data = this.route.snapshot.paramMap.get("data");
+       console.log(data);
+  }
 
   async goToTabBar() {
     const actionSheet = await this.actionSheetController.create({
@@ -170,7 +176,7 @@ export class CdescriptionPage implements OnInit {
     const modal = await this.modalController.create({
       component: ImagemodalPage,
       backdropDismiss: true,
-      cssClass:"image-modal"
+      cssClass: "image-modal"
     });
     return await modal.present();
   }

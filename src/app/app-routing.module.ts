@@ -21,7 +21,7 @@ const routes: Routes = [
       import("./contests/contests.module").then(m => m.ContestsPageModule)
   },
   {
-    path: "cdescription",
+    path: "cdescription/:id",
     loadChildren: () =>
       import("./cdescription/cdescription.module").then(
         m => m.CdescriptionPageModule
@@ -38,7 +38,7 @@ const routes: Routes = [
       import("./imagemodal/imagemodal.module").then(m => m.ImagemodalPageModule)
   },
   {
-    path: "winners",
+    path: "winners/:id",
     loadChildren: () =>
       import("./winners/winners.module").then(m => m.WinnersPageModule)
   },
@@ -66,6 +66,10 @@ const routes: Routes = [
   {
     path: 'impageupload',
     loadChildren: () => import('./impageupload/impageupload.module').then( m => m.ImpageuploadPageModule)
+  },
+  {
+    path: 'notification',
+    loadChildren: () => import('./notification/notification.module').then( m => m.NotificationPageModule)
   }
 ];
 @NgModule({

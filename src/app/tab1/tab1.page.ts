@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { PopoverController ,IonSlides, ModalController } from '@ionic/angular';
 import { AddmodalPage } from '../addmodal/addmodal.page';
+import { NotificationPage } from '../notification/notification.page';
 
 @Component({
   selector: "app-tab1",
@@ -11,7 +12,10 @@ export class Tab1Page {
   @ViewChild("slider", { static: true }) slider: IonSlides;
   segment = 0;
   items: any = [];
-  constructor(private popoverController: PopoverController , private modalController: ModalController) {
+  constructor(
+    private popoverController: PopoverController,
+    private modalController: ModalController
+  ) {
     this.items = [
       { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
       { position: 2, name: "Helium", weight: 4.0026, symbol: "He" },
@@ -44,12 +48,19 @@ export class Tab1Page {
     //Add 'implements OnInit' to the class.
     // this.slider.slideTo(this.segment);
   }
-  async openAddModalPage(){
-   const modal = await this.modalController.create({
-     component: AddmodalPage,
-     backdropDismiss: true,
-     cssClass:"add-modal"
-   });
-   return await modal.present();
+  async openAddModalPage() {
+    const modal = await this.modalController.create({
+      component: AddmodalPage,
+      backdropDismiss: true,
+      cssClass: "add-modal"
+    });
+    return await modal.present();
+  }
+  async openNotificationModal(){
+     const modal = await this.modalController.create({
+       component: NotificationPage,
+       backdropDismiss: true,
+     });
+     return await modal.present();
   }
 }
