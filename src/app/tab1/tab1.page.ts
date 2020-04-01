@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { PopoverController ,IonSlides, ModalController } from '@ionic/angular';
 import { AddmodalPage } from '../addmodal/addmodal.page';
 import { NotificationPage } from '../notification/notification.page';
+import { ImpageuploadPage } from '../impageupload/impageupload.page';
 
 @Component({
   selector: "app-tab1",
@@ -58,8 +59,9 @@ export class Tab1Page {
   }
   async openNotificationModal(){
      const modal = await this.modalController.create({
-       component: NotificationPage,
+       component: ImpageuploadPage,
        backdropDismiss: true,
+       cssClass:"imageupload-modal"
      });
      return await modal.present();
   }

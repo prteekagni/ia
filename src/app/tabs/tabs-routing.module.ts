@@ -38,15 +38,22 @@ const routes: Routes = [
         ]
       },
       {
-        path: "contests",
-        children: [
-          {
-            path: "",
-            loadChildren: () =>
-              import("../contests/contests.module").then(m => m.ContestsPageModule)
-          }
-        ]
+        path: "enteries",
+        loadChildren: () =>
+          import("../enteries/enteries.module").then(m => m.EnteriesPageModule)
       },
+      // {
+      //   path: "contests",
+      //   children: [
+      //     {
+      //       path: "",
+      //       loadChildren: () =>
+      //         import("../contests/contests.module").then(
+      //           m => m.ContestsPageModule
+      //         )
+      //     }
+      //   ]
+      // },
       {
         path: "",
         redirectTo: "/tabs/tab1",

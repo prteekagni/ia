@@ -1,16 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
 import { EnteriesPageRoutingModule } from './enteries-routing.module';
-
 import { EnteriesPage } from './enteries.page';
-import { ImagemodalPage } from '../imagemodal/imagemodal.page';
-import { ImagemodalPageModule } from '../imagemodal/imagemodal.module';
-import { TabviewgalleryComponent } from '../components/tabviewgallery/tabviewgallery.component';
-import { GalleryComponent } from '../components/gallery/gallery.component';
+import { FeaturecModule } from '../components/featurec.module';
 
 
 
@@ -20,12 +14,10 @@ import { GalleryComponent } from '../components/gallery/gallery.component';
     FormsModule,
     IonicModule,
     EnteriesPageRoutingModule,
-
+    FeaturecModule
   ],
   declarations: [
-    EnteriesPage ,
-    TabviewgalleryComponent,
-    GalleryComponent
+    EnteriesPage 
   ]
 })
 export class EnteriesPageModule {}

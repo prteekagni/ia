@@ -84,11 +84,13 @@ export class GalleryComponent implements OnInit {
   async openimageModal() {
     if(!this.iswinner){
  const modal = await this.modalController.create({
-      component: ImagemodalPage,
-      backdropDismiss: true,  
-      cssClass:"image-modal"
-    
-    });
+   component: ImagemodalPage,
+   backdropDismiss: true,
+   cssClass: "image-modal",
+   componentProps: {
+     'type': "alluploads"
+   }
+ });
     return await modal.present();
   }
     else {
@@ -96,7 +98,8 @@ export class GalleryComponent implements OnInit {
     
     const modal = await this.modalController.create({
       componentProps: {
-     'iswinner':'true'
+     'iswinner':'true',
+    
     },
       component: ImagemodalPage,
       backdropDismiss: true,  

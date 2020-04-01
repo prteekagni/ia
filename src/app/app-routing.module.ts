@@ -16,22 +16,13 @@ const routes: Routes = [
     
   },
   {
-    path: "contests/:type",
-    loadChildren: () =>
-      import("./contests/contests.module").then(m => m.ContestsPageModule)
-  },
-  {
     path: "cdescription/:id",
     loadChildren: () =>
       import("./cdescription/cdescription.module").then(
         m => m.CdescriptionPageModule
       )
   },
-  {
-    path: "enteries",
-    loadChildren: () =>
-      import("./enteries/enteries.module").then(m => m.EnteriesPageModule)
-  },
+ 
   {
     path: "imagemodal",
     loadChildren: () =>

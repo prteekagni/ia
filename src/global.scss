@@ -82,6 +82,24 @@
     --height: 360px;
     --border-radius: 10px;
 }
+.imageupload-modal .modal-wrapper {
+     --width: 95vw;
+    --height: 380px;
+    --border-radius: 5px;
+}
+.boostpost-modal .modal-wrapper {
+     --width: 95vw;
+    --height: 415px;
+    --border-radius: 5px;
+}
+
+   
+
+.supervote-modal .modal-wrapper{
+  --width: 90%;
+    --height: 315px;
+    --border-radius: 10px;
+}
 
 .my-modal .modal-wrapper {
   --width: 100%;
@@ -90,14 +108,21 @@
 
 
 .add-modal .modal-wrapper {
- --width: 90%;
-    --height: 275px;
-    border-radius: 10px;
+ --width: 95%;
+ --height: 450px;
+ border-radius: 10px;
+}
+
+
+@media screen and (min-width: 480px) {
+.add-modal .modal-wrapper{
+  --height:435px ;
+}
 }
 
 .winner-modal .modal-wrapper{
-      --width: 90%;
-    --height: 303px;
+      --width: 95%;
+    --height: 326px;
     --border-radius: 10px;
 }
 

@@ -186,7 +186,7 @@
                             class="awardimage"
                             /></ion-col
                         ><ion-col size="7" class="ion-align-self-center"
-                          ><span style="font-weight: 600;">1<sup>st</sup> Award</span>
+                          ><span style="font-weight: 600;">1<sup>st</sup></span>
                           <p
                             class="prizetext"
                           >
@@ -206,7 +206,7 @@
                             class="awardimage"
                             /></ion-col
                         ><ion-col size="7" class="ion-align-self-center"
-                          ><span style="font-weight: 600;">1<sup>st</sup> Award</span>
+                          ><span style="font-weight: 600;">2<sup>nd</sup></span>
                           <p
                             class="prizetext"
                           >
@@ -226,7 +226,7 @@
                             class="awardimage"
                             /></ion-col
                         ><ion-col size="7" class="ion-align-self-center"
-                          ><span style="font-weight: 600;">1<sup>st</sup> Award</span>
+                          ><span style="font-weight: 600;">3<sup>rd</sup></span>
                           <p
                             class="prizetext"
                           >
@@ -320,7 +320,15 @@
         </ion-content>
       </super-tab>
       <super-tab>
-        <!-- <ion-nav root="some page" ></ion-nav> -->
+        <ion-grid  class="grida">
+     <ion-row class="galleryrow">
+        <ion-col size="6" *ngFor="let item of items" style="padding:2px">
+          
+       <img src="../../assets/demoimage.jpg" alt="" (click)="openMyimageModal()">
+     
+        </ion-col>
+      </ion-row>
+      </ion-grid>
       </super-tab>
     </super-tabs-container>
   </super-tabs>

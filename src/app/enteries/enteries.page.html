@@ -9,38 +9,5 @@
 
 
 <ion-content>
- <ion-toolbar>
-   <ion-segment color="secondary" [(ngModel)]="gallery">
-  <ion-segment-button value="standard">
-    <ion-label>Standard</ion-label>
-  </ion-segment-button>
-  <ion-segment-button value="hybrid">
-    <ion-label>Hybrid</ion-label>
-  </ion-segment-button>
-</ion-segment>
- </ion-toolbar>
-
- <div [ngSwitch]="gallery">
-  <div *ngSwitchCase="'standard'">
-   <app-tabviewgallery></app-tabviewgallery>
-     
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Loading more data...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-  </div>
-  <div *ngSwitchCase="'hybrid'">
-<app-gallery></app-gallery>
-  </div>
-
-
-  
-
-  
-</div>
-
- 
-
+<app-tabviewgallery [iswinner]="true"></app-tabviewgallery>
 </ion-content>

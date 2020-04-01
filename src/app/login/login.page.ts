@@ -15,7 +15,7 @@ export class LoginPage {
   Mobile;
   enterOTP: boolean = true;
   loginForm;
-  timer = 10;
+  timer;
   OTP: string = "";
   showOTPInput: boolean = false;
   OTPmessage: string =
@@ -54,6 +54,9 @@ export class LoginPage {
     });
   }
 
+  ionViewWillEnter() {
+    this.timer = 10;
+  }
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -173,7 +176,7 @@ export class LoginPage {
     console.log(data);
   }
 
-  goBack(){
+  goBack() {
     this.timer = 10;
     this.showOTPInput = false;
   }

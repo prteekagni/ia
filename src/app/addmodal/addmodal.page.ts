@@ -7,11 +7,15 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ["./addmodal.page.scss"]
 })
 export class AddmodalPage implements OnInit {
-  constructor(private modalController :ModalController) {}
+  constructor(private modalController: ModalController) {}
 
   ngOnInit() {}
 
-  closeImageModal(){
-this.modalController.dismiss();
+  closeImageModal() {
+    this.modalController.dismiss();
+  }
+
+  watchAdsForCredit(){
+    
   }
 }

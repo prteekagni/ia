@@ -8,126 +8,6 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-row>
-    <ion-col size="12">
-      <ion-card>
-        <ion-card-content>
-            <ion-row text-center>
-          <ion-col size="12">
-           <h3>Contest Name</h3> 
-           <h5>Prize Amount</h5>
-          </ion-col>
-        </ion-row>
-          <ion-row text-center>
-            <ion-col size="4">
-  <img src="../../assets/backpacks.jpg" alt="">        
-   <img src="../../assets/medal.png" alt="" style="    width: 30%;
-    position: relative;
-    /* top: 50%; */
-    left: 50%;
-    transform: translate(-50%, -50%);">      
-            </ion-col>
-               <ion-col size="4">
-  <img src="../../assets/icon/favicon.png" alt="">   
-    <img src="../../assets/medal.png" alt="" style="    width: 30%;
-    position: relative;
-    /* top: 50%; */
-    left: 50%;
-    transform: translate(-50%, -50%);">             
-            </ion-col>
-               <ion-col size="4">
-  <img src="../../assets/icon/favicon.png" alt="">    
-    <img src="../../assets/medal.png" alt="" style="    width: 30%;
-    position: relative;
-    /* top: 50%; */
-    left: 50%;
-    transform: translate(-50%, -50%);">            
-            </ion-col>
-          </ion-row>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col size="12">
-      <ion-card>
-        <ion-card-content>
-            <ion-row text-center>
-          <ion-col size="12">
-           <h3>Contest Name</h3> 
-           <h5>Prize Amount</h5>
-          </ion-col>
-        </ion-row>
-          <ion-row text-center>
-            <ion-col size="4">
-  <img src="../../assets/backpacks.jpg" alt="">        
-   <img src="../../assets/medal.png" alt="" style="    width: 30%;
-    position: relative;
-    /* top: 50%; */
-    left: 50%;
-    transform: translate(-50%, -50%);">      
-            </ion-col>
-               <ion-col size="4">
-  <img src="../../assets/icon/favicon.png" alt="">   
-    <img src="../../assets/medal.png" alt="" style="    width: 30%;
-    position: relative;
-    /* top: 50%; */
-    left: 50%;
-    transform: translate(-50%, -50%);">             
-            </ion-col>
-               <ion-col size="4">
-  <img src="../../assets/icon/favicon.png" alt="">    
-    <img src="../../assets/medal.png" alt="" style="    width: 30%;
-    position: relative;
-    /* top: 50%; */
-    left: 50%;
-    transform: translate(-50%, -50%);">            
-            </ion-col>
-          </ion-row>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col size="12">
-      <ion-card>
-        <ion-card-content>
-            <ion-row text-center>
-          <ion-col size="12">
-           <h3>Contest Name</h3> 
-           <h5>Prize Amount</h5>
-          </ion-col>
-        </ion-row>
-          <ion-row text-center>
-            <ion-col size="4">
-  <img src="../../assets/backpacks.jpg" alt="">        
-   <img src="../../assets/medal.png" alt="" style="    width: 30%;
-    position: relative;
-    /* top: 50%; */
-    left: 50%;
-    transform: translate(-50%, -50%);">      
-            </ion-col>
-               <ion-col size="4">
-  <img src="../../assets/icon/favicon.png" alt="">   
-    <img src="../../assets/medal.png" alt="" style="    width: 30%;
-    position: relative;
-    /* top: 50%; */
-    left: 50%;
-    transform: translate(-50%, -50%);">             
-            </ion-col>
-               <ion-col size="4">
-  <img src="../../assets/icon/favicon.png" alt="">    
-    <img src="../../assets/medal.png" alt="" style="    width: 30%;
-    position: relative;
-    /* top: 50%; */
-    left: 50%;
-    transform: translate(-50%, -50%);">            
-            </ion-col>
-          </ion-row>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row> -->
 <ion-row>
   <ion-col size="12">
     <h5 class="ion-text-center">Hero</h5>
@@ -135,18 +15,7 @@
 </ion-row>
   <ion-row>
     <ion-col size="12">
-  <ion-card>
-  <!-- <ion-item>
-  <ion-avatar slot="start">
-    <img src="../../assets/icon/favicon.png" />
-  </ion-avatar>
-     <h1 style="margin-top: 0px;
-    color: black;
-    font-size: larger;">Awesome text</h1>
-   
-   
-  </ion-item> -->
-
+  <ion-card style="height: 350px;">
  <ion-item mode="ios" button>
   
   <ion-thumbnail slot="start">
@@ -166,7 +35,7 @@
     box-shadow: none;
     top: 20px;
     z-index: 11111111111111;">
-   <img src="../../assets/backpacks.jpg" alt="" style="    filter: brightness(0.9);">
+   <img src="../../assets/demoimage.jpg" alt="" style="    filter: brightness(0.9);">
   </ion-card-content>
 </ion-card>
 <ion-row>
@@ -187,7 +56,7 @@
     box-shadow: none;
     top: 10px;
     z-index: 11111111111111;">
-  <img src="../../assets/backpacks.jpg" alt="">  
+  <img src="../../assets/demoimage.jpg" alt="" (click)="goToWinnerImage()">  
    <div class="centered" style="color:white">Colorful</div>
    </div>      
    <!-- <img src="../../assets/medal.png" alt="" style="    width: 30%;
@@ -201,8 +70,8 @@
     width: 50px;
     box-shadow: none;
     top: 10px;
-    z-index: 11111111111111;">
-  <img src="../../assets/backpacks.jpg" alt="">   
+    z-index: 11111111111111;" >
+  <img src="../../assets/demoimage.jpg" alt="" (click)="goToWinnerImage()">   
     <!-- <img src="../../assets/medal.png" alt="" style="    width: 30%;
     position: relative;
     /* top: 50%; */
@@ -223,7 +92,7 @@
     </ion-col>
   </ion-row>
   
-<h4>Top 50</h4>
+<h4>Top 10</h4>
 <app-gallery [iswinner]="'true'"></app-gallery>
     </ion-col>
   </ion-row>

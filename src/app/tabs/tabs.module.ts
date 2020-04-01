@@ -6,14 +6,22 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
+import { ImagemodalPageModule } from '../imagemodal/imagemodal.module';
+import { ImagemodalPage } from '../imagemodal/imagemodal.page';
+import { ImpageuploadPage } from '../impageupload/impageupload.page';
+import { ImpageuploadPageModule } from '../impageupload/impageupload.module';
+
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    TabsPageRoutingModule
+    TabsPageRoutingModule,
+    ImpageuploadPageModule,
+  
   ],
-  declarations: [TabsPage]
+  declarations: [TabsPage],
+  entryComponents: [ImpageuploadPage]
 })
 export class TabsPageModule {}

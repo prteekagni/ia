@@ -19,7 +19,7 @@ span{
 }
 
 .description span,p {
-    margin:0 10px;
+    margin:0 0px;
     white-space: normal;
 }
 
@@ -84,7 +84,7 @@ super-tab-button.hydrated.ion-activatable.ion-focusable.active{
 }
 
 .awardcard{
-    border-radius: 5px;margin:0px;padding-top: 12px;padding-bottom: 12px;
+    border-radius: 5px;margin:0px;padding-top: 10px;padding-bottom: 10px;
 }
 
 .awardimage{
@@ -92,7 +92,7 @@ width: 50px;
 }
 
 .prizetext{
-    margin-left: 6px;
+    // margin-left: 6px;
     margin-top: 5px;margin-right: 0px;font-weight: 600;
     color: #03A9F4;
 }

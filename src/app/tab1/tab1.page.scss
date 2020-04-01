@@ -88,18 +88,21 @@ ion-scroll {
   transform: translate(-50%, -50%);
   font-size: small;
   color: white;
+  font-weight: 600;
 }
 .bottom-left {
   position: absolute;
   bottom: 8px;
   left: 16px;
   color: white;
+  font-weight: 600;
 }
 .bottom-right {
   position: absolute;
   bottom: 8px;
   right: 16px;
   color: white;
+  font-weight: 600;
 }
 .bottomcentered {
   position: absolute;
@@ -107,6 +110,7 @@ ion-scroll {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
+  font-weight: 600;
 }
 super-tabs-toolbar {
   --super-tabs-toolbar-background: 
@@ -131,4 +135,7 @@ super-tab-button.hydrated.ion-activatable.ion-focusable.active ion-label {
   font-weight: 550;
 }
 
+p{
+  margin-top: 0px;
+}
 

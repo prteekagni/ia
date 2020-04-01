@@ -1,0 +1,51 @@
+ion-scroll {
+  white-space: nowrap;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.container img {
+  filter: brightness(0.8);
+}
+.centered {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: x-large;
+  color: white;
+}
+.centeredsubheading {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: small;
+  color: white;
+  font-weight: 600;
+}
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  color: white;
+  font-weight: 600;
+}
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  color: white;
+  font-weight: 600;
+}
+.bottomcentered {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: 600;
+}

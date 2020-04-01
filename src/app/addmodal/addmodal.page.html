@@ -1,29 +1,66 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>addmodal</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content>
   <ion-row>
     <ion-col size="12" class="ion-text-right">
-             <ion-label (click)="closeImageModal($event)">
-            <ion-icon name="md-close" style="font-size: 24px;color: #92949c;"></ion-icon>
-            <!-- <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
-          </ion-label>
+      <ion-label (click)="closeImageModal($event)">
+        <ion-icon
+          name="md-close"
+          style="font-size: 24px;color: #92949c;"
+        ></ion-icon>
+        <!-- <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
+      </ion-label>
     </ion-col>
   </ion-row>
-<ion-row>
-  <ion-col size="12" class="ion-text-center">
-    <img src="../../assets/addmodal.png" alt="" style="width: 100px;">
-  </ion-col>
-  <ion-col size="12" class="ion-text-center">
-    <h3>Get your daily bonus</h3>
-    <p style="color: #92949c;
-    font-size: x-small;">Watch a video Ad to get 1 credit</p>
-    <ion-button (click)="onClick()" expand="block" fill="clear">
-      Watch Video AD - Get 1 Credit 
-    </ion-button>
-  </ion-col>
-</ion-row>
+  <ion-row>
+    <ion-col size="12" class="ion-text-center">
+      <img src="../../assets/addmodal.png" alt="" style="width: 100px;" />
+    </ion-col>
+    <ion-col size="12" class="ion-text-center">
+      <h3 style="margin-top: 0px;">PhotoRewards Credits</h3>
+      <!-- <p style="font-size: small;margin-top: 0px;">PRC are awarded when you vote for 10 times.</p> -->
+      <!-- <p>You can spend your PRC's to buy boosters which can help your photo get more noticed or show extra appreciation for others.</p> -->
+      <!-- <p
+        style="color: #92949c;
+    font-size: x-small;"
+      >
+        Watch a video Ad to get 1 credit
+      </p> -->  
+      <p style="font-size:small;">You can spend your PRC's to buy boosters which help your photos get more noticed or show extra appreciation for others.</p>
+      <ion-item>
+  <ion-thumbnail slot="start">
+    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+  </ion-thumbnail>
+  <ion-label>
+    <h2>Top Slot</h2>
+    <p>Item Thumbnail</p>
+    </ion-label>
+</ion-item>
+<ion-item>
+  <ion-thumbnail slot="start">
+    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+  </ion-thumbnail>
+  <ion-label>
+    <h2>Booster</h2>
+    <p>Item Thumbnail</p>
+    </ion-label>
+</ion-item>
+<!-- <ion-item>
+  <ion-thumbnail slot="start">
+    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+  </ion-thumbnail>
+  <ion-label>
+    <h2>Top Vote</h2>
+    <p>Item Thumbnail</p>
+    </ion-label>
+</ion-item> -->
+      
+  
+    </ion-col>
+    <ion-col size="12" style="    position: absolute;
+    bottom: 0px;
+">
+          <ion-button (click)="watchAdsForCredit()" expand="block" fill="clear">
+        Watch Video AD - Get 1 Credit
+      </ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>

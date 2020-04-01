@@ -30,7 +30,7 @@ export class CdescriptionPage implements OnInit {
     private base64: Base64,
     private modalController: ModalController,
     private popoverController: PopoverController,
-    private route:ActivatedRoute
+    private route: ActivatedRoute
   ) {
     this.items = [
       { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
@@ -44,9 +44,9 @@ export class CdescriptionPage implements OnInit {
   }
 
   ngOnInit() {
-      // this.route.paramMap()
-       let data = this.route.snapshot.paramMap.get("data");
-       console.log(data);
+    // this.route.paramMap()
+    let data = this.route.snapshot.paramMap.get("data");
+    console.log(data);
   }
 
   async goToTabBar() {
@@ -175,6 +175,7 @@ export class CdescriptionPage implements OnInit {
   async openimageModal() {
     const modal = await this.modalController.create({
       component: ImagemodalPage,
+
       backdropDismiss: true,
       cssClass: "image-modal"
     });
@@ -184,4 +185,16 @@ export class CdescriptionPage implements OnInit {
   dismissPopover() {
     this.popoverController.dismiss();
   }
+  async openMyimageModal(){
+ const modal = await this.modalController.create({
+   component: ImagemodalPage,
+   backdropDismiss: true,
+   cssClass: "image-modal",
+   componentProps: {
+     'type': "userupload"
+   }
+ });
+ modal.present();
 }
+}
+

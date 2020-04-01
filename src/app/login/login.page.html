@@ -128,18 +128,18 @@
     </ion-col>
   </ion-row>
 </ion-content> -->
-
-<ion-content no-padding>
+<ion-content no-padding style="--background:transparent">
+  <img src="../../assets/g1.jpg" alt="" class="loginbg">
   <div class="main">
     <ion-row class="ion-align-items-center ">
       <ion-col size="12" class="ion-padding-vertical">
-        <ion-card no-margin *ngIf="!showOTPInput">
+        <ion-card no-margin *ngIf="!showOTPInput" style="background:transparent">
           <ion-card-content>
             <ion-row class="row">
               <div class="fire-logo">
-                <img src="../../assets/icon/favicon.png" class="img-logo" />
+                <img src="../../assets/google.png" class="img-logo" />
                 <ion-text padding>
-                  <h2 no-margin margin-vertical text-center>Welcome</h2>
+                  <h2 no-margin margin-vertical text-center style="color: white;">Welcome</h2>
                 </ion-text>
               </div>
             </ion-row>
@@ -149,7 +149,7 @@
                   <ion-row>
                     <ion-col size="2">
                       <ion-input readonly="true" placeholder="+91" style="border: 1px solid #d2d2d2;
-    border-radius: 9px;height: 52px;width: 45px;"></ion-input>
+    border-radius: 9px;height: 52px;width: 45px; --placeholder-opacity:1;color: white;"></ion-input>
                     </ion-col>
                     <ion-col size="10">
                       <ion-input [pattern]="mobNumberPattern" style="font-size: larger;" type="number"
@@ -170,8 +170,8 @@
                   <h5 class="ion-text-center">Or</h5>
                 </ion-col>
                 <ion-col>
-                  <ion-button (click)="onClick()" expand="block"
-                    style="--background: white;color: black;font-size: medium;" size="large">
+                  <ion-button (click)="onClick()" expand="block" size="large"
+                    style="--background: white;--opacity:.9;color: black;font-size: medium;" size="large">
                     <img src="../../assets/google.png" alt="" slot="start" style="width: 30px;margin-right: 10px;">
                     Continue with google
                   </ion-button>
@@ -218,13 +218,11 @@
     </ion-row>
   </div>
 </ion-content>
-<ion-row>
-  <ion-col>
 
-    <ion-footer>
+    <!-- <ion-footer>
   <ion-toolbar>
     <ion-title text-center>
     <img src="../../assets/mii.jpg" alt="" style="width: 50px;">
     </ion-title>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 import { HttpClient } from '@angular/common/http';
+import { ImpageuploadPage } from '../impageupload/impageupload.page';
 
 @Component({
   selector: "app-tabs",
@@ -16,51 +17,59 @@ export class TabsPage {
     private actionSheetController: ActionSheetController,
     private camera: Camera,
     public imagePicker: ImagePicker,
-    private http:HttpClient
+    private http: HttpClient,
+    private modalController: ModalController
   ) {}
   async onClick() {
-    const actionSheet = await this.actionSheetController.create({
-      header: "Select Image",
-      buttons: [
-        {
-          text: "Camera",
-          icon: "camera",
-          handler: () => {
-            this.openCamera("CAMERA");
-          }
-        },
-        {
-          text: "Gallery",
-          icon: "arrow-dropright-circle",
-          handler: () => {
-            this.imagePicker
-              .getPictures({ maximumImagesCount: 1 })
-              .then(results => {
-                for (var i = 0; i < results.length; i++) {
-                  console.log("Image URI: " + results[i]);
-                  this.tempUrl = results[i];
-                  this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(
-                    results[i]
-                  );
-                  this.readimage();
-                }
-              });
-            err => {
-              console.log(err);
-            };
-          }
-        },
-        {
-          text: "Cancel",
-          icon: "close",
-          role: "cancel",
-          handler: () => {
-            console.log("Cancel clicked");
-          }
-        }
-      ]
+    // const actionSheet = await this.actionSheetController.create({
+    //   header: "Select Image",
+    //   buttons: [
+    //     {
+    //       text: "Camera",
+    //       icon: "camera",
+    //       handler: () => {
+    //         this.openCamera("CAMERA");
+    //       }
+    //     },
+    //     {
+    //       text: "Gallery",
+    //       icon: "arrow-dropright-circle",
+    //       handler: () => {
+    //         this.imagePicker
+    //           .getPictures({ maximumImagesCount: 1 })
+    //           .then(results => {
+    //             for (var i = 0; i < results.length; i++) {
+    //               console.log("Image URI: " + results[i]);
+    //               this.tempUrl = results[i];
+    //               this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(
+    //                 results[i]
+    //               );
+    //               this.readimage();
+    //             }
+    //           });
+    //         err => {
+    //           console.log(err);
+    //         };
+    //       }
+    //     },
+    //     {
+    //       text: "Cancel",
+    //       icon: "close",
+    //       role: "cancel",
+    //       handler: () => {
+    //         console.log("Cancel clicked");
+    //       }
+    //     }
+    //   ]
+    // });
+    // await actionSheet.present();
+
+    const modal = await this.modalController.create({
+      component: ImpageuploadPage,
+      backdropDismiss: true,
+      cssClass: "imageupload-modal "
     });
-    await actionSheet.present();
+    return await modal.present();
   }
   openCamera(source) {
     var srcType = "this.camera.PictureSourceType.SAVEDPHOTOALBUM";

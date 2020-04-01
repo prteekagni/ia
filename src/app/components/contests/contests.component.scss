@@ -1,0 +1,115 @@
+.content{
+    position: relative;
+    background: white;
+    top: 35%;
+    width: 80vw;
+    height: 80px;
+    z-index: 1111111;
+    border-radius: 25px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+//   clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);
+    box-shadow:0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)
+}
+.content h6 {
+        color: black;
+    text-align: left;
+    margin-top: 5px;
+        margin-left: 10px;
+}
+.content span {
+   color: black;
+    margin-top: -2px;
+    font-size: smaller;
+    /* margin-left: 10px; */
+    position: absolute;
+    margin-left: 5px;
+}
+
+welcome-card{
+    box-shadow: rgba(2, 8, 20, 0.1) 0px 0.175em 0.5em, rgba(2, 8, 20, 0.08) 0px 0.085em 0.175em;
+}
+.content p {
+    margin: 0px 0px;
+    color: gray;
+    margin-right: 5px;
+    font-size: x-small;
+    padding-top: 10px;
+	line-height: 1em;
+}
+
+h4{
+    margin:0px 0px;
+    position: absolute;
+    top: 50%;
+    // left: 45%;
+    color: orangered;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.contestheading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: large;
+}
+.filterimage{
+    filter: brightness(0.8);
+}
+
+ion-scroll {
+  white-space: nowrap;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.container img {
+  filter: brightness(0.8);
+}
+.centered {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: x-large;
+  color: white;
+}
+.centeredsubheading {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: small;
+  color: white;
+  font-weight: 600;
+}
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  color: white;
+  font-weight: 600;
+}
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  color: white;
+  font-weight: 600;
+}
+.bottomcentered {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: 600;
+}

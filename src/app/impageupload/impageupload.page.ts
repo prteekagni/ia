@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ForgotpasswordmodalPage } from '../forgotpasswordmodal/forgotpasswordmodal.page';
 
 @Component({
   selector: "app-impageupload",
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImpageuploadPage implements OnInit {
   items;
-  constructor() {
+  constructor( private modalController: ModalController) {
     this.items = [
       { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
       { position: 2, name: "Helium", weight: 4.0026, symbol: "He" },
@@ -22,5 +24,16 @@ export class ImpageuploadPage implements OnInit {
   ngOnInit() {}
 
   closeModal() {}
-  goToTabBar(){}
+  goToTabBar() {}
+ async bostPost(){
+  const modal = await this.modalController.create({
+    component: ForgotpasswordmodalPage,
+    backdropDismiss: true,
+    cssClass: "boostpost-modal",
+    componentProps:{
+      "mode":"BP"
+    }
+  });
+  return await modal.present();
+  }
 }

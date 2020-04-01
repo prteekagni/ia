@@ -20,9 +20,12 @@ export class WinnersPage implements OnInit {
   }
   async goToWinnerImage() {
     const modal = await this.modalController.create({
+      componentProps: {
+        iswinner: "true"
+      },
       component: ImagemodalPage,
       backdropDismiss: true,
-      cssClass: "my-modal"
+      cssClass: "winner-modal"
     });
     return await modal.present();
   }

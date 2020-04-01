@@ -1,7 +1,7 @@
  <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab One
+      Setting
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -40,7 +40,7 @@
   <ion-toggle enabled checked="false" id="themeToggle" (ionChange)="darkMode($event)"></ion-toggle>
 
       </ion-item>
-       <ion-item href="https://ionicframework.com/docs/theming/basics">
+       <ion-item (click)="deleteAccount()" >
                  <ion-icon slot="start" name="trash"></ion-icon>
 
         <ion-label>Delete Account</ion-label>

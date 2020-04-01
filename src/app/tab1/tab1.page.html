@@ -111,35 +111,36 @@
         class="supertabtransparentbuttons"
         >
           <ion-icon slot="start" name="image" style="--color:#757575"></ion-icon>
-          Contest
+          Current
         </ion-button>
       </super-tab-button>
-      <super-tab-button>
+      <!-- <super-tab-button>
           <ion-button
         class="supertabtransparentbuttons"
         >
           <ion-icon slot="start" name="thumbs-up" style="--color:#757575"></ion-icon>
           Votes
         </ion-button>
-      </super-tab-button>
+      </super-tab-button> -->
       <super-tab-button>
          <ion-button
         class="supertabtransparentbuttons"
         >
           <ion-icon slot="start" name="people" style="--color:#757575"></ion-icon>
-          Heroes
+          Upcoming
         </ion-button>
       </super-tab-button>
     </super-tabs-toolbar>
     <super-tabs-container>
       <super-tab>
         <ion-content>
-          <ion-list>
+          <!-- <ion-list>
             <ion-item *ngFor="let item of items">
-              <ion-card routerLink="/cdescription/{{item.position}}" style="    height: 350px;
+              <ion-card routerLink="/cdescription/{{item.position}}" style="width: 325px;
+    height: 250px;
     margin: 15px auto;" class="ion-align-items-center">
                 <div class="container" class="ion-text-center">
-                  <img src="../../assets/demoimage.jpg" alt="" style="height: 350px;" />
+                  <img src="../../assets/demoimage.jpg" alt="" style="height: 380px;" />
                   <div class="centered">Colorful</div>
                   <div class="centeredsubheading">Prateek</div>
                   <div class="bottomcentered">
@@ -154,14 +155,16 @@
                 </div>
               </ion-card>
             </ion-item>
-          </ion-list>
+          </ion-list> -->
+          <app-tabviewgallery></app-tabviewgallery>
+   <!-- <app-contests></app-contests> -->
         </ion-content>
       </super-tab>
       <super-tab>
         <!-- <ion-nav root="enteries" ></ion-nav> -->
       </super-tab>
       <super-tab>
-        <app-contests></app-contests>
+        <!-- <app-contests></app-contests> -->
         <!-- <app-winners></app-winners> -->
       </super-tab>
     </super-tabs-container>
