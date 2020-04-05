@@ -17,9 +17,10 @@ a{
 }
 
 .cameraicon{
-    position: relative;
+  position: absolute;
     top: 50%;
     left: 50%;
+    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     color: var(--ion-color-primary, #3880ff) !important;
 }
@@ -30,6 +31,7 @@ ion-avatar{
     width: 90px;
     height: 90px;
     border: 1px dotted var(--ion-color-primary, #3880ff) !important;
+    margin: auto;
 }
 ion-item.sc-ion-input-md-h:not(.item-label), ion-item:not(.item-label) .sc-ion-input-md-h{
    --padding-start: 10px;

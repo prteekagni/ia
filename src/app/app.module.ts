@@ -16,24 +16,32 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 import { HttpClientModule } from "@angular/common/http";
 import { ImagePicker } from "@ionic-native/image-picker/ngx";
-import { Base64 } from "@ionic-native/base64/ngx";
 import {  SuperTabsModule } from "@ionic-super-tabs/angular";
 import { AddmodalPageModule } from './addmodal/addmodal.module';
 import { NgOtpInputModule } from "ng-otp-input";
-import { TextMaskModule } from "angular2-text-mask";
 import { BrMaskerModule } from "br-mask";
 import { NgxMaskIonicModule } from "ngx-mask-ionic";
 import { NotificationPage } from './notification/notification.page';
 import { NotificationPageModule } from './notification/notification.module';
+import { ImpageuploadPage } from './impageupload/impageupload.page';
+import { ImpageuploadPageModule } from './impageupload/impageupload.module';
+import { GooglePlus } from "@ionic-native/google-plus/ngx";
+import { SmsRetriever } from "@ionic-native/sms-retriever/ngx";
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+// import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { Crop } from "@ionic-native/crop/ngx";
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [ImagemodalPage , NotificationPage],
+  entryComponents: [ImagemodalPage, NotificationPage, ImpageuploadPage],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      mode: "md",
+    }),
     AppRoutingModule,
     ImagemodalPageModule,
     ReactiveFormsModule,
+    ImpageuploadPageModule,
     ForgotpasswordmodalPageModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -42,7 +50,7 @@ import { NotificationPageModule } from './notification/notification.module';
     NgOtpInputModule,
     BrMaskerModule,
     NgxMaskIonicModule.forRoot(),
-    NotificationPageModule
+    NotificationPageModule,
   ],
   providers: [
     StatusBar,
@@ -50,8 +58,11 @@ import { NotificationPageModule } from './notification/notification.module';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Camera,
     ImagePicker,
-    Base64
+    GooglePlus,
+    SmsRetriever,
+    NativeStorage,
+    Crop,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

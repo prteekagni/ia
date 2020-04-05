@@ -3,7 +3,8 @@ import { PopoverController ,IonSlides, ModalController } from '@ionic/angular';
 import { AddmodalPage } from '../addmodal/addmodal.page';
 import { NotificationPage } from '../notification/notification.page';
 import { ImpageuploadPage } from '../impageupload/impageupload.page';
-
+import { myEnterAnimation } from "../animations/enter";
+import { myLeaveAnimation } from "../animations/leave";
 @Component({
   selector: "app-tab1",
   templateUrl: "tab1.page.html",
@@ -59,9 +60,10 @@ export class Tab1Page {
   }
   async openNotificationModal(){
      const modal = await this.modalController.create({
-       component: ImpageuploadPage,
+       component: NotificationPage,
        backdropDismiss: true,
-       cssClass:"imageupload-modal"
+       enterAnimation: myEnterAnimation,
+       leaveAnimation: myLeaveAnimation
      });
      return await modal.present();
   }

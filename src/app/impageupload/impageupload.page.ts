@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ForgotpasswordmodalPage } from '../forgotpasswordmodal/forgotpasswordmodal.page';
 
@@ -9,6 +9,7 @@ import { ForgotpasswordmodalPage } from '../forgotpasswordmodal/forgotpasswordmo
 })
 export class ImpageuploadPage implements OnInit {
   items;
+  @Input() imageUrl;
   constructor( private modalController: ModalController) {
     this.items = [
       { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },

@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ImagemodalPage } from 'src/app/imagemodal/imagemodal.page';
+import { myEnterAnimation } from 'src/app/animations/enter';
+import { myLeaveAnimation } from 'src/app/animations/leave';
+
 const lorem =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, seddo eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
@@ -25,6 +28,9 @@ let rotateImg = 0;
 export class GalleryComponent implements OnInit {
   items: any[] = [];
   @Input() iswinner;
+  @Input () imageUrl;
+
+  boost:boolean = true;
   // gallery: string = "standard";
   // @ViewChild(IonInfiniteScroll, { static: true })
   // infiniteScroll: IonInfiniteScroll;
@@ -88,8 +94,10 @@ export class GalleryComponent implements OnInit {
    backdropDismiss: true,
    cssClass: "image-modal",
    componentProps: {
-     'type': "alluploads"
-   }
+     type: "alluploads",
+  },
+   enterAnimation: myEnterAnimation,
+   leaveAnimation: myLeaveAnimation
  });
     return await modal.present();
   }
@@ -98,12 +106,13 @@ export class GalleryComponent implements OnInit {
     
     const modal = await this.modalController.create({
       componentProps: {
-     'iswinner':'true',
-    
-    },
+        iswinner: "true"
+      },
       component: ImagemodalPage,
-      backdropDismiss: true,  
-    cssClass:  "winner-modal"
+      backdropDismiss: true,
+      cssClass: "winner-modal",
+      enterAnimation: myEnterAnimation,
+      leaveAnimation: myLeaveAnimation
     });
     return await modal.present();
   }

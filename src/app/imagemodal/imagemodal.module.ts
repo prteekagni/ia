@@ -10,6 +10,7 @@ import { ImagemodalPage } from './imagemodal.page';
 import { FeaturecModule } from '../components/featurec.module';
 import { GalleryComponent } from '../components/gallery/gallery.component';
 import { ImagefeedbackComponent } from '../components/imagefeedback/imagefeedback.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { ImagefeedbackComponent } from '../components/imagefeedback/imagefeedbac
     FormsModule,
     IonicModule,
     ImagemodalPageRoutingModule,
-    FeaturecModule
+    FeaturecModule,
+    
   ],
   declarations: [ImagemodalPage],
   entryComponents:[ImagefeedbackComponent]

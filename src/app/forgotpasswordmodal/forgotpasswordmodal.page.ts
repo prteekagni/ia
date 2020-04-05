@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { trigger, transition, query, style, stagger, animate, keyframes } from '@angular/animations';
 import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -76,6 +76,7 @@ export class ForgotpasswordmodalPage implements OnInit {
   otprequested: boolean = false;
   currentModal = null;
   @Input() mode;
+  @Output() voted = new EventEmitter<boolean>();
   constructor(private modalCtrl: ModalController, private router: Router) {}
 
   ngOnInit() {}
@@ -85,14 +86,19 @@ export class ForgotpasswordmodalPage implements OnInit {
   // onAnimationEvent(data) {}
 
   dismissModal() {
-    this.modalCtrl.dismiss({
-      dismissed: true
-    });
+    this.modalCtrl.dismiss(false);
   }
 
   register() {
     this.modalCtrl.dismiss();
     localStorage.setItem("Login", "true");
     this.router.navigate(["tabs"]);
+  }
+
+  superVote() {
+     this.modalCtrl.dismiss(true);
+  }
+   boosPost() {
+     this.modalCtrl.dismiss(true);
   }
 }

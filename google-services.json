@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "244873214308",
+    "firebase_url": "https://photorewards-2ce97.firebaseio.com",
+    "project_id": "photorewards-2ce97",
+    "storage_bucket": "photorewards-2ce97.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244873214308:android:ce1214c493dfa77ab32271",
+        "android_client_info": {
+          "package_name": "io.photorewards.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244873214308-dg15i7v3rdl4j6fvbmloqmhsj74h153u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.photorewards.app",
+            "certificate_hash": "445de98b166d6ed51473b436a563eb290f8579a8"
+          }
+        },
+        {
+          "client_id": "244873214308-u5ffp8glmh8hsrbo46gt4ajie96hqfg5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6JOil2B0PDHtjHLgO0Ez4iZRMFkVDuxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244873214308-u5ffp8glmh8hsrbo46gt4ajie96hqfg5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,12 +1,12 @@
     <ion-list *ngIf="!iswinner">
             <ion-item *ngFor="let item of items">
-              <ion-card routerLink="/cdescription/{{item.position}}" style="width: 325px;
-    height: 250px;
+              <ion-card routerLink="/cdescription/{{item.position}}" style="
+    height: 225px;
     margin: 15px auto;" class="ion-align-items-center">
                 <div class="container" class="ion-text-center">
                   <img src="../../assets/demoimage.jpg" alt="" style="height: 380px;" />
                   <div class="centered">Colorful</div>
-                  <div class="centeredsubheading">Prateek</div>
+                  <!-- <div class="centeredsubheading">Prateek</div> -->
                   <div class="bottomcentered">
                     &#8377; 1000
                   </div>
@@ -21,14 +21,14 @@
             </ion-item>
           </ion-list>
             <ion-list *ngIf="iswinner">
-            <ion-item *ngFor="let item of items">
-              <ion-card routerLink="/winners/{{item.position}}" style="width: 325px;
-    height: 250px;
+             <ion-item *ngFor="let item of items">
+              <ion-card routerLink="/winners/{{item.position}}" style="
+    height: 225px;
     margin: 15px auto;" class="ion-align-items-center">
                 <div class="container" class="ion-text-center">
                   <img src="../../assets/demoimage.jpg" alt="" style="height: 380px;" />
                   <div class="centered">Colorful</div>
-                  <div class="centeredsubheading">Prateek</div>
+                  <!-- <div class="centeredsubheading">Prateek</div> -->
                   <div class="bottomcentered">
                     &#8377; 1000
                   </div>

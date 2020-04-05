@@ -62,10 +62,18 @@
 // }
 
 .main {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  // display: -webkit-box;
+  //   display: flex;
+  //   -webkit-box-orient: vertical;
+  //   -webkit-box-direction: normal;
+  //   flex-direction: column;
+  //   /* -webkit-box-pack: center; */
+  //   justify-content: center;
+  //   height: 150%
+  position: absolute;
+    bottom: 20px;
+    width: 96vw;
+    margin-left: 2vw;
 }
 @media screen and (min-width: 767px) {
   ion-card {
@@ -84,7 +92,7 @@ ion-card {
   border: 1px solid rgb(210, 210, 210);
   border-radius: 9px;
   font-size: 1.2rem !important;
-  color: white;
+  color: black;
 }
 .otpinput {
   letter-spacing: 30px;
@@ -129,15 +137,17 @@ ion-card {
   justify-content: center;
 }
 .img-logo {
-  height: 120px;
-  width: 120px;
+  height: 80px;
+    width: 80px;
 }
 .fire-logo {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   // padding-bottom: 30px;
+  margin-top: 15px;
+  margin-left: 15px;
 }
 .bold {
   font-weight: bold;
@@ -182,7 +192,7 @@ ion-card {
 
 ion-input{
   --placeholder-opacity:1;
-  --placeholder-color:white
+  --placeholder-color:black;
 }
 
 .button-disabled{

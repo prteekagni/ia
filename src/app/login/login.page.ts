@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Validators, FormBuilder } from '@angular/forms';
+import { GooglePlus } from "@ionic-native/google-plus/ngx";
+import { RegisterPage } from '../register/register.page';
 
 declare var SMSReceive: any;
 
@@ -40,7 +42,8 @@ export class LoginPage {
     private route: ActivatedRoute,
     private modalController: ModalController,
     private toastCtrl: ToastController,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private GooglePlus: GooglePlus
   ) {
     console.log(this.ngOtpInput);
     this.loginForm = this.fb.group({
@@ -179,5 +182,15 @@ export class LoginPage {
   goBack() {
     this.timer = 10;
     this.showOTPInput = false;
+  }
+
+  loginWithGoogle() {
+    this.GooglePlus.login({})
+      .then(res => console.log(res))
+      .catch(err => console.error(err));
+  }
+
+  async loginWithNumber(){
+  this.router.navigate(["register"]);
   }
 }

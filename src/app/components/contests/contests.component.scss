@@ -113,3 +113,54 @@ ion-scroll {
   color: white;
   font-weight: 600;
 }
+
+ion-card{
+--background: var(--ion-item-background,transparent); 
+    --color: var(--ion-color-step-600,#666);
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    border-radius: 8px;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transition: -webkit-transform .5s cubic-bezier(.12,.72,.29,1);
+    transition: -webkit-transform .5s cubic-bezier(.12,.72,.29,1);
+    transition: transform .5s cubic-bezier(.12,.72,.29,1);
+    transition: transform .5s cubic-bezier(.12,.72,.29,1),-webkit-transform .5s cubic-bezier(.12,.72,.29,1);
+    font-size: 14px;
+    -webkit-box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    box-shadow: 0 4px 16px rgba(0,0,0,.12);
+}
+
+ion-card-title{
+text-align: center;
+    --color: #000;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+
+ion-card-content{
+padding-left: unset;
+    padding-right: unset;
+    -webkit-padding-start: 20px;
+    padding-inline-start: 20px;
+    -webkit-padding-end: 20px;
+    padding-inline-end: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.4;
+}

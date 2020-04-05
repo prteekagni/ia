@@ -1,23 +1,72 @@
- <ng-container *ngIf="!iswinner; else elseTemplate">
-         <ion-grid  class="grida">
-     <ion-row class="galleryrow">
-        <ion-col size="4" *ngFor="let item of items" style="padding:2px">
-          
-       <img src="../../../assets/a.png" alt="" (click)="openimageModal()">
-     
-        </ion-col>
-      </ion-row>
-      </ion-grid>
-      </ng-container>
-      <ng-template #elseTemplate>
-               <ion-grid  class="grida">
-     <ion-row class="galleryrow">
-        <ion-col size="6" *ngFor="let item of items" style="padding:2px">
-          
-       <img src="../../assets/backpacks.jpg" alt="" (click)="openimageModal()">
-     
-        </ion-col>
-      </ion-row>
-      </ion-grid>
-      </ng-template>
+<ng-container *ngIf="!iswinner; else elseTemplate">
+  <ion-grid class="grida">
+    <ion-row class="galleryrow">
+        <ion-col size="4" style="padding:5px">
+<ion-thumbnail>
+   <img
+          src="../../../assets/demoimage.jpg"
+          alt=""
+          (click)="openimageModal()"
+          class="wrap"
+          [ngClass]="{ wrap: !boost }"
+        />
+</ion-thumbnail>
       
+                <img src="../../assets/Asset 2.png" alt="" style="width: 40px;
+    position: absolute;
+    left: 0px;bottom: 0px;" *ngIf="!boost"> 
+      </ion-col>
+      <ion-col size="4" *ngFor="let item of items" style="padding:5px">
+<ion-thumbnail>
+   <img
+          src="../../../assets/image.png"
+          alt=""
+          (click)="openimageModal()"
+          class="wrap"
+          [ngClass]="{ wrap: !boost }"
+        />
+</ion-thumbnail>
+      
+                <img src="../../assets/Asset 2.png" alt="" style="width: 40px;
+    position: absolute;
+    left: 0px;bottom: 0px;" *ngIf="!boost"> 
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-infinite-scroll
+    threshold="25%"
+    position="bottom"
+    (ionInfinite)="loadData($event)"
+  >
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ng-container>
+<ng-template #elseTemplate>
+  <ion-grid class="grida">
+    <ion-row class="galleryrow">
+      <ion-col size="6" *ngFor="let item of items" style="padding:2px">
+        <img
+          src="../../assets/backpacks.jpg"
+          alt=""
+          (click)="openimageModal()"
+        />
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-infinite-scroll
+    threshold="25%"
+    [disabled]="true"
+    position="bottom"
+    (ionInfinite)="loadData($event)"
+  >
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ng-template>
