@@ -4,9 +4,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
-import { EditProfileComponent } from './editprofile/editprofile.component';
-import { ProfileComponent } from './profile/profile.component';
 import { SuperTabsModule } from '@ionic-super-tabs/angular';
+import { FeaturecModule } from '../components/featurec.module';
+import { EditprofilemodalPage } from '../editprofilemodal/editprofilemodal.page';
+
 
 
 @NgModule({
@@ -15,9 +16,10 @@ import { SuperTabsModule } from '@ionic-super-tabs/angular';
     CommonModule,
     FormsModule,
     RouterModule.forChild([{ path: "", component: Tab3Page }]),
-    SuperTabsModule
+    SuperTabsModule,
+    FeaturecModule,
   ],
-  declarations: [Tab3Page, EditProfileComponent, ProfileComponent],
-  entryComponents:[EditProfileComponent]
+  declarations: [Tab3Page],
+  entryComponents: [],
 })
 export class Tab3PageModule {}

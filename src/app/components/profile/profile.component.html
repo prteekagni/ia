@@ -1,0 +1,59 @@
+<ion-row style="margin-top: 15px;">
+
+<ion-col size="12">
+   <ion-item mode="" button (click)="buttonClick()">
+  <ion-thumbnail slot="start">
+    <img src="../../../assets/google.png">
+  </ion-thumbnail>
+ <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">
+            <h2>Lorem ipsum</h2>
+            <p>PR Points</p>
+            <!-- <p>consectetur adipiscing elit. Duis ut urna neque.</p> -->
+          </ion-label>
+  <ion-button (click)="onClick()" expand="block" fill="outline" shape="">
+    Edit Profile
+  </ion-button>
+</ion-item>
+</ion-col>
+
+</ion-row>
+<ion-row>
+  <ion-col size="12" class="ion-text-center">
+  <h3>Participation</h3>
+    
+  </ion-col>
+  <ion-col size="12">
+    <ion-segment  (ionChange)="segmentChanged($event)" [(ngModel)]="segmentModel" >
+  <ion-segment-button value="Contests">
+    <ion-label>Contests</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="Posts">
+    <ion-label>Posts</ion-label>
+  </ion-segment-button>
+</ion-segment>
+  </ion-col>
+  <!-- <ion-slides pager #slides>
+    <ion-slide >
+        <ion-col size="12">
+    <h2>Contests</h2>
+  </ion-col>
+    </ion-slide>
+    <ion-slide>
+      <h1>Awesome Slide Content</h1>
+    </ion-slide>
+  </ion-slides> -->
+  <ng-container *ngIf="segmentModel == 'Contests'">
+<app-tabviewgallery></app-tabviewgallery>
+  </ng-container>
+  <ng-container *ngIf="segmentModel == 'Posts'">
+ <ion-grid  class="grida">
+     <ion-row class="galleryrow">
+        <ion-col size="6" *ngFor="let item of items" style="padding:2px">
+          
+       <img src="../../assets/demoimage.jpg" alt="" (click)="openimageModal()">
+     
+        </ion-col>
+      </ion-row>
+      </ion-grid>
+  </ng-container>
+</ion-row>

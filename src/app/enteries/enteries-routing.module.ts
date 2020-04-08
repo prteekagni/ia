@@ -5,9 +5,11 @@ import { EnteriesPage } from './enteries.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: EnteriesPage
-  }
+    path: "",
+    component: EnteriesPage,
+    children: [],
+  },
+  
 ];
 
 @NgModule({

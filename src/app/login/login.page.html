@@ -1,166 +1,44 @@
-<!-- <ion-content>
-  <ion-row>
-    <ion-col size="12">
-      <ng-container *ngIf="!enterOTP">
-   <form #form="ngForm" (ngSubmit)="requestOTP()">
-        <ion-grid>
-          <ion-row color="primary" justify-content-center>
-            <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-              <div class="ion-text-center">
-                <img
-                  src="../../../assets/icon/favicon.png"
-                  alt=""
-                  style="margin-top:10%"
-                />
-              </div>
-              <div padding style="padding-top: 25px;">
-                <ion-item lines="none">
-                   <ion-label position="floating">Username</ion-label> 
-                  <ion-input
-                    name="Mobile"
-                    type="Number"
-                    placeholder="Mobile Number"
-                    ngModel
-                    required
-                  ></ion-input>
-                </ion-item>
-              </div>
-              <div padding>
-                <ion-button
-                  size=""
-                  type="submit"
-                  [disabled]="form.invalid"
-                  expand="block"
-                  >
-                  Submit
-                  </ion-button>
-              </div>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </form>
 
-      <ion-row>
-        <ion-col size="12" align-self-center>
-          <div class="ion-text-center">
-            Or
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="ion-justify-content-center">
-        <ion-col size="12" class="ion-align-items-center ion-text-center">
-         
-          <ion-button
-            (click)="onClick()"
-            expand="block"
-            style="--background: white;color: black;"
-          >
-            <ion-icon
-              name="logo-google"
-              style="font-size: large;"
-              slot="start"
-            ></ion-icon>
-            Continue with google
-          </ion-button>
-        </ion-col>
-         <ion-col size="3">
-    <ion-icon name="logo-google"></ion-icon>
- 
-    </ion-col> 
-      </ion-row>
-      <ion-row style="margin-top: 25px;">
-        <ion-col size="12" class="ion-text-center">
-          <p style="font-size: small;">
-            By signing up or login, I accept and agree to
-          </p>
-          <p style="font-size: small;">
-            <a href="">Terms and Conditions</a> and
-            <a href="">Privacy Policy </a>
-          </p>
-        </ion-col>
-      </ion-row>
-      </ng-container>
-   <ng-container *ngIf="enterOTP">
-     <ion-row class="ion-">
-       <ion-col size="12">
- <h5>Verify Mobile Number</h5>
-     <h6>Waiting to automatically detect SMS sent to</h6>
-     <h6>+91- 8851610111 <a href="">Change Number?</a></h6>
-       </ion-col>
-       <ion-col size="12">
-            <form #form="ngForm" (ngSubmit)="submitOtp()">
-    <ion-grid>
-      <ion-row color="primary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <div text-center>
-       <img src="../../../assets/icon/favicon.png" alt="" style="margin-top:10%" >
-          </div>
-          <div padding style="padding-top: 25px;"> 
-            <ion-item lines="none">
-              <ion-input name="Otp" type="number" placeholder="Otp" ngModel required></ion-input>
-            </ion-item>   
-          </div>
-      
-          <div padding>
-            <ion-button size="" type="submit" [disabled]="form.invalid" expand="block">Enter Otp</ion-button>
-          </div>
-          
-        </ion-col>
-         
-        <ion-col size="12">
-          <div class="prompt">
-	Enter the code generated on your mobile device below to log in!
-</div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
-       </ion-col>
-     </ion-row>
-    
-  
-  <ion-row>
-   <ion-col size="12" text-center>
-     <h4>slkdhjfdskhgf</h4>
-    </ion-col>
-  </ion-row>
-   </ng-container>
-    </ion-col>
-  </ion-row>
-</ion-content> -->
-<ion-content no-padding style="--background:transparent">
-     <div class="fire-logo">
-                <img src="../../assets/google.png" class="img-logo" />
-               
-              </div>
-  <img src="../../assets/b3.png" alt="" class="loginbg">
+<ion-content no-padding style="--background: transparent;">
+  <div class="fire-logo">
+    <img src="../../assets/google.png" class="img-logo" />
+  </div>
+  <img src="../../assets/b3.png" alt="" class="loginbg" />
 
   <div class="main">
-    <ion-row class="ion-align-items-center ">
+    <ion-row class="ion-align-items-center">
       <ion-col size="12" class="ion-padding-vertical">
-         
-                  <h1 no-margin margin-vertical text-center style="color: white;">Welcome</h1>
-          
-              <ion-button size="large" expand="block" type="submit"
-                     color="primary" class="transition" style="margin-top: 20px;" (click)="loginWithNumber()"> 
-                   
-                      <ion-icon slot="start" name="call"></ion-icon>
-                      Login with Number</ion-button>
-                      <ion-button (click)="loginWithGoogle()" expand="block"
-                    style="--background: white;color: black;margin-top: 10px;" size="large">
-                    <img src="../../assets/google.png" alt="" slot="start" style="width: 30px;margin-right: 10px;">
-                    Continue with google
-                  </ion-button>
-        </ion-col>
+        <h1 no-margin margin-vertical text-center style="color: white;">
+          Welcome
+        </h1>
+
+        <ion-button
+          size="large"
+          expand="block"
+          type="submit"
+          color="primary"
+          class="transition"
+          style="margin-top: 20px;"
+          (click)="loginWithNumber()"
+        >
+          <ion-icon slot="start" name="call"></ion-icon>
+          Login with Number</ion-button
+        >
+        <ion-button
+          (click)="loginWithGoogle()"
+          expand="block"
+          style="--background: white; color: black; margin-top: 10px;"
+          size="large"
+        >
+          <img
+            src="../../assets/google.png"
+            alt=""
+            slot="start"
+            style="width: 30px; margin-right: 10px;"
+          />
+          Continue with google
+        </ion-button>
+      </ion-col>
     </ion-row>
   </div>
-  
-    <!-- <div class="fire-logo">
-                <img src="../../assets/google.png" class="img-logo" />
-                <ion-text padding>
-                  <h2 no-margin margin-vertical text-center style="color: white;">Welcome</h2>
-                </ion-text>
-              </div> -->
-
-  
 </ion-content>

@@ -30,13 +30,19 @@ import { SmsRetriever } from "@ionic-native/sms-retriever/ngx";
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 // import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Crop } from "@ionic-native/crop/ngx";
+
+import { EditprofilemodalPageModule } from './editprofilemodal/editprofilemodal.module';
+import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
+
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [ImagemodalPage, NotificationPage, ImpageuploadPage],
+  entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot({
       mode: "md",
+      hardwareBackButton: true,
+      swipeBackEnabled:true
     }),
     AppRoutingModule,
     ImagemodalPageModule,
@@ -51,17 +57,20 @@ import { Crop } from "@ionic-native/crop/ngx";
     BrMaskerModule,
     NgxMaskIonicModule.forRoot(),
     NotificationPageModule,
+    EditprofilemodalPageModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {provide:LocationStrategy , useClass:HashLocationStrategy},
     Camera,
     ImagePicker,
     GooglePlus,
     SmsRetriever,
-    NativeStorage,
     Crop,
+    NativeStorage
+    
   ],
   bootstrap: [AppComponent],
 })

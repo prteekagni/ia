@@ -1,0 +1,11 @@
+{
+  "android": {
+    "release": {
+      "keystore": "platforms\\android\\photorewards.keystore",
+      "storePassword": "elinfinito",
+      "alias": "prk",
+      "password": "elinfinito",
+      "keystoreType": "jks"
+    }
+  }
+}

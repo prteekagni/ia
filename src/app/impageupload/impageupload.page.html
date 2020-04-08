@@ -13,12 +13,6 @@
       <ion-icon name="flame"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-   <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="bottom:65px" color="primary">
-    <ion-fab-button>
-      <ion-icon name="ios-flame-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-    -->
      <ion-buttons slot="end" (click)="closeModal()">
       close
     </ion-buttons>
@@ -27,15 +21,12 @@
     <img src="{{imageUrl}}" alt="" style="height: 300px">
   </ion-col>
 <ion-col size="12">
-  <h6>Add Title</h6>
+  
+<h5 style="padding-left:16px">Add Title</h5>
   <form #form="ngForm">
-    <ion-item lines="none">
-  <ion-input placeholder="title"></ion-input>
+    <ion-item>
+  <ion-input placeholder="Add your title"></ion-input>
 </ion-item>
-       <!-- <ion-item>
- 
-  <ion-textarea placeholder="Enter more information here..."></ion-textarea>
-</ion-item> -->
   </form>    
   
 </ion-col>

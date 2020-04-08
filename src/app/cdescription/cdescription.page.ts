@@ -5,6 +5,7 @@ import {
   IonSlides,
   ModalController,
   PopoverController,
+  Platform,
 } from "@ionic/angular";
 import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 import { HttpClient } from "@angular/common/http";
@@ -16,6 +17,8 @@ import { myEnterAnimation } from "../animations/enter";
 import { myLeaveAnimation } from "../animations/leave";
 import { NativeStorage } from "@ionic-native/native-storage/ngx";
 import { Crop } from '@ionic-native/crop/ngx';
+import { Subscription } from 'rxjs';
+import { async } from '@angular/core/testing';
 
 declare var window;
 
@@ -33,6 +36,7 @@ export class CdescriptionPage implements OnInit {
   title;
   images: any = [];
   @ViewChild("slider", { static: true }) slider: IonSlides;
+  public unsubscribeBackEvent: Subscription;
 
   constructor(
     private router: Router,
@@ -44,7 +48,9 @@ export class CdescriptionPage implements OnInit {
     private modalController: ModalController,
     private popoverController: PopoverController,
     private route: ActivatedRoute,
-    private crop: Crop
+    private crop: Crop,
+    private platform: Platform,
+    private actionSheetCtrl: ActionSheetController
   ) {
     this.items = [
       { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
@@ -61,6 +67,7 @@ export class CdescriptionPage implements OnInit {
     // this.route.paramMap()
     let data = this.route.snapshot.paramMap.get("data");
     console.log(data);
+    this.initializeBackButtonCustomHandler();
   }
 
   async goToTabBar() {
@@ -84,10 +91,17 @@ export class CdescriptionPage implements OnInit {
                 for (var i = 0; i < results.length; i++) {
                   console.log("Image URI: " + results[i]);
                   this.tempUrl = results[i];
-                  this.crop.crop(this.tempUrl, { quality: 75 , targetWidth:300 , targetHeight: 300}).then(
-                    (newImage) => console.log("new image path is: " + newImage),
-                    (error) => console.error("Error cropping image", error)
-                  );
+                  this.crop
+                    .crop(this.tempUrl, {
+                      quality: 100,
+                      targetWidth: 300,
+                      targetHeight: 300,
+                    })
+                    .then(
+                      (newImage) =>
+                        console.log("new image path is: " + newImage),
+                      (error) => console.error("Error cropping image", error)
+                    );
                   this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(
                     results[i]
                   );
@@ -259,5 +273,37 @@ export class CdescriptionPage implements OnInit {
       leaveAnimation: myLeaveAnimation,
     });
     modal.present();
+  }
+  initializeBackButtonCustomHandler(): void {
+    this.unsubscribeBackEvent = this.platform.backButton.subscribeWithPriority(
+      999999,
+      async () => {
+        try {
+          const element = await this.actionSheetCtrl.getTop();
+
+          if (element) {
+            element.dismiss();
+            return;
+          }
+        } catch (error) {}
+
+        try {
+          const element = await this.modalController.getTop();
+          if (element) {
+            element.dismiss();
+            return;
+          }
+        } catch (error) {}
+        console.log(this.route.parent);
+        console.log(this.route.root);
+        // this.router.navigate(["/tabs/enteries"]);
+        // this.router.navigate(["/tabs/enteries"]);
+        window.history.back();
+      }
+    );
+  }
+  ionViewWillLeave() {
+    // Unregister the custom back button action for this page
+    this.unsubscribeBackEvent.unsubscribe();
   }
 }

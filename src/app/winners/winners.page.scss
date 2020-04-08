@@ -39,3 +39,39 @@ img{
   transform: translate(-50%, -50%);
   font-size: x-large;
 }
+ion-card{
+--background: var(--ion-item-background,transparent); 
+    --color: var(--ion-color-step-600,#666);
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 24px;
+    // margin-bottom: 24px;
+    border-radius: 8px;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transition: -webkit-transform .5s cubic-bezier(.12,.72,.29,1);
+    transition: -webkit-transform .5s cubic-bezier(.12,.72,.29,1);
+    transition: transform .5s cubic-bezier(.12,.72,.29,1);
+    transition: transform .5s cubic-bezier(.12,.72,.29,1),-webkit-transform .5s cubic-bezier(.12,.72,.29,1);
+    font-size: 14px;
+    -webkit-box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    box-shadow: 0 4px 16px rgba(0,0,0,.12);
+}
+
+.card6 ion-item {
+  --padding-start:0px
+  --padding-
+}
+
+ion-thumbnail{
+    margin-right: 10px;
+}
+
+.medal6cols{
+    position: absolute;
+                width: 30px;
+                box-shadow: none;
+                top: 5px;
+                z-index: 11111111111111;
+                left: 22px;
+}

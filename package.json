@@ -23,6 +23,7 @@
     "@ionic-native/camera": "^5.23.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/crop": "^5.23.0",
+    "@ionic-native/fcm": "^5.23.0",
     "@ionic-native/google-plus": "^5.23.0",
     "@ionic-native/image-picker": "^5.23.0",
     "@ionic-native/native-storage": "^5.23.0",

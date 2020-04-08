@@ -119,7 +119,8 @@ ion-card{
 
 ion-card-title{
 text-align: center;
-    --color: #000;
+    // --color: #000;
+     --color: var(--ion-color-step-950,#737373);
     margin-left: 0px;
     margin-right: 0px;
     margin-top: 0px;

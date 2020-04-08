@@ -11,7 +11,7 @@ export class AddmodalPage implements OnInit {
 
   ngOnInit() {}
 
-  closeImageModal() {
+  closeImageModal(event) {
     this.modalController.dismiss();
   }
 

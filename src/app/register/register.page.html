@@ -1,107 +1,148 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button (click)="backButton()" *ngIf="!showOTPInput"></ion-back-button>
-      <ion-icon slot="start" name="arrow-back" (click)="backButton()" *ngIf="showOTPInput" style="padding-left:12px"></ion-icon>
-      
+      <ion-icon
+        slot="start"
+        name="arrow-back"
+        (click)="backButton(!showOTPInput)"
+        *ngIf="!showOTPInput"
+        style="padding-left: 12px;"
+      ></ion-icon>
+      <ion-icon
+        slot="start"
+        name="arrow-back"
+        (click)="backButton(showOTPInput)"
+        *ngIf="showOTPInput"
+        style="padding-left: 12px;"
+      ></ion-icon>
     </ion-buttons>
-    <ion-title>{{title}}</ion-title>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
- <ion-content>
-    <ion-row class="ion-padding" *ngIf="!showOTPInput">
-      <ion-col size="12" class="ion-padding-vertical">
+<ion-content>
+  <ion-row class="ion-padding" *ngIf="!showOTPInput">
+    <ion-col size="12" class="ion-padding-vertical">
+      <ion-row>
+        <ion-col>
+          <h2 style="font-size: 24px; font-weight: 600;">
+            Enter Phone number for verification
+          </h2>
+          <p>
+            We will send an otp to verify the number.
+          </p>
+          <form [formGroup]="loginForm">
             <ion-row>
-              <ion-col>
-                <h2 style="font-size:24px;font-weight: 600;">Enter Phone number for verification</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, ipsum.</p>
-                <form [formGroup]="loginForm" (ngSubmit)="next()">
-                  <ion-row>
-                    <!-- <ion-col size="2">
-                <ion-input readonly="true" placeholder="+91" style="border: 1px solid #d2d2d2;
-    border-radius: 9px;height: 52px;width: 45px; --placeholder-opacity:1;color: black;"></ion-input>
-                    </ion-col> -->
-                    <ion-col size="12"> 
-                      <!-- <ion-input [pattern]="mobNumberPattern" style="font-size: medium;" type="number"
-                        placeholder="Number" class="" padding-horizontal clear-input="true"
-                        formControlName="Mobile" debounce=1000></ion-input> -->
-                        <ion-item>
-                          
-  <ion-label position="fixed">
-    
-    +91</ion-label>
-  <!-- <ion-input placeholder="Your number"></ion-input> -->
-      <ion-input [pattern]="mobNumberPattern" style="font-size: medium;" type="number"
-                        placeholder="Number" class="" padding-horizontal clear-input="true"
-                        formControlName="Mobile" debounce=1000></ion-input>
-</ion-item>
-                    </ion-col>
-                  </ion-row>
-                  <div *ngIf="loginForm.controls['Mobile'].errors?.pattern">
-                    Mobile number not valid.
-                  </div>
-                
-                </form>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="fixed"> +91</ion-label>
+                  <!-- <ion-input placeholder="Your number"></ion-input> -->
+                  <ion-input
+                    [pattern]="mobNumberPattern"
+                    style="font-size: medium;"
+                    type="number"
+                    placeholder="Enter Phone number"
+                    class=""
+                    padding-horizontal
+                    clear-input="true"
+                    formControlName="Mobile"
+                    debounce="300"
+                  ></ion-input>
+                </ion-item>
               </ion-col>
-
             </ion-row>
-      </ion-col>
+            <div *ngIf="loginForm.controls['Mobile'].errors?.pattern">
+              Mobile number not valid.
+            </div>
+          </form>
+        </ion-col>
       </ion-row>
-      
-            <ion-row class="ion-padding" [hidden]="!showOTPInput">
-              <ion-col size="12">
-   <ion-row>
-              <ion-col size="12">
-               <h2>Please wait.</h2>
-               <h2  >We will auto verify the OTP sent to +91-8851610111</h2><a (click)="changeNumber()">Change Number?</a>
-              </ion-col>
-              <ion-col size="12">
-                
-                
-              </ion-col>
-            </ion-row>
-            <ion-row class="OTP-border">
-              <ion-col>
-                <ng-otp-input (onInputChange)="onOtpChange($event)" #ngOtpInput [config]="config"></ng-otp-input>
-              </ion-col>
-            </ion-row>
-            <ion-row *ngIf="showOTPInput">
-              <ion-col>
-                <ion-text class="small">{{OTPmessage}}</ion-text>
-              </ion-col>
-            </ion-row>
-              </ion-col>
-            </ion-row>
-            
-       <ion-button *ngIf="!showOTPInput" expand="block" type="submit"
-                     color="primary" class="transition" style="margin-top: 20px;
-    position: absolute;
-    bottom: 4px;
-    width: 96%;
-    margin-left: 2%;" (click)="next()">
-                    <strong class="white"> Next</strong></ion-button>    
-      <!--      <ion-row *ngIf="showOTPInput">
-              <ion-col>
-                <ion-item lines="full">
-                  <ion-label slot="start">Resend OTP</ion-label>
-                  <ion-label slot="end">{{timer}}s</ion-label>
-                </ion-item>
-                <ion-item lines="none" (click)="goBack()">
-                  <ion-label slot="">Sign in with google</ion-label>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </div>-->
-    <ion-button *ngIf="showOTPInput" expand="block" type="submit"
-                     color="primary" class="transition" style="margin-top: 20px;
-    position: absolute;
-    bottom: 4px;
-    width: 96%;
-    margin-left: 2%;" (click)="verifyOTP()">
-                    <strong class="white">Verify</strong></ion-button>    
-</ion-content> 
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-padding" [hidden]="!showOTPInput">
+    <ion-col size="12">
+      <ion-row>
+        <ion-col size="12">
+          <h2>Please wait.</h2>
+          <h2>We will auto verify the OTP sent to +91-{{displaynumber}}</h2>
+          <a (click)="changeNumber()">Change Number?</a>
+        </ion-col>
+        <ion-col size="12"> </ion-col>
+      </ion-row>
+      <ion-row class="OTP-border">
+        <ion-col>
+          <ng-otp-input #ngOtpInput [config]="config"></ng-otp-input>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="showOTPInput">
+        <ion-col>
+          <ion-text class="small">You will receive a sms soon</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <!-- <ion-col size="6" text-left>
+          <ion-button
+            (click)="resendOTP()"
+            fill="clear"
+            [disabled]="isresendactive"
+            style="
+              --background: transparent;
+              color: black;
+              text-transform: none;
+            "
+          >
+            Resend OTP
+          </ion-button>
+        </ion-col>
+        <ion-col size="6" text-left>
+          <p>{{otptiming}} s</p>
+        </ion-col> -->
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>   <ion-button
+            (click)="resendOTP()"
+            fill="clear"
+         
+            style="
+              --background: transparent;
+              color: black;
+              text-transform: none;"
+          >
+            Resend OTP
+          </ion-button></ion-label>
+            <ion-label slot="end">{{otptiming}} s</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-button
+    *ngIf="!showOTPInput"
+    expand="block"
+    type="submit"
+    color="primary"
+    class="transition nextbutton"
+    (click)="next()"
+    [disabled]="!loginForm.valid"
+  >
+    <strong class="white"> Next</strong></ion-button
+  >
+  <ion-button
+    *ngIf="showOTPInput"
+    expand="block"
+    type="submit"
+    color="primary"
+    class="transition"
+    style="
+      margin-top: 20px;
+      position: absolute;
+      bottom: 4px;
+      width: 96%;
+      margin-left: 2%;
+    "
+    (click)="verifyOTP()"
+  >
+    <strong class="white">Verify</strong></ion-button
+  >
+</ion-content>

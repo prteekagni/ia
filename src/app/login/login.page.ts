@@ -1,16 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ModalController, ToastController } from '@ionic/angular';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import {
+  ModalController,
+  ToastController,
+  NavController,
+} from "@ionic/angular";
+import { Validators, FormBuilder } from "@angular/forms";
 import { GooglePlus } from "@ionic-native/google-plus/ngx";
-import { RegisterPage } from '../register/register.page';
-
 declare var SMSReceive: any;
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.page.html",
-  styleUrls: ["./login.page.scss"]
+  styleUrls: ["./login.page.scss"],
 })
 export class LoginPage {
   modalcontro;
@@ -31,8 +33,8 @@ export class LoginPage {
     placeholder: "",
     inputStyles: {
       width: "50px",
-      height: "50px"
-    }
+      height: "50px",
+    },
   };
   mobNumberPattern = "^((\\+91-?)|0)?[0-9]{10}$";
   // mobNumberPattern = "/^([+]d{2}[ ])?d{10}$/";
@@ -43,7 +45,8 @@ export class LoginPage {
     private modalController: ModalController,
     private toastCtrl: ToastController,
     private fb: FormBuilder,
-    private GooglePlus: GooglePlus
+    private GooglePlus: GooglePlus,
+    private navCtrl: NavController
   ) {
     console.log(this.ngOtpInput);
     this.loginForm = this.fb.group({
@@ -51,9 +54,9 @@ export class LoginPage {
         "",
         Validators.compose([
           Validators.required,
-          Validators.pattern(this.mobNumberPattern)
-        ])
-      ]
+          Validators.pattern(this.mobNumberPattern),
+        ]),
+      ],
     });
   }
 
@@ -71,7 +74,7 @@ export class LoginPage {
       message: message,
       showCloseButton: show_button,
       position: position,
-      duration: duration
+      duration: duration,
     });
     toast.present();
   }
@@ -80,7 +83,7 @@ export class LoginPage {
     console.log(data);
 
     var IntervalVar = setInterval(
-      function() {
+      function () {
         this.timer--;
 
         if (this.timer === 0) {
@@ -96,7 +99,7 @@ export class LoginPage {
   start() {
     // this.processSMS(IncomingSMS);
     this.processSMS(
-      "272258 is your OTP from HEALTH QUAD valid for 10 minutes. Please do not share it with anyone. vlH2Uu/03Cj"
+      "272258 is your OTP from Photo Rewards valid for 10 minutes. Please do not share it with anyone. L5mGcINS0z/"
     );
     // SMSReceive.startWatch(
     //   () => {
@@ -186,11 +189,16 @@ export class LoginPage {
 
   loginWithGoogle() {
     this.GooglePlus.login({})
-      .then(res => console.log(res))
-      .catch(err => console.error(err));
+      .then((res) => {
+        console.log(res);
+        alert(JSON.stringify(res));
+      })
+      .catch((err) => console.error(err));
   }
 
-  async loginWithNumber(){
-  this.router.navigate(["register"]);
+  async loginWithNumber() {
+    this.router.navigate(["register"]);
+    // this.navCtrl.navigateForward("/register");
+    // this.router.navigateByUrl("../register");
   }
 }

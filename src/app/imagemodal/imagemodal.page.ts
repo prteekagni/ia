@@ -101,8 +101,7 @@ export class ImagemodalPage implements OnInit {
     this.displaysupervote = false;
     console.log("Set Timeout called");
     console.log(this.displaysupervote);
-    
-  }, 2000);
+  }, 3000);
     return await modal.present();
     
     

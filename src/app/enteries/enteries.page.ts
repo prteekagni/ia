@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonInfiniteScroll, ModalController } from '@ionic/angular';
+import { IonInfiniteScroll, ModalController, Platform } from '@ionic/angular';
 import { ImagemodalPage } from '../imagemodal/imagemodal.page';
+import { Router } from '@angular/router';
 
 const lorem =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, seddo eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
@@ -21,21 +22,27 @@ let rotateImg = 0;
 @Component({
   selector: "app-enteries",
   templateUrl: "./enteries.page.html",
-  styleUrls: ["./enteries.page.scss"]
+  styleUrls: ["./enteries.page.scss"],
 })
 export class EnteriesPage implements OnInit {
   items: any[] = [];
   gallery: string = "standard";
   @ViewChild(IonInfiniteScroll, { static: true })
   infiniteScroll: IonInfiniteScroll;
-  constructor(private modalController: ModalController) {
+  unsubscribeBackEvent;
+
+  constructor(
+    private modalController: ModalController,
+    private platform: Platform,
+    private router
+  : Router) {
     for (let i = 0; i < 25; i++) {
       this.items.push({
         name: i + " - " + images[rotateImg],
         imgSrc: this.getImgSrc(),
         avatarSrc: this.getImgSrc(),
         imgHeight: Math.floor(Math.random() * 50 + 150),
-        content: lorem.substring(0, Math.random() * (lorem.length - 100) + 100)
+        content: lorem.substring(0, Math.random() * (lorem.length - 100) + 100),
       });
 
       rotateImg++;
@@ -64,7 +71,7 @@ export class EnteriesPage implements OnInit {
           content: lorem.substring(
             0,
             Math.random() * (lorem.length - 100) + 100
-          )
+          ),
         });
 
         rotateImg++;
@@ -87,9 +94,25 @@ export class EnteriesPage implements OnInit {
   async openimageModal() {
     const modal = await this.modalController.create({
       component: ImagemodalPage,
-      backdropDismiss: true
+      backdropDismiss: true,
     });
     return await modal.present();
   }
-
+  ionViewWillEnter() {
+    this.initializeBackButtonCustomHandler();
+  }
+  initializeBackButtonCustomHandler(): void {
+    this.unsubscribeBackEvent = this.platform.backButton.subscribeWithPriority(
+      999999,
+      async () => {
+        // this.router.navigate(["/tabs/enteries"]);
+        this.router.navigate(["/tabs"]);
+        // alert("Do you want to exit app?");
+      }
+    );
+  }
+  ionViewWillLeave() {
+    // Unregister the custom back button action for this page
+    this.unsubscribeBackEvent.unsubscribe();
+  }
 }

@@ -1,6 +1,6 @@
 ion-card-title{
         /* text-align: center; */
-    --color: #000;
+    --color: var(--ion-color-step-550,#737373);
     margin-left: 0px;
     margin-right: 0px;
     margin-top: 10px;
@@ -12,4 +12,6 @@ ion-card-title{
     /* font-size: 28px; */
     /* font-weight: 700; */
     line-height: 1.2;
+        text-align: left;
+    font-size: large;
 }

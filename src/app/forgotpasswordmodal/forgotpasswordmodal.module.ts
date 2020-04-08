@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ForgotpasswordmodalPageRoutingModule } from './forgotpasswordmodal-routing.module';
 
 import { ForgotpasswordmodalPage } from './forgotpasswordmodal.page';
+import { OtpcomponentComponent } from './otpcomponent/otpcomponent.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { ForgotpasswordmodalPage } from './forgotpasswordmodal.page';
     IonicModule,
     ForgotpasswordmodalPageRoutingModule
   ],
-  declarations: [ForgotpasswordmodalPage]
+  declarations: [ForgotpasswordmodalPage , OtpcomponentComponent]
 })
 export class ForgotpasswordmodalPageModule {}

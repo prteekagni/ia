@@ -37,7 +37,7 @@
         <ion-item class="togglebuttons"> 
             <ion-icon slot="start" name="contrast"></ion-icon>
         <ion-label>Dark Mode</ion-label>
-  <ion-toggle enabled checked="false" id="themeToggle" (ionChange)="darkMode($event)"></ion-toggle>
+  <ion-toggle enabled [checked]="bdarkmode" id="themeToggle" (ionChange)="darkMode($event)" #darkmode></ion-toggle>
 
       </ion-item>
       <ion-item href="https://ionicframework.com/docs/building/scaffolding">
