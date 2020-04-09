@@ -33,7 +33,8 @@ import { Crop } from "@ionic-native/crop/ngx";
 
 import { EditprofilemodalPageModule } from './editprofilemodal/editprofilemodal.module';
 import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
-
+import { AppMinimize } from "@ionic-native/app-minimize/ngx";
+import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -42,7 +43,7 @@ import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@a
     IonicModule.forRoot({
       mode: "md",
       hardwareBackButton: true,
-      swipeBackEnabled:true
+      swipeBackEnabled: true,
     }),
     AppRoutingModule,
     ImagemodalPageModule,
@@ -63,14 +64,15 @@ import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@a
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    {provide:LocationStrategy , useClass:HashLocationStrategy},
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     Camera,
     ImagePicker,
     GooglePlus,
     SmsRetriever,
     Crop,
-    NativeStorage
-    
+    NativeStorage,
+    AppMinimize,
+    SocialSharing,
   ],
   bootstrap: [AppComponent],
 })

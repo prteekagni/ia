@@ -10,6 +10,9 @@ import { Event as NavigationEvent } from "@angular/router";
 import { filter } from "rxjs/operators";
 import { NavigationStart } from "@angular/router";
 import { Subscription } from 'rxjs';
+import { AppMinimize } from '@ionic-native/app-minimize/ngx';
+import { SharedService } from '../api/shared/shared.service';
+
 @Component({
   selector: "app-tab1",
   templateUrl: "tab1.page.html",
@@ -18,6 +21,8 @@ import { Subscription } from 'rxjs';
 export class Tab1Page {
   @ViewChild("slider", { static: true }) slider: IonSlides;
   segment = 0;
+  lastTimeBackPress = 0;
+  timePeriodToExit = 3000;
   public unsubscribeBackEvent: Subscription;
 
   items: any = [];
@@ -26,7 +31,9 @@ export class Tab1Page {
     private modalController: ModalController,
     private route: ActivatedRoute,
     private router: Router,
-    private platform:Platform
+    private platform: Platform,
+    private appMinimize: AppMinimize,
+    private sharedService: SharedService
   ) {
     this.items = [
       { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
@@ -73,11 +80,9 @@ export class Tab1Page {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     // this.slider.slideTo(this.segment);
-
   }
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.initializeBackButtonCustomHandler();
-
   }
   async openAddModalPage() {
     const modal = await this.modalController.create({
@@ -104,22 +109,35 @@ export class Tab1Page {
     this.unsubscribeBackEvent = this.platform.backButton.subscribeWithPriority(
       999999,
       async () => {
-      try {
-        const element = await this.modalController.getTop();
-        if (element) {
-          element.dismiss();
-          return;
+        try {
+          const element = await this.modalController.getTop();
+          if (element) {
+            element.dismiss();
+            return;
+          }
+        } catch (error) {}
+        // this.router.navigate(["/tabs/enteries"]);
+        // this.router.navigate(["/tabs/enteries"]);
+        if (
+          new Date().getTime() - this.lastTimeBackPress <
+          this.timePeriodToExit
+        ) {
+        this.appMinimize.minimize();
+        } else {
+          this.createToast();
+          this.lastTimeBackPress = new Date().getTime();
         }
-      } catch (error) {}
-        // this.router.navigate(["/tabs/enteries"]);
-        // this.router.navigate(["/tabs/enteries"]);
-        alert("Do you want to exit app?");
+        
       }
     );
   }
   ionViewWillLeave() {
-    // Unregister the custom back button action for this page
     this.unsubscribeBackEvent.unsubscribe();
+  }
+  async createToast() {
+    this.sharedService.presentToast("Press again to exit",
+      false,
+      "top",2000)
   }
 }
 

@@ -27,7 +27,6 @@ export class Tab3Page {
       async () => {
              try {
          const element = await this.actionSheetController.getTop();
-
          if (element) {
            element.dismiss();
            return;
@@ -41,9 +40,9 @@ export class Tab3Page {
            return;
          }
        } catch (error) {}
-        // this.router.navigate(["/tabs/enteries"]);
+        
         this.router.navigate(["/tabs"]);
-        // alert("Do you want to exit app?");
+        
       }
     );
   }
