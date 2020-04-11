@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ModalController, IonSlides } from '@ionic/angular';
 
 import { AddmodalPage } from 'src/app/addmodal/addmodal.page';
@@ -6,6 +6,8 @@ import { EditprofilemodalPage } from 'src/app/editprofilemodal/editprofilemodal.
 import { ImagemodalPage } from 'src/app/imagemodal/imagemodal.page';
 import { myEnterAnimation } from 'src/app/animations/enter';
 import { myLeaveAnimation } from 'src/app/animations/leave';
+import { User } from 'src/app/models/User';
+import { SharedService } from 'src/app/api/shared/shared.service';
 
 @Component({
   selector: "app-profile",
@@ -15,8 +17,21 @@ import { myLeaveAnimation } from 'src/app/animations/leave';
 export class ProfileComponent implements OnInit {
   segmentModel = "Contests";
   items;
+
+  userDetail: User;
+  @Input() pI;
   // @ViewChild("slides") slides: IonSlides
-  constructor(private modalController: ModalController) {}
+  constructor(
+    private modalController: ModalController,
+    private sharedService: SharedService
+  ) {
+    console.log("constructior");
+     this.sharedService.getUserDetail().then((res) => {
+       this.userDetail = { ...res };
+       console.log(this.userDetail);
+      //  this.pI = this.userDetail.profileImage || "../../assets/boostpost.png";
+     });
+  }
 
   ngOnInit() {
     this.items = [
@@ -28,19 +43,36 @@ export class ProfileComponent implements OnInit {
       { position: 6, name: "Carbon", weight: 12.0107, symbol: "C" },
       { position: 7, name: "Nitrogen", weight: 14.0067, symbol: "N" },
     ];
+    // this.pI = localStorage.getItem("ProfileImage") || "../../assets/boostpost.png"
+    // this.userDetail = JSON.parse(localStorage.getItem("User"));
+    console.log("NgOnInit");
   }
 
+  ionViewWillEnter() {
+     console.log("NgOnInit11");
+  }
   buttonClick() {}
   async onClick() {
     const modal = await this.modalController.create({
       component: EditprofilemodalPage,
       backdropDismiss: true,
     });
+
+    modal.onDidDismiss().then((res: any) => {
+      if (res) {
+        this.sharedService.getUserDetail().then((res) => {
+          this.userDetail = { ...res };
+          console.log(this.userDetail);
+          this.pI =
+            this.userDetail.profileImage || "../../assets/boostpost.png";
+        });
+      }
+    });
     return await modal.present();
   }
   segmentChanged(ev) {
     console.log(ev);
-    
+
     // this.slides.slideNext();
   }
   async openimageModal() {
@@ -55,5 +87,8 @@ export class ProfileComponent implements OnInit {
       },
     });
     return await modal.present();
+  }
+
+  ngAfterViewChecked(){
   }
 }

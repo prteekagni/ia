@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { AlertController, Platform } from "@ionic/angular";
+import { SharedService } from '../api/shared/shared.service';
 
 @Component({
   selector: "app-tab2",
@@ -13,8 +14,10 @@ export class Tab2Page {
   constructor(
     private router: Router,
     private alertController: AlertController,
+    private sharedService: SharedService,
     private platform: Platform
-  ) {}
+
+    ) {}
   async onClick() {
     const alert = await this.alertController.create({
       header: "Logout",
@@ -24,8 +27,7 @@ export class Tab2Page {
         {
           text: "Logout",
           handler: () => {
-            localStorage.setItem("Login", "");
-            this.router.navigate(["login"]);
+         this.sharedService.logOut();
           },
         },
         {
@@ -86,7 +88,7 @@ export class Tab2Page {
         {
           text: "Delete",
           handler: () => {
-            localStorage.setItem("Login", "");
+            this.sharedService.deleteUser();
             this.router.navigate(["login"]);
           },
         },

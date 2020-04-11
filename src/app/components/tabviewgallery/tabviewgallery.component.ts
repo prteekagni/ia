@@ -22,23 +22,27 @@ let rotateImg = 0;
   styleUrls: ["./tabviewgallery.component.scss"],
 })
 export class TabviewgalleryComponent implements OnInit {
-  items: any[] = [];
+  items;
   @Input() iswinner: boolean;
   // gallery: string = "standard";
   // @ViewChild(IonInfiniteScroll, { static: true })
   // infiniteScroll: IonInfiniteScroll;
 
   constructor() {
-    this.items = [
-      {
-        position: 1,
-        name: "Background.jpg",
-        weight: 1.0079,
-        symbol: "Smiling Faces",
-      },
-      { position: 2, name: "makeup.jpg", weight: 1.0079, symbol: "Makeup" },
-      { position: 3, name: "makeup.jpg", weight: 1.0079, symbol: "Makeup" },
-    ];
+
+    setTimeout(() => {
+       this.items = [
+         {
+           position: 1,
+           name: "Background.jpg",
+           weight: 1.0079,
+           symbol: "Smiling Faces",
+         },
+         { position: 2, name: "makeup.jpg", weight: 1.0079, symbol: "Makeup" },
+         { position: 3, name: "makeup.jpg", weight: 1.0079, symbol: "Makeup" },
+       ];
+    }, 3000);
+   
   }
   getImgSrc() {
     const src =
@@ -77,4 +81,5 @@ export class TabviewgalleryComponent implements OnInit {
   }
 
   ngOnInit() {}
+
 }

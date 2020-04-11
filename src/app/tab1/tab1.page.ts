@@ -122,12 +122,11 @@ export class Tab1Page {
           new Date().getTime() - this.lastTimeBackPress <
           this.timePeriodToExit
         ) {
-        this.appMinimize.minimize();
+          this.appMinimize.minimize();
         } else {
           this.createToast();
           this.lastTimeBackPress = new Date().getTime();
         }
-        
       }
     );
   }
@@ -135,9 +134,16 @@ export class Tab1Page {
     this.unsubscribeBackEvent.unsubscribe();
   }
   async createToast() {
-    this.sharedService.presentToast("Press again to exit",
-      false,
-      "top",2000)
+    this.sharedService.presentToast("Press again to exit" , 2000);
+  }
+
+  doRefresh(event) {
+    console.log("Begin async operation");
+
+    setTimeout(() => {
+      console.log("Async operation has ended");
+      event.target.complete();
+    }, 2000);
   }
 }
 

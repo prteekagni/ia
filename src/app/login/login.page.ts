@@ -4,11 +4,13 @@ import {
   ModalController,
   ToastController,
   NavController,
+  Platform,
 } from "@ionic/angular";
 import { Validators, FormBuilder } from "@angular/forms";
 import { GooglePlus } from "@ionic-native/google-plus/ngx";
 declare var SMSReceive: any;
-
+import { User } from "../models/User";
+import { SharedService } from '../api/shared/shared.service';
 @Component({
   selector: "app-login",
   templateUrl: "./login.page.html",
@@ -37,18 +39,17 @@ export class LoginPage {
     },
   };
   mobNumberPattern = "^((\\+91-?)|0)?[0-9]{10}$";
-  // mobNumberPattern = "/^([+]d{2}[ ])?d{10}$/";
   isValidFormSubmitted = false;
+  userData: User;
+  objData: User;
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private modalController: ModalController,
     private toastCtrl: ToastController,
     private fb: FormBuilder,
-    private GooglePlus: GooglePlus,
-    private navCtrl: NavController
+    private GooglePlus: GooglePlus ,
+    private sharedService : SharedService,
+    private platform: Platform
   ) {
-    console.log(this.ngOtpInput);
     this.loginForm = this.fb.group({
       Mobile: [
         "",
@@ -62,11 +63,22 @@ export class LoginPage {
 
   ionViewWillEnter() {
     this.timer = 10;
+    this.userData = new User();
+    
+      this.sharedService.getUserDetail().then(
+        (res: any) => {
+          this.userData = { ...res };
+        },
+        (err) => {
+          console.log("No User detail found " + err);
+        }
+      );
   }
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.timer = 10;
+    // this.userData  = new User();
   }
 
   async presentToast(message, show_button, position, duration) {
@@ -101,23 +113,6 @@ export class LoginPage {
     this.processSMS(
       "272258 is your OTP from Photo Rewards valid for 10 minutes. Please do not share it with anyone. L5mGcINS0z/"
     );
-    // SMSReceive.startWatch(
-    //   () => {
-    //     console.log("watch started");
-    //     document.addEventListener("onSMSArrive", (e: any) => {
-    //       console.log("onSMSArrive()");
-    //       var IncomingSMS = e.data;
-    //       console.log("sms.address:" + IncomingSMS.address);
-    //       console.log("sms.body:" + IncomingSMS.body);
-    //       /* Debug received SMS content (JSON) */
-    //       console.log(JSON.stringify(IncomingSMS));
-    //       this.processSMS(IncomingSMS);
-    //     });
-    //   },
-    //   () => {
-    //     console.log("watch start failed");
-    //   }
-    // );
   }
 
   stop() {
@@ -134,10 +129,6 @@ export class LoginPage {
   }
 
   processSMS(data) {
-    // Check SMS for a specific string sequence to identify it is you SMS
-    // Design your SMS in a way so you can identify the OTP quickly i.e. first 6 letters
-    // In this case, I am keeping the first 6 letters as OTP
-    // const message = data.body;
     const message = data;
     this.OTP = data.slice(0, 6);
     setTimeout(() => {
@@ -168,8 +159,6 @@ export class LoginPage {
   }
 
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.showOTPInput = false;
     this.timer = 10;
   }
@@ -188,17 +177,53 @@ export class LoginPage {
   }
 
   loginWithGoogle() {
+        var loggedVia = "email";
+        // if (this.userData.email !== null) {
+        //   console.log(this.userData);
+        //   // this.userData.phone = this.loginForm.get("phone").value;
+        //   this.userData.loggedVia = loggedVia;
+        // } else {
+        //   this.userData = { ...this.loginForm.value };
+        //   this.userData.loggedVia = loggedVia;
+        //   this.userData.isprofileCompleted = false;
+        // }
+
     this.GooglePlus.login({})
-      .then((res) => {
-        console.log(res);
-        alert(JSON.stringify(res));
+      .then((res:any) => {
+        if(res.email == this.userData.email){
+          this.userData.displayName = res.displayName; 
+          this.userData.email = res.email;
+          this.userData.profileImage = "";
+        this.userData.loggedVia="email";
+          console.log(this.userData);
+           this.sharedService.setLoginStatus();
+           this.userData.loggedVia = loggedVia;
+             this.sharedService.saveUserDetail(this.userData).then(
+               (res) => console.log(res),
+               (err) => console.log(err)
+             );
+          this.router.navigate(["/tabs/tab1"], { replaceUrl: true });
+        } else {
+        // this.userData = { ...res };
+        this.userData.displayName = res.displayName;
+        this.userData.email = res.email;
+          this.userData.profileImage = "";
+
+        this.userData.loggedVia="email";
+        this.userData.isprofileCompleted = false;
+        this.sharedService.setLoginStatus();
+          this.sharedService.saveUserDetail(this.userData).then(
+            (res) => console.log(res),
+            (err) => console.log(err)
+          );
+        this.router.navigate(["/tabs/tab1"], { replaceUrl: true });
+        }
+      
       })
       .catch((err) => console.error(err));
   }
 
   async loginWithNumber() {
     this.router.navigate(["register"]);
-    // this.navCtrl.navigateForward("/register");
-    // this.router.navigateByUrl("../register");
   }
 }

@@ -45,13 +45,13 @@
                     class=""
                     padding-horizontal
                     clear-input="true"
-                    formControlName="Mobile"
+                    formControlName="phone"
                     debounce="300"
                   ></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
-            <div *ngIf="loginForm.controls['Mobile'].errors?.pattern">
+            <div *ngIf="loginForm.controls['phone'].errors?.pattern">
               Mobile number not valid.
             </div>
           </form>

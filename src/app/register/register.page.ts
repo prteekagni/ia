@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { SharedService } from "../api/shared/shared.service";
 import { Subscription } from 'rxjs';
 import { Platform } from '@ionic/angular';
+import { User } from '../models/User';
 @Component({
   selector: "app-register",
   templateUrl: "./register.page.html",
@@ -12,7 +13,7 @@ import { Platform } from '@ionic/angular';
 })
 export class RegisterPage implements OnInit {
   modalcontro;
-  Mobile;
+  phone;
   enterOTP: boolean = true;
   loginForm;
   OTP: string = "";
@@ -25,7 +26,8 @@ export class RegisterPage implements OnInit {
   otptiming;
   otpinterval;
   isresendactive: boolean = true;
-  unsubscribeBackEvent:Subscription;
+  unsubscribeBackEvent: Subscription;
+  userData: User;
   @ViewChild("ngOtpInput", { static: true }) ngOtpInput: any;
   config = {
     allowNumbersOnly: true,
@@ -43,10 +45,10 @@ export class RegisterPage implements OnInit {
     private smsRetriever: SmsRetriever,
     private router: Router,
     private sharedService: SharedService,
-    private platform : Platform
+    private platform: Platform
   ) {
     this.loginForm = this.fb.group({
-      Mobile: [
+      phone: [
         "",
         Validators.compose([
           Validators.required,
@@ -54,13 +56,22 @@ export class RegisterPage implements OnInit {
         ]),
       ],
     });
+     this.userData = new User();
+    
   }
   next() {
-    this.displaynumber = this.loginForm.value.Mobile;
+    this.displaynumber = this.loginForm.value.phone;
     this.showOTPInput = true;
     this.showOTPInput;
     // this.start();
     this.timerMethod(5);
+    this.sharedService.getUserDetail().then((res:any)=>{
+      console.log(res);
+      this.userData = {...res};
+    },err=>{
+      console.log(err);
+    console.log(this.userData);
+    })
   }
   changeNumber() {
     this.backButton(true);
@@ -69,7 +80,6 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
     this.OTP = this.OTPmessage.slice(0, 6);
   }
-
 
   ionViewWillEnter() {
     this.initializeBackButtonCustomHandler();
@@ -84,13 +94,26 @@ export class RegisterPage implements OnInit {
   }
 
   verifyOTP() {
-    this.sharedService.presentToast(
-      "You are successfully registered",
-      false,
-      "top",
-      1500
+    this.sharedService.presentToast("You are successfully registered" , 1000);
+    var loggedVia = "phone";
+    if(this.userData.phone !== null){
+      console.log(this.userData);
+      this.userData.phone = this.loginForm.get("phone").value;
+      this.userData.loggedVia = loggedVia;
+    }
+    else {
+      this.userData = {...this.loginForm.value};
+      this.userData.loggedVia = loggedVia;
+      this.userData.isprofileCompleted = false;
+    }
+    
+    this.sharedService.saveUserDetail(this.userData).then(
+      (res) => console.log(res),
+      (err) => console.log(err)
     );
-    localStorage.setItem("Login", "true");
+    this.sharedService.setLoginStatus();
+    // this.sharedService.setProfileCompleteStatus("false");
+
     this.router.navigate(["/tabs/tab1"], { replaceUrl: true });
   }
 
@@ -104,12 +127,7 @@ export class RegisterPage implements OnInit {
       if (this.otptiming < 1) {
         clearInterval(this.otpinterval);
         this.isresendactive = false;
-        this.sharedService.presentToast(
-          "Resend OTP if not received",
-          false,
-          top,
-          3000
-        );
+        this.sharedService.presentToast("Resend OTP if not received" , 2000);
       }
     }, 1000);
   }
@@ -118,26 +136,20 @@ export class RegisterPage implements OnInit {
     if (!this.isresendactive) {
       this.timerMethod(10);
     } else {
-      this.sharedService.presentToast(
-        "Wait for " + this.otptiming + "s",
-        false,
-        top,
-        3000
-      );
+      this.sharedService.presentToast("Wait for " + this.otptiming + "s" , 2000);
     }
   }
   initializeBackButtonCustomHandler(): void {
     this.unsubscribeBackEvent = this.platform.backButton.subscribeWithPriority(
       999999,
       async () => {
-          clearInterval(this.otpinterval);
+        clearInterval(this.otpinterval);
         // this.router.navigate(["/tabs/enteries"]);
         // this.router.navigate(["/tabs/enteries"]);
-        if(this.showOTPInput){
+        if (this.showOTPInput) {
           this.showOTPInput = !this.showOTPInput;
         } else {
-                this.router.navigate(["login"]);
-
+          this.router.navigate(["login"]);
         }
       }
     );
@@ -145,6 +157,6 @@ export class RegisterPage implements OnInit {
   ionViewWillLeave() {
     // Unregister the custom back button action for this page
     this.unsubscribeBackEvent.unsubscribe();
-     clearInterval(this.otpinterval);
+    clearInterval(this.otpinterval);
   }
 }

@@ -10,11 +10,22 @@
       <img src="../../assets/medal.png" style="width: 80px;" />
 
       <img src="../../assets/medal.png" style="width: 80px;" />
-
+    </div>
+  </div>
+  <div *ngIf="displayboostpost" class="achievement-container" @container>
+    <div class="medal" @badge>
+      <img src="../../assets/boostpost.png" style="width: 80px;" />
     </div>
   </div>
   <ng-container *ngIf="type == 'alluploads'">
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="primary" style="bottom: 80px;">
+    <ion-fab
+      vertical="bottom"
+      horizontal="end"
+      slot="fixed"
+      color="primary"
+      style="bottom: 80px;"
+      (click)="shareApp()"
+    >
       <ion-fab-button>
         <ion-icon name="share"></ion-icon>
       </ion-fab-button>
@@ -27,12 +38,12 @@
               <ion-avatar slot="start">
                 <img src="../../assets/demoimage.jpg" />
               </ion-avatar>
-              <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">
+              <ion-label
+                class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+              >
                 <h2 style="margin-top: 0px;">Prateek Agnihotri</h2>
-
               </ion-label>
             </ion-item>
-
           </ion-col>
           <ion-col size="3" class="ion-text-right">
             <ion-label (click)="presentPopover($event)">
@@ -49,13 +60,19 @@
       </ion-col>
     </ion-row>
     <div>
-      <ion-img src="../../assets/demoimage.jpg" style="height:203px" [alt]=""></ion-img>
+      <ion-img
+        src="../../assets/demoimage.jpg"
+        style="height: 203px;"
+        [alt]=""
+      ></ion-img>
     </div>
     <ion-row>
       <ion-col size="12">
-        <h6 style="margin:0px;padding-left: 16px;">1 Vote</h6>
+        <h6 style="margin: 0px; padding-left: 16px;">1 Vote</h6>
       </ion-col>
-      <ng-container *ngIf="!iswinner">
+    </ion-row>
+    <ng-container *ngIf="!iswinner">
+      <ion-row>
         <ion-col size="6">
           <ion-button fill="outline" expand="block" (click)="vote()">
             <ion-icon name="heart" style="padding-right: 5px;"></ion-icon>
@@ -69,12 +86,18 @@
             3 Super Vote
           </ion-button>
         </ion-col>
-      </ng-container>
-    </ion-row>
+      </ion-row>
+    </ng-container>
   </ng-container>
 
   <ng-container *ngIf="type == 'userupload'">
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="primary" style="bottom: 80px;">
+    <ion-fab
+      vertical="bottom"
+      horizontal="end"
+      slot="fixed"
+      color="primary"
+      style="bottom: 80px;"
+    >
       <ion-fab-button>
         <ion-icon name="share"></ion-icon>
       </ion-fab-button>
@@ -87,7 +110,9 @@
               <ion-avatar slot="start">
                 <img src="../../assets/demoimage.jpg" />
               </ion-avatar>
-              <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">
+              <ion-label
+                class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+              >
                 <h2>Prateek Agnihotri</h2>
               </ion-label>
             </ion-item>
@@ -106,13 +131,16 @@
       </ion-col>
     </ion-row>
     <div>
-      <ion-img src="https://livewallpaperhd.com/wp-content/uploads/2017/07/Dark-Elegant-Wallpaper.jpg"
-        style="height:203px" [alt]=""></ion-img>
+      <ion-img
+        src="https://livewallpaperhd.com/wp-content/uploads/2017/07/Dark-Elegant-Wallpaper.jpg"
+        style="height: 203px;"
+        [alt]=""
+      ></ion-img>
     </div>
 
     <ion-row>
       <ion-col size="12">
-        <h3 style="margin:0px">Colorful</h3>
+        <h3 style="margin: 0px;">Colorful</h3>
       </ion-col>
 
       <ng-container>
@@ -133,7 +161,7 @@
     </ion-row>
   </ng-container>
 
-    <ng-container *ngIf="type == 'iswinner'">
+  <ng-container *ngIf="type == 'iswinner'">
     <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="primary" style="bottom: 80px;">
       <ion-fab-button>
         <ion-icon name="share"></ion-icon>
@@ -147,7 +175,9 @@
               <ion-avatar slot="start">
                 <img src="../../assets/demoimage.jpg" />
               </ion-avatar>
-              <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">
+              <ion-label
+                class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+              >
                 <h2>Prateek Agnihotri</h2>
               </ion-label>
             </ion-item>
@@ -166,15 +196,18 @@
       </ion-col>
     </ion-row>
     <div>
-      <ion-img src="https://livewallpaperhd.com/wp-content/uploads/2017/07/Dark-Elegant-Wallpaper.jpg"
-        style="height:203px" [alt]=""></ion-img>
+      <ion-img
+        src="https://livewallpaperhd.com/wp-content/uploads/2017/07/Dark-Elegant-Wallpaper.jpg"
+        style="height: 203px;"
+        [alt]=""
+      ></ion-img>
     </div>
 
     <ion-row>
       <ion-col size="12">
-        <h3 style="margin:0px;margin-left: 10px;">Colorful</h3>
+        <h3 style="margin: 0px; margin-left: 10px;">Colorful</h3>
       </ion-col>
-<!-- 
+      <!-- 
       <ng-container>
         <ion-col size="6">
           <ion-button fill="outline" expand="block">

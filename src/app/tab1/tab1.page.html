@@ -101,6 +101,7 @@
 </ion-content>-->
 
 <ion-content>
+  
   <super-tabs>
     <super-tabs-toolbar position="top" showIndicator="true">
       <super-tab-button>
@@ -134,6 +135,10 @@
     <super-tabs-container>
       <super-tab>
         <ion-content>
+
+  <ion-refresher slot="fixed"  (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
           <!-- <ion-list>
             <ion-item *ngFor="let item of items">
               <ion-card routerLink="/cdescription/{{item.position}}" style="width: 325px;

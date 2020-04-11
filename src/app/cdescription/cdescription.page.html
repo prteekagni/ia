@@ -3,24 +3,8 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{title}}</ion-title>
+<ion-title>{{title}}</ion-title>
   </ion-toolbar>
-  <!-- <ion-toolbar>
-    <ion-segment (ionChange)="segmentChanged()" [(ngModel)]="segment">
-      <ion-segment-button value="0" layout="icon-start">
-        <ion-label>You</ion-label>
-        <ion-icon name="call"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button value="1" layout="icon-start">
-        <ion-icon name="cloud-upload"></ion-icon>
-        <ion-label>Photos</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="2" layout="icon-start">
-        <ion-icon name="paper"></ion-icon>
-        <ion-label>Conditions</ion-label>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar> -->
 </ion-header>
 <ion-content overflow-scroll="true">
   <!-- <ion-slides #slider (ionSlideDidChange)="slideChanged()" mode="ios">
@@ -348,9 +332,7 @@
         <ion-grid  class="grida">
      <ion-row class="galleryrow">
         <ion-col size="6" *ngFor="let item of items" style="padding:2px">
-          
        <img src="../../assets/demoimage.jpg" alt="" (click)="openMyimageModal()">
-     
         </ion-col>
       </ion-row>
       </ion-grid>

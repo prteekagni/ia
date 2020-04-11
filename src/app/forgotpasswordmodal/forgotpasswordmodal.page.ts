@@ -1,12 +1,21 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { trigger, transition, query, style, stagger, animate, keyframes } from '@angular/animations';
-import { ModalController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import {
+  trigger,
+  transition,
+  query,
+  style,
+  stagger,
+  animate,
+  keyframes,
+} from "@angular/animations";
+import { ModalController } from "@ionic/angular";
+import { Router } from "@angular/router";
+import { SharedService } from '../api/shared/shared.service';
 
 @Component({
   selector: "app-forgotpasswordmodal",
   templateUrl: "./forgotpasswordmodal.page.html",
-  styleUrls: ["./forgotpasswordmodal.page.scss"]
+  styleUrls: ["./forgotpasswordmodal.page.scss"],
   // animations: [
   //   trigger("otpanimation", [
   //     transition(":enter", [
@@ -77,7 +86,8 @@ export class ForgotpasswordmodalPage implements OnInit {
   currentModal = null;
   @Input() mode;
   @Output() voted = new EventEmitter<boolean>();
-  constructor(private modalCtrl: ModalController, private router: Router) {}
+  userPRC;
+  constructor(private modalCtrl: ModalController, private router: Router , private sharedService : SharedService) {}
 
   ngOnInit() {}
   requestOtp() {
@@ -96,9 +106,33 @@ export class ForgotpasswordmodalPage implements OnInit {
   }
 
   superVote() {
-     this.modalCtrl.dismiss(true);
+    this.sharedService.getUserDetail().then((res:any)=>{
+      this.userPRC = res.credits;
+      if(this.userPRC >= 20){
+      this.modalCtrl.dismiss(true);
+      } else{
+            this.sharedService.presentToast(
+              "Not enough credits avaliable. You need "+ "<strong>" + Math.abs(this.userPRC-20) + "</strong>"+ " credits more to super vote. Please watch an add and collect credits to your account.",4000
+            );
+
+      }
+    })
   }
-   boosPost() {
-     this.modalCtrl.dismiss(true);
+  boosPost() {
+        this.sharedService.getUserDetail().then((res: any) => {
+          this.userPRC = res.credits;
+          if (this.userPRC >= 30) {
+              this.modalCtrl.dismiss(true);
+          }
+          else {
+            this.sharedService.presentToast(
+              "Not enough credits avaliable. You need " +
+                "<strong>" +
+                Math.abs(this.userPRC - 30) +
+                "</strong>" +
+                " credits more to boost your post. Please watch an add and collect credits to your account.",4000
+            );
+          }
+        });
   }
 }

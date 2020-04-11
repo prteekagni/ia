@@ -1,14 +1,20 @@
-import { Component, ViewChildren, QueryList } from '@angular/core';
-
-import { Platform, IonRouterOutlet, ModalController, ToastController, ActionSheetController } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router, NavigationEnd, ActivatedRoute, NavigationStart } from '@angular/router';
-
-import { TabsPage } from './tabs/tabs.page';
-import { filter } from 'rxjs/operators';
-
-import { Event as NavigationEvent } from "@angular/router";
+import { Component, ViewChildren, QueryList } from "@angular/core";
+import {
+  Platform,
+  IonRouterOutlet,
+  ModalController,
+  ToastController,
+  ActionSheetController,
+} from "@ionic/angular";
+import { SplashScreen } from "@ionic-native/splash-screen/ngx";
+import { StatusBar } from "@ionic-native/status-bar/ngx";
+import { Router, ActivatedRoute } from "@angular/router";
+import { Deeplinks } from "@ionic-native/deeplinks/ngx";
+import { Tab1Page } from './tab1/tab1.page';
+import { CdescriptionPage } from './cdescription/cdescription.page';
+import { ImagemodalPage } from './imagemodal/imagemodal.page';
+import { ImpageuploadPage } from './impageupload/impageupload.page';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 @Component({
   selector: "app-root",
@@ -25,13 +31,11 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private router: Router,
-
-    private modalCtrl: ModalController,
-    private route: ActivatedRoute,
     public toast: ToastController,
-    private actionSheetCtrl: ActionSheetController,
-    private activatedRoute: ActivatedRoute
+    public deepLinks: Deeplinks,
+    private router: Router,
+    private modalController: ModalController,
+    private imagePicker : ImagePicker
   ) {
     this.initializeApp();
   }
@@ -41,10 +45,18 @@ export class AppComponent {
       this.statusBar.overlaysWebView(false);
       this.statusBar.backgroundColorByHexString("#3880ff");
       this.splashScreen.hide();
+      this.routeConfig();
+    this.hasReadPermission();
+
+    });
+
+    this.platform.resume.subscribe((res) => {
+      // alert("App Resumed from ");
+      this.routeConfig();
     });
 
     this.bdarkmode = localStorage.getItem("darkmode") == "true" ? true : false;
-    console.log(this.bdarkmode);
+    // console.log(this.bdarkmode);
     this.setDarkMode(this.bdarkmode);
   }
 
@@ -128,5 +140,61 @@ export class AppComponent {
     document.body.classList.toggle("dark", data);
     // document.body.classList.toggle("dark", ev.detail.checked);
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+  }
+
+  routeConfig() {
+    this.deepLinks
+      .route({
+        "/contests": Tab1Page,
+        "/cdescription/:id": CdescriptionPage,
+        "/entry/:contestid/:entryid": ImagemodalPage,
+      })
+      .subscribe(
+        (match) => {
+          // match.$route - the route we matched, which is the matched entry from the arguments to route()
+          // match.$args - the args passed in the link
+          // match.$link - the full link data
+          console.log("Successfully matched route", match);
+          // this.router.navigate(["/cdescription", "1" ]);
+          if (
+            match.$link.path ==
+            "/entry/" + match.$args.contestid + "/" + match.$args.entryid
+          ) {
+            console.log("vote modal");
+            // this.modalController1(match.$args)
+            this.router.navigate(["/cdescription", match.$args.contestid], {
+              queryParams: { entryId: match.$args.entryid },
+            });
+          }
+        },
+        (nomatch) => {
+          // nomatch.$link - the full link data
+          console.error("Got a deeplink that didn't match", nomatch);
+        }
+      );
+  }
+
+  async modalController1(data) {
+    console.log(data);
+
+    const modal = await this.modalController.create({
+      component: ImpageuploadPage,
+      backdropDismiss: true,
+      cssClass: "imageupload-modal",
+      componentProps: {
+        imageUrl: "../../assets/google.png",
+      },
+    });
+    modal.present();
+  }
+
+  hasReadPermission() {
+    this.imagePicker.hasReadPermission().then((res:any)=>{
+      if(res){
+        console.log(res);
+      }else {
+        this.imagePicker.requestReadPermission()
+      }
+    })
   }
 }

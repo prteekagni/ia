@@ -4,6 +4,7 @@ import { GalleryComponent } from "../components/gallery/gallery.component";
 import { ImagefeedbackComponent } from "../components/imagefeedback/imagefeedback.component";
 import { ForgotpasswordmodalPage } from '../forgotpasswordmodal/forgotpasswordmodal.page';
 import { trigger, transition, query, style, stagger, animate, keyframes, group, animateChild } from '@angular/animations';
+import { SharedService } from '../api/shared/shared.service';
 
 @Component({
   selector: "app-imagemodal",
@@ -16,35 +17,35 @@ import { trigger, transition, query, style, stagger, animate, keyframes, group, 
         style({ opacity: "0" }),
         group([
           animate("200ms ease-out", style({ opacity: "1" })),
-          query("@badge, @message", [animateChild()])
-        ])
+          query("@badge, @message", [animateChild()]),
+        ]),
       ]),
       transition(":leave", [
         group([
           animate("200ms ease-out", style({ opacity: "0" })),
-          query("@badge, @message", [animateChild()])
-        ])
-      ])
+          query("@badge, @message", [animateChild()]),
+        ]),
+      ]),
     ]),
 
     trigger("badge", [
       transition(":enter", [
         style({ transform: "translateY(100px)" }),
-        animate("200ms ease-out", style({ transform: "translateY(0)" }))
+        animate("200ms ease-out", style({ transform: "translateY(0)" })),
       ]),
       transition(":leave", [
-        animate("200ms ease-in", style({ transform: "translateY(100px)" }))
-      ])
+        animate("200ms ease-in", style({ transform: "translateY(100px)" })),
+      ]),
     ]),
 
     trigger("message", [
       transition(":enter", [
         style({ opacity: "0" }),
-        animate("5000ms 1000ms ease-out", style({ opacity: "1" }))
+        animate("5000ms 1000ms ease-out", style({ opacity: "1" })),
       ]),
-      transition(":leave", [animate("500ms ease-in", style({ opacity: "0" }))])
-    ])
-  ]
+      transition(":leave", [animate("500ms ease-in", style({ opacity: "0" }))]),
+    ]),
+  ],
 })
 export class ImagemodalPage implements OnInit {
   popup;
@@ -53,12 +54,14 @@ export class ImagemodalPage implements OnInit {
   @ViewChild("inputElement", { static: false }) inputElement: ElementRef;
   public displayvote: boolean = false;
   public displaysupervote: boolean = false;
+  public displayboostpost: boolean = false;
 
   heartBtn: string = "start";
   constructor(
     private popoverController: PopoverController,
     private modalController: ModalController,
-    private navParams: NavParams
+    private navParams: NavParams,
+    private sharedService: SharedService
   ) {
     console.log("Type " + this.navParams.get("type"));
   }
@@ -67,7 +70,7 @@ export class ImagemodalPage implements OnInit {
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: ImagefeedbackComponent,
-      event: ev
+      event: ev,
     });
     this.popup = popover;
     return await popover.present();
@@ -87,24 +90,22 @@ export class ImagemodalPage implements OnInit {
       backdropDismiss: true,
       cssClass: "supervote-modal",
       componentProps: {
-        mode: "SV"
-      }
+        mode: "SV",
+      },
     });
 
-   modal.onDidDismiss().then(data => {
-     let superVoteData = data["data"];
-     if(superVoteData){
-       this.displaysupervote = true;
-     }
-   });
-  setTimeout(() => {
-    this.displaysupervote = false;
-    console.log("Set Timeout called");
-    console.log(this.displaysupervote);
-  }, 3000);
+    modal.onDidDismiss().then((data) => {
+      let superVoteData = data["data"];
+      if (superVoteData) {
+        this.displaysupervote = true;
+      }
+    });
+    setTimeout(() => {
+      this.displaysupervote = false;
+      console.log("Set Timeout called");
+      console.log(this.displaysupervote);
+    }, 3000);
     return await modal.present();
-    
-    
   }
   async boostPhoto() {
     const modal = await this.modalController.create({
@@ -112,22 +113,34 @@ export class ImagemodalPage implements OnInit {
       backdropDismiss: true,
       cssClass: "boostpost-modal",
       componentProps: {
-        mode: "BP"
+        mode: "BP",
+      },
+    });
+    modal.onDidDismiss().then((data) => {
+      let boostpost = data["data"];
+      if (boostpost) {
+        this.displayboostpost = true;
+        this.sharedService.presentToast("Photo Boosted" , 1000);
       }
     });
+      setTimeout(() => {
+        this.displayboostpost = false;
+        console.log("Set Timeout called");
+        console.log(this.displayboostpost);
+      }, 3000);
     return await modal.present();
   }
 
   vote() {
     this.heartBtn = this.heartBtn == "start" ? "end" : "start";
     console.log(this.heartBtn);
-    // console.log(this.inputElement.nativeElement);
-    // this.inputElement.nativeElement.addClass(this.inputElement.nativeElement,"")
-    // this.inputElement.nativeElement.classList.add("animated");
     this.displayvote = true;
-
     setTimeout(() => {
       this.displayvote = false;
     }, 1000);
+  }
+
+  shareApp() {
+    this.sharedService.sharingToOther("1");
   }
 }

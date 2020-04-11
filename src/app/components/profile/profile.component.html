@@ -3,11 +3,12 @@
 <ion-col size="12">
    <ion-item mode="" button (click)="buttonClick()">
   <ion-thumbnail slot="start">
-    <img src="../../../assets/google.png">
+    <!-- <img src="{{pI}}"> -->
+    <img [src]="pI" alt="">
   </ion-thumbnail>
  <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">
-            <h2>Lorem ipsum</h2>
-            <p>PR Points</p>
+            <h2>{{userDetail?.displayName}}</h2>
+            <p>10 pcr</p>
             <!-- <p>consectetur adipiscing elit. Duis ut urna neque.</p> -->
           </ion-label>
   <ion-button (click)="onClick()" expand="block" fill="outline" shape="">

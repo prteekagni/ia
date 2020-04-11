@@ -1,9 +1,9 @@
       <ion-list>
             <ion-list-header>Report</ion-list-header>
             <!-- <ion-item button>Report</ion-item> -->
-            <ion-item button>It's spam</ion-item>
-            <ion-item button>It's inappropriate</ion-item>
-            <ion-item button>Infringes Copyright</ion-item>
+            <ion-item button (click)="popBtnClick('spam')">It's spam</ion-item>
+            <ion-item button (click)="popBtnClick('inappropiate')">It's inappropriate</ion-item>
+            <ion-item button (click)="popBtnClick('infringes copyright')">Infringes Copyright</ion-item>
             <!-- <ion-item button>Showcase</ion-item>
             <ion-item button>GitHub Repo</ion-item> -->
             <ion-item lines="none" detail="false" button (click)="dismissPopover()">Close</ion-item>

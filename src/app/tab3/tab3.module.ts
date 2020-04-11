@@ -1,5 +1,5 @@
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { RouterModule, RouteReuseStrategy } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -21,5 +21,6 @@ import { EditprofilemodalPage } from '../editprofilemodal/editprofilemodal.page'
   ],
   declarations: [Tab3Page],
   entryComponents: [],
+  // providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
 })
 export class Tab3PageModule {}

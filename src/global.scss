@@ -101,7 +101,7 @@
    
 
 .supervote-modal .modal-wrapper{
-  --width: 90%;
+  --width: 95%;
     --height: 315px;
     --border-radius: 10px;
 }
@@ -125,10 +125,23 @@
 }
 }
 
+
+
 .winner-modal .modal-wrapper{
       --width: 95%;
     --height: 326px;
     --border-radius: 10px;
+}
+
+@media screen and (min-width: 414px) {
+.supervote-modal .modal-wrapper{
+  --height:295px ;
+}
+}
+@media screen and (min-width: 414px) {
+.boostpost-modal .modal-wrapper{
+  --height:400px ;
+}
 }
 
 
@@ -233,4 +246,10 @@ padding-left: unset;
     padding-bottom: 20px;
     font-size: 16px;
     line-height: 1.4;
+}
+
+ion-toast{
+    --background: white;
+    color: slategrey;
+    font-weight: 600;
 }

@@ -6,6 +6,13 @@
       "alias": "prk",
       "password": "elinfinito",
       "keystoreType": "jks"
+    },
+    "debug": {
+      "keystore": "platforms\\android\\photorewards.keystore",
+      "storePassword": "elinfinito",
+      "alias": "prk",
+      "password": "elinfinito",
+      "keystoreType": "jks"
     }
   }
 }

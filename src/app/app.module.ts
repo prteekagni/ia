@@ -21,20 +21,17 @@ import { AddmodalPageModule } from './addmodal/addmodal.module';
 import { NgOtpInputModule } from "ng-otp-input";
 import { BrMaskerModule } from "br-mask";
 import { NgxMaskIonicModule } from "ngx-mask-ionic";
-import { NotificationPage } from './notification/notification.page';
 import { NotificationPageModule } from './notification/notification.module';
-import { ImpageuploadPage } from './impageupload/impageupload.page';
 import { ImpageuploadPageModule } from './impageupload/impageupload.module';
 import { GooglePlus } from "@ionic-native/google-plus/ngx";
 import { SmsRetriever } from "@ionic-native/sms-retriever/ngx";
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
-// import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Crop } from "@ionic-native/crop/ngx";
-
 import { EditprofilemodalPageModule } from './editprofilemodal/editprofilemodal.module';
 import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppMinimize } from "@ionic-native/app-minimize/ngx";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
+import { Deeplinks } from "@ionic-native/deeplinks/ngx";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -64,7 +61,7 @@ import { SocialSharing } from "@ionic-native/social-sharing/ngx";
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    
     Camera,
     ImagePicker,
     GooglePlus,
@@ -73,6 +70,7 @@ import { SocialSharing } from "@ionic-native/social-sharing/ngx";
     NativeStorage,
     AppMinimize,
     SocialSharing,
+    Deeplinks,
   ],
   bootstrap: [AppComponent],
 })

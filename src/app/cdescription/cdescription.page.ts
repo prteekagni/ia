@@ -6,6 +6,7 @@ import {
   ModalController,
   PopoverController,
   Platform,
+  AlertController,
 } from "@ionic/angular";
 import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 import { HttpClient } from "@angular/common/http";
@@ -19,6 +20,8 @@ import { NativeStorage } from "@ionic-native/native-storage/ngx";
 import { Crop } from '@ionic-native/crop/ngx';
 import { Subscription } from 'rxjs';
 import { async } from '@angular/core/testing';
+import { SharedService } from '../api/shared/shared.service';
+import { User } from '../models/User';
 
 declare var window;
 
@@ -35,6 +38,8 @@ export class CdescriptionPage implements OnInit {
   gallery;
   title;
   images: any = [];
+  imagemodal;
+  userDetail:User;
   @ViewChild("slider", { static: true }) slider: IonSlides;
   public unsubscribeBackEvent: Subscription;
 
@@ -50,7 +55,9 @@ export class CdescriptionPage implements OnInit {
     private route: ActivatedRoute,
     private crop: Crop,
     private platform: Platform,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private alertController: AlertController,
+    private sharedService: SharedService
   ) {
     this.items = [
       { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
@@ -65,67 +72,90 @@ export class CdescriptionPage implements OnInit {
 
   ngOnInit() {
     // this.route.paramMap()
-    let data = this.route.snapshot.paramMap.get("data");
-    console.log(data);
+    let contestID = this.route.snapshot.paramMap.get("id");
+    let entryID = +this.route.snapshot.queryParamMap.get("entryId");
+    if (entryID != 0) {
+      this.openimageModal();
+    }
+    console.log("Contests ID is " + contestID);
+    console.log("Entry ID is " + entryID);
+  }
+
+  ionViewWillEnter() {
     this.initializeBackButtonCustomHandler();
   }
 
   async goToTabBar() {
-    const actionSheet = await this.actionSheetController.create({
-      header: "Select Image",
-      buttons: [
-        {
-          text: "Camera",
-          icon: "camera",
-          handler: () => {
-            this.openCamera("CAMERA");
-          },
-        },
-        {
-          text: "Gallery",
-          icon: "arrow-dropright-circle",
-          handler: () => {
-            this.imagePicker
-              .getPictures({ maximumImagesCount: 1, height: 300, width: 300 })
-              .then((results) => {
-                for (var i = 0; i < results.length; i++) {
-                  console.log("Image URI: " + results[i]);
-                  this.tempUrl = results[i];
-                  this.crop
-                    .crop(this.tempUrl, {
-                      quality: 100,
-                      targetWidth: 300,
-                      targetHeight: 300,
-                    })
-                    .then(
-                      (newImage) =>
-                        console.log("new image path is: " + newImage),
-                      (error) => console.error("Error cropping image", error)
-                    );
-                  this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(
-                    results[i]
-                  );
-                  console.log(this.imgUrl);
+    
+    this.sharedService.getUserDetail().then(async(res:User) =>
+     {
+        console.log("Profile status" + res.isprofileCompleted);
+       if (res.isprofileCompleted == true) {
+         const actionSheet = await this.actionSheetController.create({
+           header: "Select Image",
+           buttons: [
+             {
+               text: "Camera",
+               icon: "camera",
+               handler: () => {
+                 this.openCamera("CAMERA");
+               },
+             },
+             {
+               text: "Gallery",
+               icon: "arrow-dropright-circle",
+               handler: () => {
+                 this.imagePicker
+                   .getPictures({
+                     maximumImagesCount: 1,
+                     height: 300,
+                     width: 300,
+                   })
+                   .then((results) => {
+                     for (var i = 0; i < results.length; i++) {
+                       console.log("Image URI: " + results[i]);
+                       this.tempUrl = results[i];
+                       this.crop
+                         .crop(this.tempUrl, {
+                           quality: 100,
+                           targetWidth: 300,
+                           targetHeight: 300,
+                         })
+                         .then(
+                           (newImage) =>
+                             console.log("new image path is: " + newImage),
+                           (error) =>
+                             console.error("Error cropping image", error)
+                         );
+                       this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(
+                         results[i]
+                       );
+                       console.log(this.imgUrl);
 
-                  this.readimage();
-                }
-              });
-            (err) => {
-              console.log(err);
-            };
-          },
-        },
-        {
-          text: "Cancel",
-          icon: "close",
-          role: "cancel",
-          handler: () => {
-            console.log("Cancel clicked");
-          },
-        },
-      ],
+                       this.readimage();
+                     }
+                   });
+                 (err) => {
+                   console.log(err);
+                 };
+               },
+             },
+             {
+               text: "Cancel",
+               icon: "close",
+               role: "cancel",
+               handler: () => {
+                 console.log("Cancel clicked");
+               },
+             },
+           ],
+         });
+         await actionSheet.present();
+       } else {
+         this.presentAlertConfirm();
+       }
     });
-    await actionSheet.present();
+   
   }
   onClick() {
     this.router.navigate(["/enteries"]);
@@ -254,6 +284,9 @@ export class CdescriptionPage implements OnInit {
       cssClass: "image-modal",
       enterAnimation: myEnterAnimation,
       leaveAnimation: myLeaveAnimation,
+      componentProps: {
+        type: "alluploads",
+      },
     });
     return await modal.present();
   }
@@ -262,7 +295,7 @@ export class CdescriptionPage implements OnInit {
     this.popoverController.dismiss();
   }
   async openMyimageModal() {
-    const modal = await this.modalController.create({
+    this.imagemodal = await this.modalController.create({
       component: ImagemodalPage,
       backdropDismiss: true,
       cssClass: "image-modal",
@@ -272,7 +305,7 @@ export class CdescriptionPage implements OnInit {
       enterAnimation: myEnterAnimation,
       leaveAnimation: myLeaveAnimation,
     });
-    modal.present();
+    this.imagemodal.present();
   }
   initializeBackButtonCustomHandler(): void {
     this.unsubscribeBackEvent = this.platform.backButton.subscribeWithPriority(
@@ -296,14 +329,55 @@ export class CdescriptionPage implements OnInit {
         } catch (error) {}
         console.log(this.route.parent);
         console.log(this.route.root);
+        this.router.navigate(["/tabs/tab1"]);
         // this.router.navigate(["/tabs/enteries"]);
-        // this.router.navigate(["/tabs/enteries"]);
-        window.history.back();
+        // window.history.back();
       }
     );
   }
-  ionViewWillLeave() {
+  async ionViewWillLeave() {
     // Unregister the custom back button action for this page
+    if (this.imagemodal){
+      this.imagemodal.dismiss();
+    } 
+     try {
+       const element = await this.alertController.getTop();
+       if (element) {
+         element.dismiss();
+         return;
+       }
+     } catch (error) {}
+    
     this.unsubscribeBackEvent.unsubscribe();
+
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: "Complete Profile!",
+      message: "It is required to deliver you the prizes if you won.",
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+          cssClass: "secondary",
+          handler: (blah) => {
+            console.log("Confirm Cancel: blah");
+          },
+        },
+        {
+          text: "Complete Profile",
+          handler: () => {
+            this.router.navigate(["/tabs/tab3"],{queryParams:{
+              source:"contests",
+              contestID:"1"
+            }});
+            console.log("Confirm Okay");
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }
