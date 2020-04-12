@@ -49,7 +49,7 @@ export class EditprofilemodalPage implements OnInit {
     this.sharedService.getUserDetail().then(
       (res: any) => {
         this.userDetail = { ...res };
-        this.imgUrl = this.userDetail.profileImage;
+        this.imgUrl = this.userDetail.profileImage || "../../assets/boostpost.png";
         this.createProfileUpdateForm();
       },
       (err) => console.log(err)

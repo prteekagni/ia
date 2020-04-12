@@ -191,9 +191,7 @@ export class LoginPage {
     this.GooglePlus.login({})
       .then((res:any) => {
         if(res.email == this.userData.email){
-          this.userData.displayName = res.displayName; 
           this.userData.email = res.email;
-          this.userData.profileImage = "";
         this.userData.loggedVia="email";
           console.log(this.userData);
            this.sharedService.setLoginStatus();
@@ -207,10 +205,11 @@ export class LoginPage {
         // this.userData = { ...res };
         this.userData.displayName = res.displayName;
         this.userData.email = res.email;
-          this.userData.profileImage = "";
-
         this.userData.loggedVia="email";
         this.userData.isprofileCompleted = false;
+        // if(res.hasOwnProperty("imageUrl")){
+        //     this.userData.profileImage = res.imageUrl;
+        // }
         this.sharedService.setLoginStatus();
           this.sharedService.saveUserDetail(this.userData).then(
             (res) => console.log(res),

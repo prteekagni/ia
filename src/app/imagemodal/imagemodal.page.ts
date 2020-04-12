@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
-import { PopoverController, ModalController, NavParams } from "@ionic/angular";
+import { PopoverController, ModalController, NavParams, AlertController } from "@ionic/angular";
 import { GalleryComponent } from "../components/gallery/gallery.component";
 import { ImagefeedbackComponent } from "../components/imagefeedback/imagefeedback.component";
 import { ForgotpasswordmodalPage } from '../forgotpasswordmodal/forgotpasswordmodal.page';
@@ -61,7 +61,8 @@ export class ImagemodalPage implements OnInit {
     private popoverController: PopoverController,
     private modalController: ModalController,
     private navParams: NavParams,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private alertController : AlertController
   ) {
     console.log("Type " + this.navParams.get("type"));
   }
@@ -142,5 +143,30 @@ export class ImagemodalPage implements OnInit {
 
   shareApp() {
     this.sharedService.sharingToOther("1");
+  }
+
+  async deletePhoto(){
+     const alert = await this.alertController.create({
+       header: "Delete?",
+       subHeader: "",
+       message: "Do you want to delete your entry. Entry once deleted can not be restored?",
+       buttons: [
+         {
+           text: "Delete",
+           handler: () => {
+             this.sharedService.presentToast("Entry Deleted." , 2000);
+             this.modalController.dismiss();
+           },
+         },
+         {
+           text: "Cancel",
+           handler: () => {
+             console.log("Cancelled");
+           },
+         },
+       ],
+     });
+
+     await alert.present();
   }
 }

@@ -109,7 +109,12 @@ export class ForgotpasswordmodalPage implements OnInit {
     this.sharedService.getUserDetail().then((res:any)=>{
       this.userPRC = res.credits;
       if(this.userPRC >= 20){
+         res.credits = res.credits - 20;         
+         this.sharedService.saveUserDetail(res).then((res: any) => {
+           console.log(res);
+         });
       this.modalCtrl.dismiss(true);
+
       } else{
             this.sharedService.presentToast(
               "Not enough credits avaliable. You need "+ "<strong>" + Math.abs(this.userPRC-20) + "</strong>"+ " credits more to super vote. Please watch an add and collect credits to your account.",4000
@@ -123,6 +128,11 @@ export class ForgotpasswordmodalPage implements OnInit {
           this.userPRC = res.credits;
           if (this.userPRC >= 30) {
               this.modalCtrl.dismiss(true);
+              res.credits = res.credits -30;
+              console.log(res);    
+              this.sharedService.saveUserDetail(res).then((res:any)=>{
+                  console.log(res);
+              })
           }
           else {
             this.sharedService.presentToast(

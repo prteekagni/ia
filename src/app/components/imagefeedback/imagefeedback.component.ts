@@ -18,6 +18,8 @@ export class ImagefeedbackComponent implements OnInit {
 
   popBtnClick(data){
 this.sharedService.presentToast("Thanks you for your feedback for reporting the image as " + data , 2000);
+    this.popoverController.dismiss();
+
   }
 }
 
