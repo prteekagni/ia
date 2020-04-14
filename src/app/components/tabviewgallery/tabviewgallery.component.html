@@ -1,7 +1,7 @@
 
 <ng-container *ngIf="items">
 <ion-list *ngIf="!iswinner">
-  <ion-item *ngFor="let item of items">
+  <ion-item *ngFor="let item of items" @items>
     <ion-card
       routerLink="/cdescription/{{ item.position }}"
       routerDirection="forward"

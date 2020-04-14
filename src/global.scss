@@ -138,6 +138,12 @@
  border-radius: 10px;
 }
 
+.userupload-modal .modal-wrapper{
+  --width: 90%;
+    --height: 360px;
+    --border-radius: 5px;
+}
+
 
 @media screen and (min-width: 480px) {
 .add-modal .modal-wrapper{

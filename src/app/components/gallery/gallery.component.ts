@@ -3,6 +3,8 @@ import { ModalController } from '@ionic/angular';
 import { ImagemodalPage } from 'src/app/imagemodal/imagemodal.page';
 import { myEnterAnimation } from 'src/app/animations/enter';
 import { myLeaveAnimation } from 'src/app/animations/leave';
+import { fader } from 'src/app/animations/routeranimation';
+import { trigger, transition, style, animate, keyframes } from '@angular/animations';
 
 const lorem =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, seddo eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
@@ -23,27 +25,48 @@ let rotateImg = 0;
 @Component({
   selector: "app-gallery",
   templateUrl: "./gallery.component.html",
-  styleUrls: ["./gallery.component.scss"]
+  styleUrls: ["./gallery.component.scss"],
+  animations: [
+    trigger("items", [
+      transition(":enter", [
+        style({ transform: "scale(0.5)", opacity: 0 }), // initial
+        animate(
+          "2s cubic-bezier(.8, -0.6, 0.2, 1.5)",
+          keyframes([
+            style({
+              transform: "rotateX(-100deg)",
+              "transform-origin": "top",
+              opacity: 0,
+            }),
+            style({
+              transform: "rotateX(0deg)",
+              "transform-origin": "top",
+              opacity: 1,
+            }),
+          ])
+        ),
+      ]),
+    ]),
+  ],
 })
 export class GalleryComponent implements OnInit {
   items: any[] = [];
   @Input() iswinner;
-  @Input () imageUrl;
+  @Input() imageUrl;
 
-  boost:boolean = true;
+  boost: boolean = true;
   // gallery: string = "standard";
   // @ViewChild(IonInfiniteScroll, { static: true })
   // infiniteScroll: IonInfiniteScroll;
 
   constructor(private modalController: ModalController) {
-
     for (let i = 0; i < 25; i++) {
       this.items.push({
         name: i + " - " + images[rotateImg],
         imgSrc: this.getImgSrc(),
         avatarSrc: this.getImgSrc(),
         imgHeight: Math.floor(Math.random() * 50 + 150),
-        content: lorem.substring(0, Math.random() * (lorem.length - 100) + 100)
+        content: lorem.substring(0, Math.random() * (lorem.length - 100) + 100),
       });
 
       rotateImg++;
@@ -72,7 +95,7 @@ export class GalleryComponent implements OnInit {
           content: lorem.substring(
             0,
             Math.random() * (lorem.length - 100) + 100
-          )
+          ),
         });
 
         rotateImg++;
@@ -88,40 +111,35 @@ export class GalleryComponent implements OnInit {
     }, 500);
   }
   async openimageModal() {
-    if(!this.iswinner){
- const modal = await this.modalController.create({
-   component: ImagemodalPage,
-   backdropDismiss: true,
-   cssClass: "image-modal",
-   componentProps: {
-     type: "alluploads",
-   },
+    if (!this.iswinner) {
+      const modal = await this.modalController.create({
+        component: ImagemodalPage,
+        backdropDismiss: true,
+        cssClass: "image-modal",
+        componentProps: {
+          type: "alluploads",
+        },
 
-
-   enterAnimation: myEnterAnimation,
-   leaveAnimation: myLeaveAnimation,
- });
-    return await modal.present();
-  }
-    else {
-
-    
-    const modal = await this.modalController.create({
-      componentProps: {
-        iswinner: "true"
-      },
-      component: ImagemodalPage,
-      backdropDismiss: true,
-      cssClass: "winner-modal",
-      enterAnimation: myEnterAnimation,
-      leaveAnimation: myLeaveAnimation
-    });
-    return await modal.present();
-  }
+        enterAnimation: myEnterAnimation,
+        leaveAnimation: myLeaveAnimation,
+      });
+      return await modal.present();
+    } else {
+      const modal = await this.modalController.create({
+        componentProps: {
+          iswinner: "true",
+        },
+        component: ImagemodalPage,
+        backdropDismiss: true,
+        cssClass: "winner-modal",
+        enterAnimation: myEnterAnimation,
+        leaveAnimation: myLeaveAnimation,
+      });
+      return await modal.present();
+    }
   }
   ngOnInit() {
     console.log(this.iswinner);
-    
   }
 }
 

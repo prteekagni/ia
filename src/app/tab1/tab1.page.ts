@@ -13,11 +13,13 @@ import { Subscription } from 'rxjs';
 import { AppMinimize } from '@ionic-native/app-minimize/ngx';
 import { SharedService } from '../api/shared/shared.service';
 import { User } from '../models/User';
+import { fader } from '../animations/routeranimation';
 
 @Component({
   selector: "app-tab1",
   templateUrl: "tab1.page.html",
   styleUrls: ["tab1.page.scss"],
+  animations: [fader],
 })
 export class Tab1Page {
   @ViewChild("slider", { static: true }) slider: IonSlides;
@@ -84,10 +86,10 @@ export class Tab1Page {
     // this.slider.slideTo(this.segment);
   }
   ionViewWillEnter() {
-     this.sharedService.getUserDetail().then((res: User) => {
-       console.log(res);
-       this.credits = res.credits;
-     });
+    this.sharedService.getUserDetail().then((res: User) => {
+      console.log(res);
+      this.credits = res.credits;
+    });
 
     this.initializeBackButtonCustomHandler();
   }
@@ -96,23 +98,17 @@ export class Tab1Page {
       component: AddmodalPage,
       backdropDismiss: true,
       cssClass: "add-modal",
+      enterAnimation: myEnterAnimation,
+      leaveAnimation: myLeaveAnimation,
     });
     modal.onDidDismiss().then((res: any) => {
-      if(typeof(res.data) == "number"){
-        this.credits = res.data
+      if (typeof res.data == "number") {
+        this.credits = res.data;
       }
     });
     return await modal.present();
   }
-  async openNotificationModal() {
-    const modal = await this.modalController.create({
-      component: NotificationPage,
-      backdropDismiss: true,
-      enterAnimation: myEnterAnimation,
-      leaveAnimation: myLeaveAnimation,
-    });
-    return await modal.present();
-  }
+ 
 
   ionViewDidLeave() {
     console.log("View Did Lwave");
@@ -146,7 +142,7 @@ export class Tab1Page {
     this.unsubscribeBackEvent.unsubscribe();
   }
   async createToast() {
-    this.sharedService.presentToast("Press again to exit" , 2000);
+    this.sharedService.presentToast("Press again to exit", 2000);
   }
 
   doRefresh(event) {

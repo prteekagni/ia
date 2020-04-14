@@ -22,6 +22,8 @@ import { Subscription } from 'rxjs';
 import { async } from '@angular/core/testing';
 import { SharedService } from '../api/shared/shared.service';
 import { User } from '../models/User';
+import { fader } from '../animations/routeranimation';
+import { trigger, transition, style, animate, keyframes } from '@angular/animations';
 
 declare var window;
 
@@ -29,6 +31,28 @@ declare var window;
   selector: "app-cdescription",
   templateUrl: "./cdescription.page.html",
   styleUrls: ["./cdescription.page.scss"],
+  animations: [
+    trigger("items", [
+      transition(":enter", [
+        style({ transform: "scale(0.5)", opacity: 0 }), // initial
+        animate(
+          "2s cubic-bezier(.8, -0.6, 0.2, 1.5)",
+          keyframes([
+            style({
+              transform: "rotateX(-100deg)",
+              "transform-origin": "top",
+              opacity: 0,
+            }),
+            style({
+              transform: "rotateX(0deg)",
+              "transform-origin": "top",
+              opacity: 1,
+            }),
+          ])
+        ),
+      ]),
+    ]),
+  ],
 })
 export class CdescriptionPage implements OnInit {
   imgUrl = "";
@@ -39,8 +63,10 @@ export class CdescriptionPage implements OnInit {
   title;
   images: any = [];
   imagemodal;
-  userDetail:User;
+  userDetail: User;
+  isdata;
   @ViewChild("slider", { static: true }) slider: IonSlides;
+  tabvisible=true;
   public unsubscribeBackEvent: Subscription;
 
   constructor(
@@ -86,76 +112,73 @@ export class CdescriptionPage implements OnInit {
   }
 
   async goToTabBar() {
-    
-    this.sharedService.getUserDetail().then(async(res:User) =>
-     {
-        console.log("Profile status" + res.isprofileCompleted);
-       if (res.isprofileCompleted == true) {
-         const actionSheet = await this.actionSheetController.create({
-           header: "Select Image",
-           buttons: [
-             {
-               text: "Camera",
-               icon: "camera",
-               handler: () => {
-                 this.openCamera("CAMERA");
-               },
-             },
-             {
-               text: "Gallery",
-               icon: "arrow-dropright-circle",
-               handler: () => {
-                 this.imagePicker
-                   .getPictures({
-                     maximumImagesCount: 1,
-                     height: 300,
-                     width: 300,
-                   })
-                   .then((results) => {
-                     for (var i = 0; i < results.length; i++) {
-                       console.log("Image URI: " + results[i]);
-                       this.tempUrl = results[i];
-                       this.crop
-                         .crop(this.tempUrl, {
-                           quality: 100,
-                           targetWidth: 300,
-                           targetHeight: 300,
-                         })
-                         .then(
-                           (newImage) =>
-                             console.log("new image path is: " + newImage),
-                           (error) =>
-                             console.error("Error cropping image", error)
-                         );
-                       this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(
-                         results[i]
-                       );
-                       console.log(this.imgUrl);
+    this.sharedService.getUserDetail().then(async (res: User) => {
+      console.log("Profile status" + res.isprofileCompleted);
+      if (res.isprofileCompleted == true) {
+        const actionSheet = await this.actionSheetController.create({
+          header: "Select Image",
+          buttons: [
+            {
+              text: "Camera",
+              icon: "camera",
+              handler: () => {
+                this.openCamera("CAMERA");
+              },
+            },
+            {
+              text: "Gallery",
+              icon: "arrow-dropright-circle",
+              handler: () => {
+                this.imagePicker
+                  .getPictures({
+                    maximumImagesCount: 1,
+                    height: 300,
+                    width: 300,
+                  })
+                  .then((results) => {
+                    for (var i = 0; i < results.length; i++) {
+                      console.log("Image URI: " + results[i]);
+                      this.tempUrl = results[i];
+                      this.crop
+                        .crop(this.tempUrl, {
+                          quality: 100,
+                          targetWidth: 300,
+                          targetHeight: 300,
+                        })
+                        .then(
+                          (newImage) =>
+                            console.log("new image path is: " + newImage),
+                          (error) =>
+                            console.error("Error cropping image", error)
+                        );
+                      this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(
+                        results[i]
+                      );
+                      console.log(this.imgUrl);
 
-                       this.readimage();
-                     }
-                   });
-                 (err) => {
-                   console.log(err);
-                 };
-               },
-             },
-             {
-               text: "Cancel",
-               icon: "close",
-               role: "cancel",
-               handler: () => {
-                 console.log("Cancel clicked");
-               },
-             },
-           ],
-         });
-         await actionSheet.present();
-       } else {
-         this.presentAlertConfirm();
-       }
+                      this.readimage();
+                    }
+                  });
+                (err) => {
+                  console.log(err);
+                };
+              },
+            },
+            {
+              text: "Cancel",
+              icon: "close",
+              role: "cancel",
+              handler: () => {
+                console.log("Cancel clicked");
+              },
+            },
+          ],
+        });
+        await actionSheet.present();
+      } else {
+        this.presentAlertConfirm();
+      }
     });
-   
   }
   onClick() {
     this.router.navigate(["/enteries"]);
@@ -298,7 +321,7 @@ export class CdescriptionPage implements OnInit {
     this.imagemodal = await this.modalController.create({
       component: ImagemodalPage,
       backdropDismiss: true,
-      cssClass: "image-modal",
+      cssClass: "userupload-modal",
       componentProps: {
         type: "userupload",
       },
@@ -337,19 +360,18 @@ export class CdescriptionPage implements OnInit {
   }
   async ionViewWillLeave() {
     // Unregister the custom back button action for this page
-    if (this.imagemodal){
+    if (this.imagemodal) {
       this.imagemodal.dismiss();
-    } 
-     try {
-       const element = await this.alertController.getTop();
-       if (element) {
-         element.dismiss();
-         return;
-       }
-     } catch (error) {}
-    
-    this.unsubscribeBackEvent.unsubscribe();
+    }
+    try {
+      const element = await this.alertController.getTop();
+      if (element) {
+        element.dismiss();
+        return;
+      }
+    } catch (error) {}
 
+    this.unsubscribeBackEvent.unsubscribe();
   }
 
   async presentAlertConfirm() {
@@ -368,10 +390,12 @@ export class CdescriptionPage implements OnInit {
         {
           text: "Complete Profile",
           handler: () => {
-            this.router.navigate(["/tabs/tab3"],{queryParams:{
-              source:"contests",
-              contestID:"1"
-            }});
+            this.router.navigate(["/tabs/tab3"], {
+              queryParams: {
+                source: "contests",
+                contestID: "1",
+              },
+            });
             console.log("Confirm Okay");
           },
         },
@@ -379,5 +403,17 @@ export class CdescriptionPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  on1Click(data) {
+    if (data.detail.index == 2) {
+      console.log(data.detail.index);
+      this.items = [
+        { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
+        { position: 2, name: "Helium", weight: 4.0026, symbol: "He" },
+      ];
+    } else if (data.detail.index == 1) {
+      this.tabvisible = true;
+    }
   }
 }

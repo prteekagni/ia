@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from "@angular/core";
 import { IonInfiniteScroll } from "@ionic/angular";
+import { trigger, transition, style, animate, keyframes } from '@angular/animations';
 const lorem =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, seddo eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
@@ -20,6 +21,28 @@ let rotateImg = 0;
   selector: "app-tabviewgallery",
   templateUrl: "./tabviewgallery.component.html",
   styleUrls: ["./tabviewgallery.component.scss"],
+  animations: [
+    trigger("items", [
+      transition(":enter", [
+        style({ transform: "scale(0.5)", opacity: 0 }), // initial
+        animate(
+          "2s cubic-bezier(.8, -0.6, 0.2, 1.5)",
+          keyframes([
+            style({
+              transform: "rotateX(-100deg)",
+              "transform-origin": "top",
+              opacity: 0,
+            }),
+            style({
+              transform: "rotateX(0deg)",
+              "transform-origin": "top",
+              opacity: 1,
+            }),
+          ])
+        ),
+      ]),
+    ]),
+  ],
 })
 export class TabviewgalleryComponent implements OnInit {
   items;
@@ -29,20 +52,18 @@ export class TabviewgalleryComponent implements OnInit {
   // infiniteScroll: IonInfiniteScroll;
 
   constructor() {
-
     setTimeout(() => {
-       this.items = [
-         {
-           position: 1,
-           name: "Background.jpg",
-           weight: 1.0079,
-           symbol: "Smiling Faces",
-         },
-         { position: 2, name: "makeup.jpg", weight: 1.0079, symbol: "Makeup" },
-         { position: 3, name: "makeup.jpg", weight: 1.0079, symbol: "Makeup" },
-       ];
+      this.items = [
+        {
+          position: 1,
+          name: "Background.jpg",
+          weight: 1.0079,
+          symbol: "Smiling Faces",
+        },
+        { position: 2, name: "makeup.jpg", weight: 1.0079, symbol: "Makeup" },
+        { position: 3, name: "makeup.jpg", weight: 1.0079, symbol: "Makeup" },
+      ];
     }, 3000);
-   
   }
   getImgSrc() {
     const src =
@@ -81,5 +102,4 @@ export class TabviewgalleryComponent implements OnInit {
   }
 
   ngOnInit() {}
-
 }

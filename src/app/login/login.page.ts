@@ -188,15 +188,10 @@ export class LoginPage {
         //   this.userData.isprofileCompleted = false;
         // }
 
-        this.sharedService.loadingControllerDisplay().then((res:any)=>{
-          console.log(res); 
-        })
+  
 
     this.GooglePlus.login({})
       .then((res:any) => {
-        this.sharedService.dismissLoadingController().then((res:any)=>{
-          console.log(res);
-        })
         if (res.email == this.userData.email && this.userData.loggedVia == "email") {
           this.userData.email = res.email;
           this.userData.loggedVia = "email";

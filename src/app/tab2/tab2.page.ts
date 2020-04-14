@@ -1,7 +1,10 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { AlertController, Platform } from "@ionic/angular";
+import { AlertController, Platform, ModalController } from "@ionic/angular";
 import { SharedService } from '../api/shared/shared.service';
+import { NotificationPage } from '../notification/notification.page';
+import { myEnterAnimation } from '../animations/enter';
+import { myLeaveAnimation } from '../animations/leave';
 
 @Component({
   selector: "app-tab2",
@@ -11,13 +14,14 @@ import { SharedService } from '../api/shared/shared.service';
 export class Tab2Page {
   unsubscribeBackEvent;
   bdarkmode: boolean;
+  modal;
   constructor(
     private router: Router,
     private alertController: AlertController,
     private sharedService: SharedService,
-    private platform: Platform
-
-    ) {}
+    private platform: Platform,
+    private modalController: ModalController
+  ) {}
   async onClick() {
     const alert = await this.alertController.create({
       header: "Logout",
@@ -27,7 +31,7 @@ export class Tab2Page {
         {
           text: "Logout",
           handler: () => {
-         this.sharedService.logOut();
+            this.sharedService.logOut();
           },
         },
         {
@@ -53,19 +57,18 @@ export class Tab2Page {
     this.initializeBackButtonCustomHandler();
   }
 
-  setDarkMode(data){
-      document.body.classList.toggle("dark", data);
-      // document.body.classList.toggle("dark", ev.detail.checked);
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+  setDarkMode(data) {
+    document.body.classList.toggle("dark", data);
+    // document.body.classList.toggle("dark", ev.detail.checked);
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
   }
-
 
   darkMode(ev) {
     console.log("event is " + ev.detail.checked);
     localStorage.setItem("darkmode", ev.detail.checked);
     document.body.classList.toggle("dark", ev.detail.checked);
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
-    
+
     function loadApp() {
       checkToggle(prefersDark.matches);
     }
@@ -76,8 +79,7 @@ export class Tab2Page {
     }
   }
 
-  ngAfterViewChecked(): void {
-  }
+  ngAfterViewChecked(): void {}
 
   async deleteAccount() {
     const alert = await this.alertController.create({
@@ -107,6 +109,9 @@ export class Tab2Page {
     this.unsubscribeBackEvent = this.platform.backButton.subscribeWithPriority(
       999999,
       async () => {
+        if(this.modal){
+          this.modal.dismiss();
+        }
         // this.router.navigate(["/tabs/enteries"]);
         this.router.navigate(["/tabs"]);
         // alert("Do you want to exit app?");
@@ -114,7 +119,20 @@ export class Tab2Page {
     );
   }
   ionViewWillLeave() {
+    if (this.modal) {
+      this.modal.dismiss();
+    }
     // Unregister the custom back button action for this page
     this.unsubscribeBackEvent.unsubscribe();
+  }
+
+  async openNotificationModal() {
+    this.modal = await this.modalController.create({
+      component: NotificationPage,
+      backdropDismiss: true,
+      enterAnimation: myEnterAnimation,
+      leaveAnimation: myLeaveAnimation,
+    });
+    return await this.modal.present();
   }
 }
