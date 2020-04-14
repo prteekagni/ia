@@ -38,7 +38,7 @@ import { Deeplinks } from "@ionic-native/deeplinks/ngx";
   imports: [
     BrowserModule,
     IonicModule.forRoot({
-      mode: "md",
+      mode :"md",
       hardwareBackButton: true,
       swipeBackEnabled: true,
     }),

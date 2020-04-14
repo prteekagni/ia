@@ -96,3 +96,18 @@ h5 {
     font-size: 2em;
     text-shadow: -1px 2px 15px rgba(0, 0, 0, 0.7);
 }
+.icon {
+ display: inline-block;
+ font-size: 35px;
+ color: #ffC977;
+ vertical-align: middle;
+}
+
+.text{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.iconcolor path{
+  fill: red;
+}

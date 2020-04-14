@@ -18,7 +18,91 @@
     </div>
   </div>
   <ng-container *ngIf="type == 'alluploads'">
-    <ion-fab
+    <ion-slides mode="ios"  #swiper (ionSlideReachEnd)="isReachedEnd($event)" >
+
+   
+      <ion-slide *ngFor="let item of items" >
+        <!-- <h2>{{item}}</h2> -->
+          <ion-fab
+      vertical="bottom"
+      horizontal="end"
+      slot="fixed"
+      color="primary"
+      style="bottom: 80px;"
+      (click)="shareApp()"
+    >
+      <ion-fab-button>
+        <ion-icon name="share"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+     <ion-row>
+          <ion-col size="9">
+            <ion-item mode="ios" lines="none">
+              <ion-avatar slot="start">
+                <img src="../../assets/demoimage.jpg"  style="width: 50px;"/>
+              </ion-avatar>
+              <ion-label
+                class="sc-ion-label-md-h sc-ion-label-md-s md hydrated"
+              >
+                <h2>Prateek Agnihotri</h2>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="3" class="ion-text-right">
+            <ion-label (click)="presentPopover($event)">
+              <ion-icon name="md-more" style="font-size: 24px;"></ion-icon>
+             
+            </ion-label>
+
+            <ion-label (click)="closeImageModal($event)">
+              <ion-icon name="md-close" style="font-size: 24px;"></ion-icon>
+             
+            </ion-label>
+          </ion-col>
+          <ion-col size="12">
+             <img src="../../assets/demoimage.jpg" alt="" style="width: 300px; height: 300px;">
+          </ion-col>
+            <ion-col size="12" class="ion-text-left">
+            <ion-item>
+  <ion-icon src="../../assets/heart-outline.svg" class="iconcolor" *ngIf="!isvoted"></ion-icon> 
+  <img src="../../assets/medal.png" alt="" style="width: 19px;" *ngIf="isvoted">
+  <span class="text">1000</span>
+</ion-item>
+      </ion-col>
+
+       
+          <ion-col size="12">
+              <ng-container *ngIf="!iswinner">
+      <ion-row>
+        <ion-col size="6">
+          <ion-button fill="outline" expand="block" (click)="vote()" *ngIf="!isvoted">
+            <ion-icon name="heart" style="padding-right: 5px;"></ion-icon>
+            Vote
+          </ion-button>
+             <ion-button fill="outline" expand="block" (click)="vote()" *ngIf="isvoted">
+            <ion-icon name="heart" style="padding-right: 5px;"></ion-icon>
+            Unvote
+          </ion-button>
+        </ion-col>
+        <ion-col size="6" class="ion-text-right">
+          <ion-button fill="outline" expand="block" (click)="superVote()" style="    --padding-end: 3px;
+    --padding-start: 7px;">
+            <ion-icon name="heart" slot="start"></ion-icon>
+            <ion-icon name="md-close" slot="start" style="margin-right: 0px;"></ion-icon>
+            3 Super Vote
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+          </ion-col>
+        </ion-row>
+      
+      </ion-slide>
+      
+    </ion-slides>
+     
+    
+    <!-- <ion-fab
       vertical="bottom"
       horizontal="end"
       slot="fixed"
@@ -48,12 +132,12 @@
           <ion-col size="3" class="ion-text-right">
             <ion-label (click)="presentPopover($event)">
               <ion-icon name="md-more" style="font-size: 24px;"></ion-icon>
-              <!-- <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
+             
             </ion-label>
 
             <ion-label (click)="closeImageModal($event)">
               <ion-icon name="md-close" style="font-size: 24px;"></ion-icon>
-              <!-- <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
+             
             </ion-label>
           </ion-col>
         </ion-row>
@@ -158,15 +242,15 @@
           </ion-button>
         </ion-col>
       </ng-container>
-    </ion-row>
+    </ion-row> -->
   </ng-container>
 
   <ng-container *ngIf="type == 'iswinner'">
-    <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="primary" style="bottom: 80px;">
+     <ion-fab vertical="bottom" horizontal="end" slot="fixed" color="primary" style="bottom: 80px;">
       <ion-fab-button>
         <ion-icon name="share"></ion-icon>
       </ion-fab-button>
-    </ion-fab> -->
+    </ion-fab> 
     <ion-row>
       <ion-col size="12">
         <ion-row>

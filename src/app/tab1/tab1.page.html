@@ -1,22 +1,63 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-icon
+    <!-- <ion-icon
       slot="start"
       name="notifications"
-      style="margin-left: 15px;
-    font-size: 20px;"
-     (click)="openNotificationModal()"
-    ></ion-icon>
-    <ion-title class="ion-text-left">
+      style="margin-left: 15px;"
+      (click)="openNotificationModal()"
+    ></ion-icon> -->
+    <ion-title
+      class="ion-text-left"
+      style="padding-right: 0px;    font-family: Cookie;
+    font-size: xx-large;"
+    >
       Photo Rewards
     </ion-title>
-    <ion-icon
+    <!-- <ion-icon
       slot="end"
       name="gift"
       style="margin-right: 15px;
     font-size: 20px;"
      (click)="openAddModalPage()"
-    ></ion-icon>
+    ></ion-icon> -->
+    <!-- <ion-buttons slot="end">
+      <ion-button (click)="doSomething()">
+        <ion-icon slot="start" name="add" color="primary"></ion-icon>
+        <div slot="end"></div>
+      </ion-button>
+    </ion-buttons> -->
+    <!-- <div slot="end" style="width: 80px;">
+      <img src="../../assets/google.png" alt="" style="width: 20px;">
+      <span>0</span>
+      <ion-icon slot="end" name="add"></ion-icon>
+    </div> -->
+    <ion-button
+      fill="outline"
+      slot="end"
+      style="
+        --background: white;
+        color: black;
+        --border-color: rgba(211, 211, 211, 0.9);
+        --border-radius: 30px;
+        height: 2.3em;
+        --padding-start: 10px;
+        --padding-end: 10px;
+        margin-right: 10px;
+      "
+      (click)="openAddModalPage()"
+      ><img
+        alt=""
+        slot="start"
+        src="../../assets/medal.png"
+        style="width: 15px; margin-right: 5px;" /><strong>{{credits}}</strong>
+      <ion-icon
+        color="primary"
+        name="add"
+        slot="end"
+        ng-reflect-color="primary"
+        style="margin-left: 0px;"
+      ></ion-icon
+    ></ion-button>
   </ion-toolbar>
   <!-- <ion-toolbar>
     <ion-segment (ionChange)="segmentChanged()" [(ngModel)]="segment" >
@@ -101,17 +142,18 @@
 </ion-content>-->
 
 <ion-content>
-  
   <super-tabs>
     <super-tabs-toolbar position="top" showIndicator="true">
       <super-tab-button>
         <!-- <ion-icon name="star"></ion-icon> -->
         <!-- <ion-label>Contests</ion-label> -->
 
-        <ion-button
-        class="supertabtransparentbuttons"
-        >
-          <ion-icon slot="start" name="image" style="--color:#757575"></ion-icon>
+        <ion-button class="supertabtransparentbuttons">
+          <ion-icon
+            slot="start"
+            name="trending-up"
+            style="--color: #757575;"
+          ></ion-icon>
           Current
         </ion-button>
       </super-tab-button>
@@ -124,10 +166,13 @@
         </ion-button>
       </super-tab-button> -->
       <super-tab-button>
-         <ion-button
-        class="supertabtransparentbuttons"
-        >
-          <ion-icon slot="start" name="ios-contacts" style="--color:#757575"></ion-icon>
+        <ion-button class="supertabtransparentbuttons">
+          <ion-icon
+            slot="start"
+            name="clock"
+           
+          ></ion-icon>
+          <!-- <ion-icon name="hourglass-outline" ></ion-icon> -->
           Upcoming
         </ion-button>
       </super-tab-button>
@@ -135,10 +180,9 @@
     <super-tabs-container>
       <super-tab>
         <ion-content>
-
-  <ion-refresher slot="fixed"  (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
+          <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content></ion-refresher-content>
+          </ion-refresher>
           <!-- <ion-list>
             <ion-item *ngFor="let item of items">
               <ion-card routerLink="/cdescription/{{item.position}}" style="width: 325px;
@@ -162,7 +206,7 @@
             </ion-item>
           </ion-list> -->
           <app-tabviewgallery></app-tabviewgallery>
-   <!-- <app-contests></app-contests> -->
+          <!-- <app-contests></app-contests> -->
         </ion-content>
       </super-tab>
       <super-tab>

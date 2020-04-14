@@ -95,9 +95,11 @@ export class GalleryComponent implements OnInit {
    cssClass: "image-modal",
    componentProps: {
      type: "alluploads",
-  },
+   },
+
+
    enterAnimation: myEnterAnimation,
-   leaveAnimation: myLeaveAnimation
+   leaveAnimation: myLeaveAnimation,
  });
     return await modal.present();
   }

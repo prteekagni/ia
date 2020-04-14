@@ -149,7 +149,7 @@
       </ion-list> -->
 
          
-          <ion-list>
+          <!-- <ion-list>
             <ion-item *ngFor="let item of items">
               <ion-card routerLink="/cdescription/{{item.position}}" style="
     height: 300px;
@@ -170,5 +170,27 @@
                 </div>
               </ion-card>
             </ion-item>
-          </ion-list>
+          </ion-list> -->
+          <ion-virtual-scroll [items]="items">
+            <div *virtualItem="let item">
+              <!-- <ion-card>
+                <ion-card-header> -->
+                  <ion-item mode="ios" button>
+            <ion-thumbnail slot="start">
+              <img
+                src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
+              />
+            </ion-thumbnail>
+            <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">
+              <h2>Lorem ipsum</h2>
+              <p>dolor sit amet</p>
+            </ion-label>
+          </ion-item>
+                <!-- </ion-card-header> -->
+                <!-- <ion-card-content> -->
+                <img src='../../assets/demoimage.jpg'/>
+                <!-- </ion-card-content> -->
+              <!-- </ion-card> -->
+            </div>
+          </ion-virtual-scroll>
         

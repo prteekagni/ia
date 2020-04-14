@@ -188,34 +188,40 @@ export class LoginPage {
         //   this.userData.isprofileCompleted = false;
         // }
 
+        this.sharedService.loadingControllerDisplay().then((res:any)=>{
+          console.log(res); 
+        })
+
     this.GooglePlus.login({})
       .then((res:any) => {
-        if(res.email == this.userData.email){
+        this.sharedService.dismissLoadingController().then((res:any)=>{
+          console.log(res);
+        })
+        if (res.email == this.userData.email && this.userData.loggedVia == "email") {
           this.userData.email = res.email;
-        this.userData.loggedVia="email";
+          this.userData.loggedVia = "email";
           console.log(this.userData);
-           this.sharedService.setLoginStatus();
-           this.userData.loggedVia = loggedVia;
-             this.sharedService.saveUserDetail(this.userData).then(
-               (res) => console.log(res),
-               (err) => console.log(err)
-             );
-          this.router.navigate(["/tabs/tab1"], { replaceUrl: true });
-        } else {
-        // this.userData = { ...res };
-        this.userData.displayName = res.displayName;
-        this.userData.email = res.email;
-        this.userData.loggedVia="email";
-        this.userData.isprofileCompleted = false;
-        // if(res.hasOwnProperty("imageUrl")){
-        //     this.userData.profileImage = res.imageUrl;
-        // }
-        this.sharedService.setLoginStatus();
+          this.sharedService.setLoginStatus();
+          this.userData.loggedVia = loggedVia;
           this.sharedService.saveUserDetail(this.userData).then(
             (res) => console.log(res),
             (err) => console.log(err)
           );
-        this.router.navigate(["/tabs/tab1"], { replaceUrl: true });
+          this.router.navigate(["/tabs/tab1"], { replaceUrl: true });
+        } else {
+          // this.userData = { ...res };
+          this.userData = new User();
+          this.userData.displayName = res.displayName;
+          this.userData.email = res.email;
+          this.userData.loggedVia = "email";
+          this.userData.isprofileCompleted = false;
+          this.userData.credits = 0;
+          this.sharedService.setLoginStatus();
+          this.sharedService.saveUserDetail(this.userData).then(
+            (res) => console.log(res),
+            (err) => console.log(err)
+          );
+          this.router.navigate(["/tabs/tab1"], { replaceUrl: true });
         }
       
       })

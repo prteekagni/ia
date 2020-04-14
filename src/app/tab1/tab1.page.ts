@@ -12,6 +12,7 @@ import { NavigationStart } from "@angular/router";
 import { Subscription } from 'rxjs';
 import { AppMinimize } from '@ionic-native/app-minimize/ngx';
 import { SharedService } from '../api/shared/shared.service';
+import { User } from '../models/User';
 
 @Component({
   selector: "app-tab1",
@@ -23,6 +24,7 @@ export class Tab1Page {
   segment = 0;
   lastTimeBackPress = 0;
   timePeriodToExit = 3000;
+  credits = 0;
   public unsubscribeBackEvent: Subscription;
 
   items: any = [];
@@ -82,6 +84,11 @@ export class Tab1Page {
     // this.slider.slideTo(this.segment);
   }
   ionViewWillEnter() {
+     this.sharedService.getUserDetail().then((res: User) => {
+       console.log(res);
+       this.credits = res.credits;
+     });
+
     this.initializeBackButtonCustomHandler();
   }
   async openAddModalPage() {
@@ -89,6 +96,11 @@ export class Tab1Page {
       component: AddmodalPage,
       backdropDismiss: true,
       cssClass: "add-modal",
+    });
+    modal.onDidDismiss().then((res: any) => {
+      if(typeof(res.data) == "number"){
+        this.credits = res.data
+      }
     });
     return await modal.present();
   }

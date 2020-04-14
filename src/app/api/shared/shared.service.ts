@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
@@ -16,7 +16,8 @@ export class SharedService {
     private socialSharing: SocialSharing,
     private nativeStorage : NativeStorage,
     private google: GooglePlus,
-    private router : Router
+    private router : Router,
+    private loadingController : LoadingController
   ) {}
 
   setUserDetail() {}
@@ -70,16 +71,17 @@ export class SharedService {
     return this.nativeStorage.getItem("isProfileCompleted");
   }
 
-  addCredits(data){
-    
+  addCredits(data):Promise<any>{
    return this.getUserDetail().then((res:any)=>{
+    //  alert("Current Credit " + res.credits);
       res.credits = res.credits + data;
-      console.log(res);
-      
       this.saveUserDetail(res).then((res:any)=>{
-        console.log(res);
+        // alert("Updated Credit avaliable " + res.credits);
+        console.log(res.credits);
+        return res.credits;
       },err=>{
         console.log(err); 
+        return err;
       })
     })
   }
@@ -88,7 +90,13 @@ export class SharedService {
     this.getUserDetail().then((res:User)=>{
       console.log(res);
       if(res.loggedVia == "email"){
-        this.google.logout();
+        this.google.trySilentLogin().then((res:any)=>{
+          console.log(res);
+        this.google.disconnect().then((res)=>console.log(res));
+        ;  
+        },err=> console.log(err)
+        )
+        
       }
     })
     this.nativeStorage.setItem("User", "");
@@ -99,11 +107,19 @@ logOut(){
   this.getUserDetail().then((res: User) => {
     console.log(res);
     if (res.loggedVia == "email") {
-      this.google.logout().then((res:any)=>{
-         this.clearLoginStatus();
-         this.router.navigate(["login"]);
-      },err=>{console.log(err);
-      })
+      this.google.trySilentLogin({
+        offline:false
+      }).then((res: any) => {
+        console.log(res);
+        this.google.logout().then(
+          (res: any) => {
+            console.log(res);
+                  this.clearLoginStatus();
+                  this.router.navigate(["login"]);
+          },
+          (err) => console.log(err)
+        );
+      }); 
     } else if(res.loggedVia == "phone"){
          this.clearLoginStatus();
          this.router.navigate(["login"]);
@@ -112,4 +128,23 @@ logOut(){
 }
 
 
+async loadingControllerDisplay(){
+    const loading = await this.loadingController.create({
+      spinner: null,
+      message: 'Click the backdrop to dismiss early...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading',
+      backdropDismiss: true
+    });
+    await loading.present();
+  }
+
+  async dismissLoadingController(){
+    if(this.loadingController){
+      this.loadingController.dismiss();
+    }
+  }
 }
+
+
+

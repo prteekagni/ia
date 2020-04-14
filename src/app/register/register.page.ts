@@ -96,7 +96,7 @@ export class RegisterPage implements OnInit {
   verifyOTP() {
     this.sharedService.presentToast("You are successfully registered" , 1000);
     var loggedVia = "phone";
-    if(this.userData.phone !== null){
+    if(this.userData.phone !== this.displaynumber && this.userData.loggedVia == "phone"){
       console.log(this.userData);
       this.userData.phone = this.loginForm.get("phone").value;
       this.userData.loggedVia = loggedVia;
@@ -105,6 +105,7 @@ export class RegisterPage implements OnInit {
       this.userData = {...this.loginForm.value};
       this.userData.loggedVia = loggedVia;
       this.userData.isprofileCompleted = false;
+      this.userData.credits = 0;
     }
     
     this.sharedService.saveUserDetail(this.userData).then(
