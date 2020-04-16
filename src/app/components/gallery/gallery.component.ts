@@ -110,7 +110,7 @@ export class GalleryComponent implements OnInit {
       }
     }, 500);
   }
-  async openimageModal() {
+  async openimageModal(data) {
     if (!this.iswinner) {
       const modal = await this.modalController.create({
         component: ImagemodalPage,
@@ -118,6 +118,8 @@ export class GalleryComponent implements OnInit {
         cssClass: "image-modal",
         componentProps: {
           type: "alluploads",
+          data : this.items,
+          index: data
         },
 
         enterAnimation: myEnterAnimation,

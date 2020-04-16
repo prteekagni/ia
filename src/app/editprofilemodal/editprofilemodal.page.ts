@@ -45,15 +45,18 @@ export class EditprofilemodalPage implements OnInit {
     private sharedService: SharedService,
     private navParams: NavParams
   ) {
+    this.userDetail = new User();
     this.contestID = this.navParams.get("contestID");
-    this.sharedService.getUserDetail().then(
-      (res: any) => {
-        this.userDetail = { ...res };
-        this.imgUrl = this.userDetail.profileImage || "../../assets/boostpost.png";
+    // this.sharedService.getUserDetail().then(
+    //   (res: any) => {
+    //     this.userDetail = { ...res };
+    //     this.imgUrl = this.userDetail.profileImage || "../../assets/boostpost.png";
+    //     this.createProfileUpdateForm();
+    //   },
+    //   (err) => console.log(err)
+    // );
+    this.imgUrl = this.userDetail.profileImage || "../../assets/boostpost.png";
         this.createProfileUpdateForm();
-      },
-      (err) => console.log(err)
-    );
   }
 
   ngOnInit() { }

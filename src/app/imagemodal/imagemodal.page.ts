@@ -1,10 +1,24 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
-import { PopoverController, ModalController, NavParams, AlertController, IonSlides } from "@ionic/angular";
-import { GalleryComponent } from "../components/gallery/gallery.component";
+import {
+  PopoverController,
+  ModalController,
+  NavParams,
+  AlertController,
+  IonSlides,
+} from "@ionic/angular";
 import { ImagefeedbackComponent } from "../components/imagefeedback/imagefeedback.component";
-import { ForgotpasswordmodalPage } from '../forgotpasswordmodal/forgotpasswordmodal.page';
-import { trigger, transition, query, style, stagger, animate, keyframes, group, animateChild } from '@angular/animations';
-import { SharedService } from '../api/shared/shared.service';
+import { ForgotpasswordmodalPage } from "../forgotpasswordmodal/forgotpasswordmodal.page";
+import {
+  trigger,
+  transition,
+  query,
+  style,
+  animate,
+  group,
+  animateChild,
+} from "@angular/animations";
+import { SharedService } from "../api/shared/shared.service";
+import { Subscription, timer } from 'rxjs';
 
 @Component({
   selector: "app-imagemodal",
@@ -52,14 +66,22 @@ export class ImagemodalPage implements OnInit {
   @Input() iswinner;
   @Input() type;
   @ViewChild("inputElement", { static: false }) inputElement: ElementRef;
-  isvoted:boolean = false;
-  // @ViewChild("swiper", { read: IonSlides , static:false }) swiper: IonSlides;
+  isvoted: boolean = false;
+  isboosted: boolean = false;
+  @ViewChild("myslides", { static: false }) slides: IonSlides;
   items;
+  slideOptions;
+  timeLeft = 3600000;
+  timerS: Subscription;
   public displayvote: boolean = false;
   public displaysupervote: boolean = false;
   public displayboostpost: boolean = false;
-
+  index;
   heartBtn: string = "start";
+  minutes: number;
+  seconds: number;
+  findresult;
+  localVotedData;
   constructor(
     private popoverController: PopoverController,
     private modalController: ModalController,
@@ -68,11 +90,80 @@ export class ImagemodalPage implements OnInit {
     private alertController: AlertController
   ) {
     console.log("Type " + this.navParams.get("type"));
-    this.items = [1];
+    this.items = this.navParams.get("data");
+    this.index = this.navParams.get("index");
+    this.slideOptions = {
+      initialSlide: this.navParams.get("index"),
+      speed: 400,
+    };
   }
 
   ngOnInit() {
-    // console.log("This is the end of slides");
+    // this.sharedService.clearVoteData();
+    this.sharedService.getVoteData().then(
+      (res: any) => {
+this.localVotedData = res;
+        console.log(this.items[this.navParams.get("index")].name);
+         this.findresult =  res.find((x) => x.id === this.items[this.navParams.get("index")].name)
+        console.log(this.findresult);
+        if (this.findresult) {
+          if (
+            this.timeLeft - (new Date().getTime() - this.findresult.time) <=
+            0
+          ) {
+            this.isvoted = false;
+            console.log("Time over");
+          } else if (
+                   this.timeLeft -
+                     (new Date().getTime() - this.findresult.time) <=
+                   10000
+                 ) {
+                   console.log("Wihtin 10 seconds");
+                   this.timerS = timer(0, 1000).subscribe((res: any) => {
+                     var dt =
+                       this.timeLeft -
+                       (new Date().getTime() - this.findresult.time) -
+                       res;
+                     if (dt == 0) {
+                       this.isvoted = false;
+                       this.sharedService.presentToast(
+                         "You can now revote",
+                         3000
+                       );
+                       this.timerS.unsubscribe();
+                     }
+                   });
+                 } else {
+                   this.isvoted = true;
+                 }
+    } 
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    // var voteOBj = JSON.parse(localStorage.getItem("time"));
+    // console.log(voteOBj);
+    // console.log(this.items[this.index].name);
+
+    // if (this.items[this.index].name == voteOBj.id) {
+    //   if (+voteOBj.time - this.timeLeft == 0) {
+    //     this.isvoted = false;
+    //     console.log("Time over");
+    //   } else if (+voteOBj.time - this.timeLeft == 30000) {
+    //     this.timerS = timer(0, 1000).subscribe((res: any) => {
+    //       var dt = +voteOBj.time - this.timeLeft - res;
+    //       if (dt == 0) {
+    //         this.isvoted = true;
+    //         this.sharedService.presentToast("You can now revote", 3000);
+    //         this.timerS.unsubscribe();
+    //       }
+    //     });
+    //     // this.isvoted = true;
+    //   } else {
+    //     this.isvoted = true;
+    //   }
+    // }
   }
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
@@ -128,6 +219,7 @@ export class ImagemodalPage implements OnInit {
       if (boostpost) {
         this.displayboostpost = true;
         this.sharedService.presentToast("Photo Boosted", 1000);
+        localStorage.setItem("boostTime", JSON.stringify(new Date().getTime()));
       }
     });
     setTimeout(() => {
@@ -138,17 +230,24 @@ export class ImagemodalPage implements OnInit {
     return await modal.present();
   }
 
-  vote() {
+  vote(data) {
+    var time = new Date().getTime();
+    var obj = {
+      id: data.name,
+      time: time,
+    };
+    
+    // localStorage.setItem("time", JSON.stringify(obj));
     this.heartBtn = this.heartBtn == "start" ? "end" : "start";
     console.log(this.heartBtn);
-    this.isvoted  = !this.isvoted
+    this.sharedService.addVote(obj).then((res) => console.log(res));
+    this.isvoted = !this.isvoted;
     this.displayvote = true;
     setTimeout(() => {
       this.displayvote = false;
     }, 900);
-    if(this.isvoted){
-    this.sharedService.presentToast("Your can revote after 3 hours", 3000);
-
+    if (this.isvoted) {
+      this.sharedService.presentToast("Your can revote after 1 hour", 3000);
     }
   }
 
@@ -192,4 +291,75 @@ export class ImagemodalPage implements OnInit {
       console.log("Done");
     }, 500);
   }
+
+  ionViewDidEnter() {}
+
+  voted() {
+    var dT = new Date().getTime() - this.findresult.time;
+    console.log(dT);
+    var timeleft = this.timeLeft - dT;
+    console.log(timeleft);
+    var seconds = Math.floor(((timeleft - timeleft / 60000) / 1000) % 60);
+    var minutes = Math.floor(timeleft / 60000);
+    console.log("Minutes" + Math.floor(timeleft / 60000));
+    console.log("Seconds " + Math.floor((seconds / 1000) % 60));
+    this.sharedService.presentToast(
+      "You can revote after " + minutes + "m and " + seconds + "s",
+      3000
+    );
+  }
+
+  boostedPhoto() {
+    var voteTime = +localStorage.getItem("boostTime");
+    var dT = new Date().getTime() - voteTime;
+    console.log(dT);
+    var timeleft = this.timeLeft - dT;
+    console.log(timeleft);
+    var seconds = Math.floor(((timeleft - timeleft / 60000) / 1000) % 60);
+    var minutes = Math.floor(timeleft / 60000);
+    console.log("Minutes" + Math.floor(timeleft / 60000));
+    console.log("Seconds " + Math.floor((seconds / 1000) % 60));
+    this.sharedService.presentToast(
+      "You can boost after " + minutes + "m and " + seconds + "s",
+      3000
+    );
+  }
+  isChanged(data){
+    if(this.timerS){
+      this.timerS.unsubscribe();
+    }
+this.slides.getActiveIndex().then((res:any)=>{
+ this.findresult = this.localVotedData.find(
+   (x) => x.id === this.items[res].name
+ );
+ console.log(this.findresult);
+  if (this.findresult) {
+    if (this.timeLeft - (new Date().getTime() - this.findresult.time) <= 0) {
+      this.isvoted = false;
+      console.log("Time over");
+    } else if (
+      this.timeLeft - (new Date().getTime() - this.findresult.time) <=
+      10000
+    ) {
+      console.log("Wihtin 10 seconds");
+      this.timerS = timer(0, 1000).subscribe((res: any) => {
+        var dt =
+          this.timeLeft - (new Date().getTime() - this.findresult.time) - res;
+        if (dt == 0) {
+          this.isvoted = false;
+          this.sharedService.presentToast("You can now revote", 3000);
+          this.timerS.unsubscribe();
+        }
+      });
+    } else {
+      this.isvoted = true;
+    }
+  }else {
+    this.isvoted = false;
+  }
+})
+
+
+  }
+  ionViewWillLeave() {}
 }

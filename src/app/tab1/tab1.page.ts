@@ -1,19 +1,21 @@
-import { Component, ViewChild } from '@angular/core';
-import { PopoverController ,IonSlides, ModalController, Platform } from '@ionic/angular';
-import { AddmodalPage } from '../addmodal/addmodal.page';
-import { NotificationPage } from '../notification/notification.page';
-import { ImpageuploadPage } from '../impageupload/impageupload.page';
+import { Component, ViewChild } from "@angular/core";
+import {
+  PopoverController,
+  IonSlides,
+  ModalController,
+  Platform,
+} from "@ionic/angular";
+import { AddmodalPage } from "../addmodal/addmodal.page";
 import { myEnterAnimation } from "../animations/enter";
 import { myLeaveAnimation } from "../animations/leave";
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
 import { Event as NavigationEvent } from "@angular/router";
 import { filter } from "rxjs/operators";
-import { NavigationStart } from "@angular/router";
-import { Subscription } from 'rxjs';
-import { AppMinimize } from '@ionic-native/app-minimize/ngx';
-import { SharedService } from '../api/shared/shared.service';
-import { User } from '../models/User';
-import { fader } from '../animations/routeranimation';
+import { Subscription } from "rxjs";
+import { AppMinimize } from "@ionic-native/app-minimize/ngx";
+import { SharedService } from "../api/shared/shared.service";
+import { User } from "../models/User";
+import { fader } from "../animations/routeranimation";
 
 @Component({
   selector: "app-tab1",
@@ -51,16 +53,16 @@ export class Tab1Page {
     router.events
       .pipe(
         filter((event: NavigationEvent) => {
-          return event instanceof NavigationStart;
+          return event instanceof NavigationEnd;
         })
       )
-      .subscribe((event: NavigationStart) => {
-        if (
-          event.navigationTrigger == "popstate" &&
-          event.url == "/tabs/tab1" &&
-          localStorage.getItem("Login") == "true"
-        ) {
-          this.router.navigate(["/tabs/tab1"]);
+      .subscribe((event: NavigationEnd) => {
+        if (event.url == "/tabs/tab1") {
+          this.credits = 1000;
+          this.sharedService.getUserDetail().then((res: User) => {
+            console.log("Response from tab1page" + res);
+            this.credits = 1000;
+          });
         }
       });
   }
@@ -87,7 +89,7 @@ export class Tab1Page {
   }
   ionViewWillEnter() {
     this.sharedService.getUserDetail().then((res: User) => {
-      console.log(res);
+      console.log("Response from tab1page" + res);
       this.credits = res.credits;
     });
 
@@ -108,10 +110,10 @@ export class Tab1Page {
     });
     return await modal.present();
   }
- 
 
   ionViewDidLeave() {
     console.log("View Did Lwave");
+    // this.sharedService.subject.unsubscribe();
   }
   initializeBackButtonCustomHandler(): void {
     this.unsubscribeBackEvent = this.platform.backButton.subscribeWithPriority(
@@ -154,4 +156,3 @@ export class Tab1Page {
     }, 2000);
   }
 }
-

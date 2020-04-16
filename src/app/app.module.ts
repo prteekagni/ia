@@ -60,7 +60,7 @@ import { Deeplinks } from "@ionic-native/deeplinks/ngx";
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    // { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     
     Camera,
     ImagePicker,

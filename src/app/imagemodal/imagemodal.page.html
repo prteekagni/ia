@@ -18,7 +18,7 @@
     </div>
   </div>
   <ng-container *ngIf="type == 'alluploads'">
-    <ion-slides mode="ios"  #swiper (ionSlideReachEnd)="isReachedEnd($event)" >
+    <ion-slides mode="ios"  #myslides (ionSlideReachEnd)="isReachedEnd($event)" [options]="slideOptions" (ionSlideDidChange)="isChanged($event)">
 
    
       <ion-slide *ngFor="let item of items" >
@@ -75,13 +75,14 @@
               <ng-container *ngIf="!iswinner">
       <ion-row>
         <ion-col size="6">
-          <ion-button fill="outline" expand="block" (click)="vote()" *ngIf="!isvoted">
+          <ion-button fill="outline" expand="block" (click)="vote(item)"  *ngIf="!isvoted">
             <ion-icon name="heart" style="padding-right: 5px;"></ion-icon>
             Vote
           </ion-button>
-             <ion-button fill="outline" expand="block" (click)="vote()" *ngIf="isvoted">
+             <ion-button fill="outline" expand="block" (click)="voted()" *ngIf="isvoted" style="--opacity: 0.5;
+    ">
             <ion-icon name="heart" style="padding-right: 5px;"></ion-icon>
-            Unvote
+            vote
           </ion-button>
         </ion-col>
         <ion-col size="6" class="ion-text-right">
@@ -236,9 +237,12 @@
           </ion-button>
         </ion-col>
         <ion-col size="6" class="ion-text-right">
-          <ion-button fill="outline" expand="block" (click)="boostPhoto()">
+          <ion-button fill="outline" expand="block" (click)="boostPhoto()" *ngIf="!isboosted">
             <ion-icon name="md-flame" slot="start"></ion-icon>
-
+            Boost Photo
+          </ion-button>
+              <ion-button fill="outline" expand="block" (click)="boostedPhoto()" *ngIf="isboosted" style="opacity: .5;">
+            <ion-icon name="md-flame" slot="start"></ion-icon>
             Boost Photo
           </ion-button>
         </ion-col>

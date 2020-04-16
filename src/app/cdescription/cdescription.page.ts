@@ -7,6 +7,7 @@ import {
   PopoverController,
   Platform,
   AlertController,
+  NavController,
 } from "@ionic/angular";
 import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 import { HttpClient } from "@angular/common/http";
@@ -83,7 +84,8 @@ export class CdescriptionPage implements OnInit {
     private platform: Platform,
     private actionSheetCtrl: ActionSheetController,
     private alertController: AlertController,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private navCtrl: NavController
   ) {
     this.items = [
       { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
@@ -350,8 +352,7 @@ export class CdescriptionPage implements OnInit {
             return;
           }
         } catch (error) {}
-        console.log(this.route.parent);
-        console.log(this.route.root);
+        // this.navCtrl.navigateRoot("/tabs/tab1");
         this.router.navigate(["/tabs/tab1"]);
         // this.router.navigate(["/tabs/enteries"]);
         // window.history.back();
