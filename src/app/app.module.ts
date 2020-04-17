@@ -32,13 +32,14 @@ import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@a
 import { AppMinimize } from "@ionic-native/app-minimize/ngx";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 import { Deeplinks } from "@ionic-native/deeplinks/ngx";
+import { AndroidPermissions } from "@ionic-native/android-permissions/ngx";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot({
-      mode :"md",
+      mode: "md",
       hardwareBackButton: true,
       swipeBackEnabled: true,
     }),
@@ -61,7 +62,7 @@ import { Deeplinks } from "@ionic-native/deeplinks/ngx";
     StatusBar,
     SplashScreen,
     // { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    
+
     Camera,
     ImagePicker,
     GooglePlus,
@@ -71,6 +72,7 @@ import { Deeplinks } from "@ionic-native/deeplinks/ngx";
     AppMinimize,
     SocialSharing,
     Deeplinks,
+    AndroidPermissions,
   ],
   bootstrap: [AppComponent],
 })

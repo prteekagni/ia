@@ -36,6 +36,7 @@ export class EditprofilemodalPage implements OnInit {
   profileForm;
   contestID;
   loggedVia;
+  dataloaded:boolean = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -55,6 +56,7 @@ export class EditprofilemodalPage implements OnInit {
         this.userDetail = { ...res };
         this.imgUrl = this.userDetail.profileImage || "../../assets/boostpost.png";
         this.createProfileUpdateForm();
+        this.dataloaded = true;
       },
       (err) => console.log(err)
     );
@@ -104,7 +106,7 @@ export class EditprofilemodalPage implements OnInit {
               (error) => console.error("Error cropping image", error)
             );
         }
-        this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(this.tempUrl);
+        // this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(this.tempUrl);
       });
     (err) => {
       console.log(err);

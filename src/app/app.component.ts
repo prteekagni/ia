@@ -10,11 +10,15 @@ import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Deeplinks } from "@ionic-native/deeplinks/ngx";
-import { Tab1Page } from './tab1/tab1.page';
-import { CdescriptionPage } from './cdescription/cdescription.page';
-import { ImagemodalPage } from './imagemodal/imagemodal.page';
-import { ImpageuploadPage } from './impageupload/impageupload.page';
-import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { Tab1Page } from "./tab1/tab1.page";
+import { CdescriptionPage } from "./cdescription/cdescription.page";
+import { ImagemodalPage } from "./imagemodal/imagemodal.page";
+import { ImpageuploadPage } from "./impageupload/impageupload.page";
+import { ImagePicker } from "@ionic-native/image-picker/ngx";
+import {
+  AndroidPermissionResponse,
+  AndroidPermissions,
+} from "@ionic-native/android-permissions/ngx";
 
 @Component({
   selector: "app-root",
@@ -35,7 +39,8 @@ export class AppComponent {
     public deepLinks: Deeplinks,
     private router: Router,
     private modalController: ModalController,
-    private imagePicker : ImagePicker
+    private imagePicker: ImagePicker,
+    private androidPermissions: AndroidPermissions
   ) {
     this.initializeApp();
   }
@@ -46,10 +51,20 @@ export class AppComponent {
       this.statusBar.backgroundColorByHexString("#3880ff");
       this.splashScreen.hide();
       this.routeConfig();
-    this.hasReadPermission();
-    if (this.platform.is("android")) {
-    }
-
+      this.hasReadPermission();
+      if (this.platform.is("android")) {
+        this.androidPermissions.checkPermission("WRITE_EXTERNAL_STORAGE").then(
+          (res: any) => {
+            console.log(res);
+            if (!res) {
+              this.androidPermissions.requestPermission(
+                "WRITE_EXTERNAL_STORAGE"
+              );
+            }
+          },
+          (err) => {}
+        );
+      }
     });
 
     this.platform.resume.subscribe((res) => {
@@ -191,14 +206,12 @@ export class AppComponent {
   }
 
   hasReadPermission() {
-    this.imagePicker.hasReadPermission().then((res:any)=>{
-      if(res){
+    this.imagePicker.hasReadPermission().then((res: any) => {
+      if (res) {
         console.log(res);
-      }else {
-        this.imagePicker.requestReadPermission()
+      } else {
+        this.imagePicker.requestReadPermission();
       }
-    })
-
+    });
   }
-  
 }
