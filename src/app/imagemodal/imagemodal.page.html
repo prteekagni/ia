@@ -79,14 +79,14 @@
             <ion-icon name="heart" style="padding-right: 5px;"></ion-icon>
             Vote
           </ion-button>
-             <ion-button fill="outline" expand="block" (click)="voted()" *ngIf="isvoted" style="--opacity: 0.5;
+             <ion-button fill="outline" expand="block" (click)="voted()" *ngIf="isvoted" style="--opacity: 0.7;
     ">
             <ion-icon name="heart" style="padding-right: 5px;"></ion-icon>
-            vote
+            Vote
           </ion-button>
         </ion-col>
         <ion-col size="6" class="ion-text-right">
-          <ion-button fill="outline" expand="block" (click)="superVote()" style="    --padding-end: 3px;
+          <ion-button fill="outline" expand="block" (click)="superVote()" class="supervotedbtn" style="    --padding-end: 3px;
     --padding-start: 7px;">
             <ion-icon name="heart" slot="start"></ion-icon>
             <ion-icon name="md-close" slot="start" style="margin-right: 0px;"></ion-icon>
@@ -241,7 +241,7 @@
             <ion-icon name="md-flame" slot="start"></ion-icon>
             Boost Photo
           </ion-button>
-              <ion-button fill="outline" expand="block" (click)="boostedPhoto()" *ngIf="isboosted" style="opacity: .5;">
+              <ion-button fill="outline" expand="block" (click)="boostedPhoto()" *ngIf="isboosted" style="opacity: .7;">
             <ion-icon name="md-flame" slot="start"></ion-icon>
             Boost Photo
           </ion-button>

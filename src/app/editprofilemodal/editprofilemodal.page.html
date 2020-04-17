@@ -8,11 +8,33 @@
 </ion-header>
 <ion-content>
   <form [formGroup]="profileForm" (ngSubmit)="updateProfile(profileForm)" novalidate *ngIf="this.userDetail">
-    <ion-grid>
+    
       <ion-row color="primary" class="ion-justify-content-center">
         <ion-col size="6" class="ion-align-self-center">
-          <ion-avatar (click)="uploadProfileImage()">
-            <img src="{{imgUrl}}" *ngIf="imgUrl" formControlName="profileImage" name="profileImage" />
+          <ion-avatar > 
+    <div style=" width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  box-shadow: 0 0 8px 3px #B8B8B8;
+  position:relative;">
+               <ion-icon src="../../assets/edit.svg" style="position: absolute;
+  top: 10px;
+  right: 15px;
+  background:white;
+  border-radius:100%;
+  width:40px;
+  height:40px;
+  line-height:30px;
+  vertical-align:middle;
+  text-align:center;
+  font-size:14px;
+  cursor:pointer;" (click)="uploadProfileImage()"></ion-icon>
+            <img src="{{imgUrl}}" *ngIf="imgUrl" formControlName="profileImage" name="profileImage"  style="    width: 200px;
+    height: 200px;
+    border-radius: 50%;"/>
+
+    </div>
+          
    <!-- <input type="image" src="{{imgUrl}}" alt="" formControlName="profileImage" name="profileImage" style="width: 90px;height: 90px;"> -->
           </ion-avatar>
         </ion-col>
@@ -64,7 +86,7 @@
           </div>
         </ion-col>
       </ion-row>
-    </ion-grid>
+    
   </form>
 
   

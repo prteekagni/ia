@@ -13,24 +13,7 @@
     >
       Photo Rewards
     </ion-title>
-    <!-- <ion-icon
-      slot="end"
-      name="gift"
-      style="margin-right: 15px;
-    font-size: 20px;"
-     (click)="openAddModalPage()"
-    ></ion-icon> -->
-    <!-- <ion-buttons slot="end">
-      <ion-button (click)="doSomething()">
-        <ion-icon slot="start" name="add" color="primary"></ion-icon>
-        <div slot="end"></div>
-      </ion-button>
-    </ion-buttons> -->
-    <!-- <div slot="end" style="width: 80px;">
-      <img src="../../assets/google.png" alt="" style="width: 20px;">
-      <span>0</span>
-      <ion-icon slot="end" name="add"></ion-icon>
-    </div> -->
+
     <ion-button
       fill="outline"
       slot="end"
@@ -59,95 +42,14 @@
       ></ion-icon
     ></ion-button>
   </ion-toolbar>
-  <!-- <ion-toolbar>
-    <ion-segment (ionChange)="segmentChanged()" [(ngModel)]="segment" >
-      <ion-segment-button value="0" layout="icon-start">
-        <ion-label>Contests</ion-label>
-        <ion-icon name="call"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button value="1" layout="icon-start">
-        <ion-icon name="cloud-upload"></ion-icon>
-        <ion-label>Heroes</ion-label>
-      </ion-segment-button>
-       <ion-segment-button value="2" layout="icon-start">
-        <ion-icon name="paper"></ion-icon>
-        <ion-label>Heroes</ion-label>
-      </ion-segment-button> 
-    </ion-segment>
-  </ion-toolbar> -->
+ 
 </ion-header>
 
-<!-- <ion-content>
-    <ion-card class="welcome-card" routerLink="/contests/123">
-      <div class="front side">
-		<div class="content">
-      <h1>Current Challenges</h1>
-      <p>5 Ongoing</p>
-		</div>
-  </div>
-    
-    </ion-card>
-     <ion-card class="welcome-card">
-      <div class="front side">
-		<div class="content">
-      <h1>Upcoming Challenges</h1>
-      <p>5 Ongoing</p>
-		</div>
-  </div>
-    
-    </ion-card>
-     <ion-card class="welcome-card" routerLink="/winners">
-      <div class="front side">
-		<div class="content">
-      <h1>Winners</h1>
-      <p>5 Ongoing</p>
-		</div>
-  </div>
-    
-    </ion-card>
-</ion-content> -->
-
-<!--<ion-content overflow-scroll="true">
-
- <ion-slides #slider (ionSlideDidChange)="slideChanged()" mode="ios">
-    <ion-slide class="slide-1">
-      <ion-list>
-        <ion-item *ngFor="let item of items ">
-          <ion-card  routerLink="/cdescription" style="height: 80vw;">
-            <div class="container">
-              <img src="../../assets/backpacks.jpg" alt="" />
-              <div class="centered">Colorful</div>
-              <div class="centeredsubheading">Prateek</div>
-              <div class="bottomcentered">
-                7days
-              </div>
-              <div class="bottom-left">
-                1000
-              </div>
-              <div class="bottom-right">
-                7days
-              </div>
-            </div>
-          </ion-card>
-        </ion-item>
-      </ion-list>
-    </ion-slide>
-    <ion-slide class="slide-2">
-      Publish
-    </ion-slide>
-    <ion-slide class="slide-3">
-      Topic
-    </ion-slide>
-  </ion-slides> 
-</ion-content>-->
 
 <ion-content>
   <super-tabs>
     <super-tabs-toolbar position="top" showIndicator="true">
       <super-tab-button>
-        <!-- <ion-icon name="star"></ion-icon> -->
-        <!-- <ion-label>Contests</ion-label> -->
-
         <ion-button class="supertabtransparentbuttons">
           <ion-icon
             slot="start"
@@ -157,22 +59,12 @@
           Current
         </ion-button>
       </super-tab-button>
-      <!-- <super-tab-button>
-          <ion-button
-        class="supertabtransparentbuttons"
-        >
-          <ion-icon slot="start" name="thumbs-up" style="--color:#757575"></ion-icon>
-          Votes
-        </ion-button>
-      </super-tab-button> -->
       <super-tab-button>
         <ion-button class="supertabtransparentbuttons">
           <ion-icon
             slot="start"
             name="clock"
-           
           ></ion-icon>
-          <!-- <ion-icon name="hourglass-outline" ></ion-icon> -->
           Upcoming
         </ion-button>
       </super-tab-button>
@@ -183,38 +75,12 @@
           <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
             <ion-refresher-content></ion-refresher-content>
           </ion-refresher>
-          <!-- <ion-list>
-            <ion-item *ngFor="let item of items">
-              <ion-card routerLink="/cdescription/{{item.position}}" style="width: 325px;
-    height: 250px;
-    margin: 15px auto;" class="ion-align-items-center">
-                <div class="container" class="ion-text-center">
-                  <img src="../../assets/demoimage.jpg" alt="" style="height: 380px;" />
-                  <div class="centered">Colorful</div>
-                  <div class="centeredsubheading">Prateek</div>
-                  <div class="bottomcentered">
-                    &#8377; 1000
-                  </div>
-                  <div class="bottom-left">
-08 Days
-                  </div>
-                  <div class="bottom-right">
-       4175 photos
-                  </div>
-                </div>
-              </ion-card>
-            </ion-item>
-          </ion-list> -->
           <app-tabviewgallery @routeAnimations></app-tabviewgallery>
-          <!-- <app-contests></app-contests> -->
         </ion-content>
       </super-tab>
       <super-tab>
-        <!-- <ion-nav root="enteries" ></ion-nav> -->
       </super-tab>
       <super-tab>
-        <!-- <app-contests></app-contests> -->
-        <!-- <app-winners></app-winners> -->
       </super-tab>
     </super-tabs-container>
   </super-tabs>

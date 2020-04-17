@@ -82,6 +82,7 @@ export class ImagemodalPage implements OnInit {
   seconds: number;
   findresult;
   localVotedData;
+  ischanged:boolean = false;
   constructor(
     private popoverController: PopoverController,
     private modalController: ModalController,
@@ -142,28 +143,6 @@ this.localVotedData = res;
         console.log(err);
       }
     );
-    // var voteOBj = JSON.parse(localStorage.getItem("time"));
-    // console.log(voteOBj);
-    // console.log(this.items[this.index].name);
-
-    // if (this.items[this.index].name == voteOBj.id) {
-    //   if (+voteOBj.time - this.timeLeft == 0) {
-    //     this.isvoted = false;
-    //     console.log("Time over");
-    //   } else if (+voteOBj.time - this.timeLeft == 30000) {
-    //     this.timerS = timer(0, 1000).subscribe((res: any) => {
-    //       var dt = +voteOBj.time - this.timeLeft - res;
-    //       if (dt == 0) {
-    //         this.isvoted = true;
-    //         this.sharedService.presentToast("You can now revote", 3000);
-    //         this.timerS.unsubscribe();
-    //       }
-    //     });
-    //     // this.isvoted = true;
-    //   } else {
-    //     this.isvoted = true;
-    //   }
-    // }
   }
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
@@ -236,11 +215,11 @@ this.localVotedData = res;
       id: data.name,
       time: time,
     };
-    
-    // localStorage.setItem("time", JSON.stringify(obj));
     this.heartBtn = this.heartBtn == "start" ? "end" : "start";
     console.log(this.heartBtn);
-    this.sharedService.addVote(obj).then((res) => console.log(res));
+    this.sharedService.addVote(obj).then((res) => {
+      this.localVotedData = res;
+    });
     this.isvoted = !this.isvoted;
     this.displayvote = true;
     setTimeout(() => {
@@ -291,7 +270,7 @@ this.localVotedData = res;
       console.log("Done");
     }, 500);
   }
-
+ 
   ionViewDidEnter() {}
 
   voted() {

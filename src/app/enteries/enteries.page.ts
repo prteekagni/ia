@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll, ModalController, Platform } from '@ionic/angular';
 import { ImagemodalPage } from '../imagemodal/imagemodal.page';
 import { Router } from '@angular/router';
+import { fader } from '../animations/routeranimation';
 
 const lorem =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, seddo eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
@@ -23,6 +24,7 @@ let rotateImg = 0;
   selector: "app-enteries",
   templateUrl: "./enteries.page.html",
   styleUrls: ["./enteries.page.scss"],
+  animations: [fader],
 })
 export class EnteriesPage implements OnInit {
   items: any[] = [];
@@ -34,8 +36,8 @@ export class EnteriesPage implements OnInit {
   constructor(
     private modalController: ModalController,
     private platform: Platform,
-    private router
-  : Router) {
+    private router: Router
+  ) {
     for (let i = 0; i < 25; i++) {
       this.items.push({
         name: i + " - " + images[rotateImg],

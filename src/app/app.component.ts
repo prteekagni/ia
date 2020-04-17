@@ -47,6 +47,8 @@ export class AppComponent {
       this.splashScreen.hide();
       this.routeConfig();
     this.hasReadPermission();
+    if (this.platform.is("android")) {
+    }
 
     });
 
@@ -196,5 +198,7 @@ export class AppComponent {
         this.imagePicker.requestReadPermission()
       }
     })
+
   }
+  
 }

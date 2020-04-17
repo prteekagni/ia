@@ -19,6 +19,9 @@ import {
 } from "@angular/forms";
 import { SharedService } from "../api/shared/shared.service";
 
+
+declare var window;
+
 @Component({
   selector: "app-editprofilemodal",
   templateUrl: "./editprofilemodal.page.html",
@@ -27,7 +30,7 @@ import { SharedService } from "../api/shared/shared.service";
 export class EditprofilemodalPage implements OnInit {
   modalcontro;
   tempUrl;
-  imgUrl = "../../assets/camera.png";
+  imgUrl = "../../assets/boostpost.png";
   userDetail: User;
   unsubscribeBackEvent;
   profileForm;
@@ -47,16 +50,15 @@ export class EditprofilemodalPage implements OnInit {
   ) {
     this.userDetail = new User();
     this.contestID = this.navParams.get("contestID");
-    // this.sharedService.getUserDetail().then(
-    //   (res: any) => {
-    //     this.userDetail = { ...res };
-    //     this.imgUrl = this.userDetail.profileImage || "../../assets/boostpost.png";
-    //     this.createProfileUpdateForm();
-    //   },
-    //   (err) => console.log(err)
-    // );
-    this.imgUrl = this.userDetail.profileImage || "../../assets/boostpost.png";
+    this.sharedService.getUserDetail().then(
+      (res: any) => {
+        this.userDetail = { ...res };
+        this.imgUrl = this.userDetail.profileImage || "../../assets/boostpost.png";
         this.createProfileUpdateForm();
+      },
+      (err) => console.log(err)
+    );
+    // this.createProfileUpdateForm();
   }
 
   ngOnInit() { }
@@ -87,7 +89,6 @@ export class EditprofilemodalPage implements OnInit {
       .getPictures({ maximumImagesCount: 1, height: 300, width: 300 })
       .then((results) => {
         for (var i = 0; i < results.length; i++) {
-          console.log("Image URI: " + results[i]);
           this.tempUrl = results[i];
           this.crop
             .crop(this.tempUrl, {
@@ -95,13 +96,15 @@ export class EditprofilemodalPage implements OnInit {
               targetWidth: 300,
               targetHeight: 300,
             })
-            .then(
-              (newImage) => console.log("new image path is: " + newImage),
+            .then((newImage) => {
+              console.log(newImage);
+               this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(newImage);
+               console.log("Cropped Image" + this.imgUrl); 
+            },
               (error) => console.error("Error cropping image", error)
             );
-          this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(results[i]);
-          localStorage.setItem("ProfileImage", this.imgUrl);
         }
+        this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(this.tempUrl);
       });
     (err) => {
       console.log(err);

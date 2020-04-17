@@ -20,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     IonicModule,
     CdescriptionPageRoutingModule,
     SuperTabsModule,
-    FeaturecModule,
+    FeaturecModule
     
   ],
   declarations: [CdescriptionPage]

@@ -58,6 +58,8 @@ export class Tab3Page {
       componentProps: {
         contestID: this.contestID,
       },
+      enterAnimation: myEnterAnimation,
+      leaveAnimation: myLeaveAnimation,
     });
     return await this.editModal.present();
   }
@@ -68,6 +70,8 @@ export class Tab3Page {
       console.log(this.userDetail);
       this.profileI =
         this.userDetail.profileImage || "../../assets/boostpost.png";
+    },err=>{
+      this.profileI = "../../assets/boostpost.png"
     });
     this.sourceParams = this.route.snapshot.queryParamMap.get("source");
     this.contestID = this.route.snapshot.queryParamMap.get("contestID");
@@ -114,6 +118,8 @@ export class Tab3Page {
     const modal = await this.modalController.create({
       component: EditprofilemodalPage,
       backdropDismiss: true,
+      enterAnimation: myEnterAnimation,
+      leaveAnimation: myLeaveAnimation,
     });
 
     modal.onDidDismiss().then((res: any) => {

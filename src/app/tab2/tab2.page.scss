@@ -60,3 +60,7 @@ font-size: medium;
 font-weight: 600;
 color: var(--ion-text-color,#757575);
 }
+
+ion-backdrop{
+    opacity: 0.4 !important;
+}

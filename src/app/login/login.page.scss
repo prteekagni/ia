@@ -71,9 +71,9 @@
   //   justify-content: center;
   //   height: 150%
   position: absolute;
-    bottom: 20px;
-    width: 96vw;
-    margin-left: 2vw;
+  bottom: 20px;
+  width: 96vw;
+  margin-left: 2vw;
 }
 @media screen and (min-width: 767px) {
   ion-card {
@@ -138,7 +138,7 @@ ion-card {
 }
 .img-logo {
   height: 80px;
-    width: 80px;
+  width: 80px;
 }
 .fire-logo {
   display: flex;
@@ -167,34 +167,33 @@ ion-card {
   display: block;
   font-weight: bold;
 }
-.ng-valid[pattern], .ng-valid.pattern  {
-  border-left: 5px solid #42A948; /* green */
+.ng-valid[pattern],
+.ng-valid.pattern {
+  border-left: 5px solid #42a948; /* green */
 }
 
-.ng-dirty.ng-invalid:not(form)  {
+.ng-dirty.ng-invalid:not(form) {
   border-left: 5px solid #a94442; /* red */
 }
 
-
-.loginbg{
-    position: fixed;
-        top: 50%;
-        left: 50%;
-        min-width: 100%;
-        min-height: 100%;
-        width: auto;
-        height: auto;
-        z-index: -100;
-        transform: translateX(-50%) translateY(-50%);
-        filter: grayscale(.1) brightness(0.5);
+.loginbg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translateX(-50%) translateY(-50%);
+  filter: grayscale(1) brightness(0.9);
 }
 
-
-ion-input{
-  --placeholder-opacity:1;
-  --placeholder-color:black;
+ion-input {
+  --placeholder-opacity: 1;
+  --placeholder-color: black;
 }
 
-.button-disabled{
-  --opacity:.8 !important
+.button-disabled {
+  --opacity: 0.8 !important;
 }

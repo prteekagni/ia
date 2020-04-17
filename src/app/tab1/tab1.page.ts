@@ -16,6 +16,7 @@ import { AppMinimize } from "@ionic-native/app-minimize/ngx";
 import { SharedService } from "../api/shared/shared.service";
 import { User } from "../models/User";
 import { fader } from "../animations/routeranimation";
+import { ImpageuploadPage } from '../impageupload/impageupload.page';
 
 @Component({
   selector: "app-tab1",
@@ -58,10 +59,9 @@ export class Tab1Page {
       )
       .subscribe((event: NavigationEnd) => {
         if (event.url == "/tabs/tab1") {
-          this.credits = 1000;
           this.sharedService.getUserDetail().then((res: User) => {
             console.log("Response from tab1page" + res);
-            this.credits = 1000;
+            this.credits = res.credits;
           });
         }
       });

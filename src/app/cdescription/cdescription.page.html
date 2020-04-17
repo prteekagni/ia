@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" >
+    <ion-buttons slot="start">
       <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
     </ion-buttons>
-<ion-title class="focus-in-expand-fwd">Test Description</ion-title>
+    <ion-title class="focus-in-expand-fwd" style="padding-left: 0px;"
+      >Test Description</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 <ion-content overflow-scroll="true">
@@ -106,21 +108,28 @@
   
     </ion-slide>
   </ion-slides> -->
-  <super-tabs (buttonClick)=on1Click($event)>
+  <super-tabs (buttonClick)="on1Click($event)">
     <super-tabs-toolbar position="top" showIndicator="false">
-      <super-tab-button >
-        <ion-button class="supertabtransparentbuttons" (buttonClick)=on1Click($event)>
+      <super-tab-button>
+        <ion-button
+          class="supertabtransparentbuttons"
+          (buttonClick)="on1Click($event)"
+        >
           <ion-icon
             slot="start"
             name="images"
-            style="--color:#757575"
+            style="--color: #757575;"
           ></ion-icon>
           Enteries
         </ion-button>
       </super-tab-button>
       <super-tab-button>
         <ion-button class="supertabtransparentbuttons">
-          <ion-icon slot="start" name="ios-information-circle-outline" style="--color:#757575"></ion-icon>
+          <ion-icon
+            slot="start"
+            name="ios-information-circle-outline"
+            style="--color: #757575;"
+          ></ion-icon>
           Description
         </ion-button>
       </super-tab-button>
@@ -129,7 +138,7 @@
           <ion-icon
             slot="start"
             name="person"
-            style="--color:#757575"
+            style="--color: #757575;"
           ></ion-icon>
           You
         </ion-button>
@@ -147,97 +156,129 @@
             <ion-col size="12">
               <ion-card class="ioscarddesign">
                 <ion-card-header>
-                  <ion-card-title style="text-align:center" class="ioscardtitle animated fadeInLeft">Colorful</ion-card-title>
+                  <ion-card-title
+                    style="text-align: center;"
+                    class="ioscardtitle animated fadeInLeft"
+                    >Colorful</ion-card-title
+                  >
 
-                  <ion-card-subtitle style="text-align:center">8 days left</ion-card-subtitle>
+                  <!-- <ion-card-subtitle style="text-align:center">8 days left</ion-card-subtitle> -->
                 </ion-card-header>
-                <ion-card-content class="card-contentios">
-                     <ion-row>
-              </ion-row>
-                  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis dicta atque harum ad suscipit, quas tenetur. Impedit, quis eum. Nobis, quia. Labore voluptatum officia minima.</p>
-
+                <ion-card-content
+                  class="card-contentios"
+                  style="padding-top: 0px;"
+                >
+                  <ion-row> </ion-row>
+                  <p style="text-align: center;">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Nobis dicta atque harum ad suscipit, quas tenetur. Impedit,
+                    quis eum. Nobis, quia. Labore voluptatum officia minima.
+                  </p>
                 </ion-card-content>
               </ion-card>
-              <ion-card style="   
-               /* margin-left: 0px;margin-right: 0px; */
-    padding: 10px;
-    /* border-radius: 5px; */
-">
-<ion-card-header>
-  <ion-card-title style="text-align:center">The Best Photos will win these prizes</ion-card-title>
+              <ion-card
+                style="
+                  /* margin-left: 0px;margin-right: 0px; */
+                  padding: 10px;
+                  /* border-radius: 5px; */
+                "
+                class="ioscarddesign"
+              >
+                <ion-card-header>
+                  <ion-card-title style="text-align: center;"
+                    >The Best Photos will win these prizes</ion-card-title
+                  >
 
-  <!-- <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle> -->
-</ion-card-header>
+                  <!-- <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle> -->
+                </ion-card-header>
 
-                   <ion-row>
-         
-              
-                <ion-col size="6" class="ion-text-left" style="margin-top:0px;padding-top: 0px;">
-                  <p>Total Entry</p>
-                  <p> &#8377;3000</p>
-                </ion-col>
-                   <ion-col size="6" class="ion-text-right">
-                  <h6>Total Prize</h6>
-                  <h6 style="text-align:right"> &#8377;3000</h6>
-                </ion-col>
-              </ion-row>
-          
+                <ion-row>
+                  <ion-col
+                    size="6"
+                    class="ion-text-left"
+                    style="margin-top: 0px; padding-top: 0px;"
+                  >
+                    <h6 style="font-weight: 600; color: black;">Ends in</h6>
+                    <h6
+                      style="
+                        text-align: left;
+                        font-weight: 600;
+                        color: #03a9f4;
+                      "
+                    >
+                      8 days
+                    </h6>
+                  </ion-col>
+                  <ion-col size="6" class="ion-text-right">
+                    <h6 style="font-weight: 600; color: black;">Total Prize</h6>
+                    <h6
+                      style="
+                        text-align: right;
+                        color: #03a9f4;
+                        font-weight: 600;
+                      "
+                    >
+                      &#8377;3000
+                    </h6>
+                  </ion-col>
+                </ion-row>
+
                 <ion-row class="ion-text-left">
-                  <ion-col size="4" 
-                    ><ion-card
-                      class="awardcard"
+                  <ion-col size="4"
+                    ><ion-card class="awardcard"
                       ><ion-row
-                        ><ion-col size="5" style=""
+                        ><ion-col size="5" style=" display: flex;
+    justify-content: center;
+    align-items: center;"
                           ><img
                             src="../../assets/gold.png"
-                            class="awardimage"
-                            /></ion-col
+                            class="awardimage" /></ion-col
                         ><ion-col size="7" class="ion-align-self-center"
-                          ><span style="font-weight: 600;">1<sup>st</sup></span>
-                          <p
-                            class="prizetext"
+                          ><span class="awardpostext"
+                            >1<sup>st</sup> Prize</span
                           >
-                              &#8377;5000
+                          <p class="prizetext">
+                            &#8377;5000
                           </p>
                         </ion-col></ion-row
                       ></ion-card
                     ></ion-col
                   >
-                     <ion-col size="4" 
-                    ><ion-card
-                      class="awardcard"
+                  <ion-col size="4"
+                    ><ion-card class="awardcard"
                       ><ion-row
-                        ><ion-col size="5" style=""
+                        ><ion-col size="5" style=" display: flex;
+    justify-content: center;
+    align-items: center;"
                           ><img
                             src="../../assets/silver.png"
-                            class="awardimage"
-                            /></ion-col
+                            class="awardimage" /></ion-col
                         ><ion-col size="7" class="ion-align-self-center"
-                          ><span style="font-weight: 600;">2<sup>nd</sup></span>
-                          <p
-                            class="prizetext"
+                          ><span class="awardpostext"
+                            >2<sup>nd</sup> Prize</span
                           >
-                              &#8377;5000
+                          <p class="prizetext">
+                            &#8377;5000
                           </p>
                         </ion-col></ion-row
                       ></ion-card
                     ></ion-col
                   >
-                     <ion-col size="4" 
-                    ><ion-card
-                      class="awardcard"
+                  <ion-col size="4"
+                    ><ion-card class="awardcard"
                       ><ion-row
-                        ><ion-col size="5" style=""
+                        ><ion-col size="5" style=" display: flex;
+    justify-content: center;
+    align-items: center;"
                           ><img
                             src="../../assets/bronze.png"
-                            class="awardimage"
-                            /></ion-col
+                            class="awardimage" /></ion-col
                         ><ion-col size="7" class="ion-align-self-center"
-                          ><span style="font-weight: 600;">3<sup>rd</sup></span>
-                          <p
-                            class="prizetext"
+                          ><span class="awardpostext" style=""
+                            >3<sup>rd</sup> Prize</span
                           >
-                              &#8377;5000
+                          <p class="prizetext">
+                            &#8377;5000
                           </p>
                         </ion-col></ion-row
                       ></ion-card
@@ -245,21 +286,21 @@
                   >
                 </ion-row>
               </ion-card>
-             <ion-card style="margin-top: 0;">
+              <ion-card style="margin-top: 0;" class="ioscarddesign">
                 <ion-card-header>
                   <!-- <ion-card-subtitle>Rules</ion-card-subtitle> -->
                   <ion-card-title>Rules</ion-card-title>
                 </ion-card-header>
                 <ion-card-content style="padding-top: 0px;">
-                <!-- <ion-col size="12"> -->
+                  <!-- <ion-col size="12"> -->
                   <ion-item lines="none">
                     <ion-label>
                       <ion-icon
                         slot="start"
                         md="md-checkbox-outline"
-                        style="color:#03A9F4"
+                        style="color: #03a9f4;"
                       ></ion-icon>
-                      Pizza
+                      You must own the image.
                     </ion-label>
                   </ion-item>
 
@@ -268,9 +309,9 @@
                       <ion-icon
                         slot="start"
                         md="md-checkbox-outline"
-                        style="color:#03A9F4"
+                        style="color: #03a9f4;"
                       ></ion-icon>
-                      Pizza
+                      No nudity/ inappropiate content.
                     </ion-label>
                   </ion-item>
                   <ion-item lines="none">
@@ -278,9 +319,9 @@
                       <ion-icon
                         slot="start"
                         md="md-checkbox-outline"
-                        style="color:#03A9F4"
+                        style="color: #03a9f4;"
                       ></ion-icon>
-                      Pizza
+                      Stick to the theme of the contests.
                     </ion-label>
                   </ion-item>
                   <ion-item lines="none">
@@ -288,9 +329,9 @@
                       <ion-icon
                         slot="start"
                         md="md-checkbox-outline"
-                        style="color:#03A9F4"
+                        style="color: #03a9f4;"
                       ></ion-icon>
-                      Pizza
+                      No copyright infrgemnet of images.
                     </ion-label>
                   </ion-item>
                   <ion-item lines="none">
@@ -298,9 +339,11 @@
                       <ion-icon
                         slot="start"
                         md="md-checkbox-outline"
-                        style="color:#03A9F4"
+                        style="color: #03a9f4;"
                       ></ion-icon>
-                      Pizza
+                      In case of any fraud activities the team has right to
+                      cancel your participation and also disallow you from any
+                      prizes won.
                     </ion-label>
                   </ion-item>
                   <ion-item lines="none">
@@ -308,28 +351,36 @@
                       <ion-icon
                         slot="start"
                         md="md-checkbox-outline"
-                        style="color:#03A9F4"
+                        style="color: #03a9f4;"
                       ></ion-icon>
-                      Pizza
+                      The account has be suspended if we recieve negtaive
+                      feedbacks on your image.
                     </ion-label>
                   </ion-item>
-                <!-- </ion-col> -->
-              
-              </ion-card-content>
+                  <!-- </ion-col> -->
+                </ion-card-content>
               </ion-card>
-            
             </ion-col>
           </ion-row>
         </ion-content>
       </super-tab>
       <super-tab>
-        <ion-grid  class="grida">
-     <ion-row class="galleryrow">
-        <ion-col size="6" *ngFor="let item of items" style="padding:2px" @items>
-       <img src="../../assets/demoimage.jpg" alt="" (click)="openMyimageModal()">
-        </ion-col>
-      </ion-row>
-      </ion-grid>
+        <ion-grid class="grida">
+          <ion-row class="galleryrow">
+            <ion-col
+              size="6"
+              *ngFor="let item of items"
+              style="padding: 2px;"
+              @items
+            >
+              <img
+                src="../../assets/demoimage.jpg"
+                alt=""
+                (click)="openMyimageModal()"
+              />
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </super-tab>
     </super-tabs-container>
   </super-tabs>
@@ -337,10 +388,14 @@
 <ion-footer class="footerdesign">
   <ion-button
     expand="block"
-    style="text-transform:none;    text-transform: none;
-    margin: 0px;
-    height: 40px;
-    --border-radius: 0px;"
+    style="
+      text-transform: none;
+      text-transform: none;
+      margin: 0px;
+      height: 40px;
+      --border-radius: 0px;
+    "
     (click)="goToTabBar()"
-    >Upload Photo - Free</ion-button>
+    >Upload Photo - Free</ion-button
+  >
 </ion-footer>

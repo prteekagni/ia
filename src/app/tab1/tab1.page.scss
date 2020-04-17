@@ -126,7 +126,7 @@ super-tab-button {
 
 super-tab-button.hydrated.ion-activatable.ion-focusable.active {
   // background:#F5F5F5;
-  background: rgba(211, 211, 211, 0.5);
+  background: rgba(211, 211, 211, 0.9);
 }
 super-tab-button.hydrated.ion-activatable.ion-focusable.active ion-label {
   // background:#F5F5F5;
@@ -142,3 +142,9 @@ p{
 super-tab-button.hydrated.ion-activatable.ion-focusable.active[_ngcontent-tkn-c3] ion-button{
   color:black !important;
 }
+
+
+// :host {  
+//   // --super-tabs-toolbar-background: black;
+//   --st-indicator-color: var(--ion-color-primary, #3880ff) !important;
+// }

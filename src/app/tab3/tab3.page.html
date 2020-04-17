@@ -12,12 +12,12 @@
     <ion-col size="12">
       <ion-item mode="" button (click)="buttonClick()">
         <ion-thumbnail slot="start" style="width: 95px;height: 95px;">
-          <img src="../../assets/demoimage.jpg">
-          <!-- <img [src]="profileI" alt="" /> -->
+          <!-- <img src="../../assets/demoimage.jpg"> -->
+          <img [src]="profileI" alt="" />
         </ion-thumbnail>
         <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">
           <h2 style="overflow: hidden; text-overflow: ellipsis;">
-            {{userDetail?.displayName}}|| Prateek Agnihotri
+            {{userDetail?.displayName}}
           </h2>
           <p><strong>{{userDetail?.credits}} credits</strong></p>
           <!-- <p>consectetur adipiscing elit. Duis ut urna neque.</p> -->

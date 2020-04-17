@@ -109,7 +109,7 @@
 }
 .imageupload-modal .modal-wrapper {
      --width: 95vw;
-    --height: 460px;
+    --height: 430px;
     --border-radius: 5px;
 }
 .boostpost-modal .modal-wrapper {
@@ -151,6 +151,11 @@
 }
 }
 
+@media screen and (max-width: 360px) {
+ion-title{
+  font-size: x-large !important;
+}
+}
 
 
 @media screen and (max-height: 850px) and (min-height: 731px){
@@ -312,6 +317,8 @@ ion-title{
     font-size: xx-large;
 }
 
-ion-backdrop{
-  opacity: .8 !important;
+
+
+.footer-md:before{
+  display: none;
 }

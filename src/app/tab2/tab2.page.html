@@ -7,15 +7,12 @@
 </ion-header>
 <ion-content>
   <ion-list lines="none">
-    
         <ion-item (click)="openNotificationModal()" >
-        <!-- <ion-icon slot="start" color="medium" name="ios-settings-outline"></ion-icon> -->
        <ion-icon name="notifications" slot="start"></ion-icon>
         <ion-label>Notifications</ion-label>
          <ion-icon slot="end" color="medium" name="ios-arrow-dropright"></ion-icon>
       </ion-item>
       <ion-item >
-        <!-- <ion-icon slot="start" color="medium" name="ios-settings-outline"></ion-icon> -->
        <ion-icon name="settings" slot="start"></ion-icon>
         <ion-label>Help & Support</ion-label>
          <ion-icon slot="end" color="medium" name="ios-arrow-dropright"></ion-icon>
@@ -44,10 +41,8 @@
             <ion-icon slot="start" name="contrast"></ion-icon>
         <ion-label>Dark Mode</ion-label>
   <ion-toggle enabled [checked]="bdarkmode" id="themeToggle" (ionChange)="darkMode($event)" #darkmode></ion-toggle>
-
       </ion-item>
       <ion-item >
-        <!-- <ion-icon slot="start" color="medium" name="ios-settings-outline"></ion-icon> -->
        <ion-icon name="settings" slot="start"></ion-icon>
         <ion-label>Change Number</ion-label>
          <ion-icon slot="end" color="medium" name="ios-arrow-dropright"></ion-icon>
