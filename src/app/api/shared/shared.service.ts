@@ -7,6 +7,8 @@ import { User } from 'src/app/models/User';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import * as moment from "moment";
+import { HttpClient } from '@angular/common/http';
 // import { AsyncSubject } from "rxjs";
 
 @Injectable({
@@ -22,7 +24,8 @@ export class SharedService {
     private nativeStorage: NativeStorage,
     private google: GooglePlus,
     private router: Router,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private httpClient : HttpClient
   ) {}
 
   setUserDetail() {}
@@ -181,7 +184,61 @@ export class SharedService {
   clearVoteData(){
     this.nativeStorage.setItem("Vote", []);
   }
-}
+
+  remoteVoteFromData(data){
+   let tempVote = [];
+   return this.nativeStorage.getItem("Vote").then(
+     (res: any) => {
+      let toKeep:any = [];
+      for (let i of res) {
+        if (i.id !== data) {
+          toKeep.push(i);
+        }
+      }
+      this.nativeStorage.setItem("Vote", toKeep);
+    });
+  }
+
+  getTimeDifference(data , totaldifference){
+    var timeInMiliseconds = totaldifference*60*1000;
+    var timediff = timeInMiliseconds - (new Date().getTime() - data);
+    return timediff
+  }
+
+  convertToHumanize(data){
+    return moment.duration(data).humanize();
+  }
+
+  uploadToS3(image, url){
+     this.httpClient
+       .put(
+         "https://testbucketforia.s3.ap-south-1.amazonaws.com/mytestimage.jpg?X-Amz-Expires=6000&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJWQHHE5TFZQOXXHQ/20200422/ap-south-1/s3/aws4_request&X-Amz-Date=20200422T090542Z&X-Amz-SignedHeaders=host&X-Amz-Signature=736e92744d0753bd0e5807992bfea641ac75366c27789d608439deb1477adfe4",
+         image,
+         {
+           headers: {
+             "Content-Type": "image/jpeg",
+           },
+         }
+       )
+       .subscribe(
+         (res: any) => {
+           console.log(res);
+         },
+         (err) => {
+           console.log(err);
+         }
+       );
+    }
+
+    getUploadUrl(imagedata){
+      return 1;
+    }
+
+
+  }
+
+
+
 
 
 

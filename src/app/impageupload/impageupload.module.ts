@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ImpageuploadPageRoutingModule } from './impageupload-routing.module';
 
 import { ImpageuploadPage } from './impageupload.page';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ImpageuploadPageRoutingModule
+    ImpageuploadPageRoutingModule,
+    ImageCropperModule
   ],
   declarations: [ImpageuploadPage]
 })

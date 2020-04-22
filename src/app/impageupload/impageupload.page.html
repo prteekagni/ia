@@ -1,11 +1,4 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>impageupload</ion-title>
-    <ion-buttons slot="end" (click)="closeModal()">
-      close
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
+<!-- 
 
 <ion-content>
    <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="bottom:65px">
@@ -22,7 +15,7 @@
   </ion-col>
 <ion-col size="12">
   
-<!-- <h5 style="padding-left:16px">Add Title</h5> -->
+
   <form #form="ngForm">
     <ion-item lines="">
   <ion-input placeholder="Add your title"></ion-input>
@@ -36,4 +29,100 @@
     padding: 5px;">
   
 <ion-button expand="block" style="text-transform:none" (click)="goToTabBar()">Upload Photo - Free</ion-button>
+</ion-footer> -->
+ <ion-header translucent>
+            <ion-toolbar>
+              <ion-title *ngIf="imagenotcropped">Edit Image</ion-title>
+              <ion-title *ngIf="!imagenotcropped">Upload Image</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="dismissModal()" style="color: black;">
+                  <ion-icon slot="icon-only" name="close"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ng-container>
+          <ion-content style="--overflow:hidden">
+  <ion-row  *ngIf="imagenotcropped"
+  style="display: flex;
+    height: 100vh;
+    align-items: center;">
+    <ion-col size="12" class="ion-align-self-center">
+      <ion-row>
+        <ion-col size="12">
+          <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    (imageCropped)="imageCropped($event)"
+    (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady()"
+    (loadImageFailed)="loadImageFailed()"
+    [transform]="transform"
+    [canvasRotation]="canvasRotation"
+    cropperMinWidth="1080"
+    cropperMinHeight="1080"
+    maintainAspectRatio="true"
+    [aspectRatio]="1/1"
+    #cropper
+  ></image-cropper>
+        </ion-col>
+      </ion-row>
+    <ion-row>
+    <ion-col size="6">
+      <ion-button
+        (click)="rotateLeft()"
+        expand="block"
+        fill="clear"
+        shape="round"
+      >
+        Rotate Left
+      </ion-button>
+    </ion-col>
+     <ion-col size="6">
+      <ion-button
+        (click)="rotateRight()"
+        expand="block"
+        fill="clear"
+        shape="round"
+      >
+        Rotate Right
+      </ion-button>
+    </ion-col>
+    <ion-col size="12">
+      <ion-button (click)="cropImage($event)" expand="block" fill="clear" shape="round">
+        Crop
+      </ion-button>
+    </ion-col>
+  </ion-row>
+    </ion-col>
+  </ion-row>
+
+ 
+
+<ion-row *ngIf="!imagenotcropped" >
+  <ion-col size="12" class="ion-align-self-center" style="padding-top:16px">
+  <ion-row>
+    <ion-col size="12">
+      <img [src]="croppedImage" alt="">
+    </ion-col>
+  </ion-row>
+<ion-row>
+  <ion-col size="12">
+  <h3>Colors</h3>
+
+       <form #form="ngForm">
+    <ion-item lines="">
+  <ion-input placeholder="Add your title"></ion-input>
+</ion-item>
+<ion-button expand="block" style="text-transform:none" (click)="goToTabBar()">Upload Photo - Free</ion-button>
+
+  </form> 
+
+  </ion-col>
+</ion-row>
+</ion-col>
+</ion-row>
+</ion-content>
+<ion-footer *ngIf="!imagenotcropped" style="background: white;
+    padding: 5px;">
 </ion-footer>
+</ng-container>

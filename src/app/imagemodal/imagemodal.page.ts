@@ -75,7 +75,7 @@ export class ImagemodalPage implements OnInit {
   @ViewChild("myslides", { read: IonSlides, static: false }) slides: IonSlides;
   items: any = [];
   slideOptions;
-  timeLeft = 3600000;
+  timeLeft = 60;
   timerS: Subscription;
   public displayvote: boolean = false;
   public displaysupervote: boolean = false;
@@ -136,30 +136,38 @@ export class ImagemodalPage implements OnInit {
          }
          if (this.findresult) {
            if (
-             this.timeLeft - (new Date().getTime() - this.findresult.time) <=
-             0
+             this.sharedService.getTimeDifference(
+               this.findresult.time,
+               this.timeLeft
+             ) <= 0
            ) {
              this.isvoted = false;
              console.log("Time over");
+             this.sharedService.remoteVoteFromData(names);
            } else if (
-             this.timeLeft - (new Date().getTime() - this.findresult.time) <=
-             10000
-           ) {
-             console.log("Wihtin 10 seconds");
-             this.timerS = timer(0, 1000).subscribe((res: any) => {
-               var dt =
-                 this.timeLeft -
-                 (new Date().getTime() - this.findresult.time) -
-                 res;
-               if (dt == 0) {
-                 this.isvoted = false;
-                 this.sharedService.presentToast("You can now revote", 3000);
-                 this.timerS.unsubscribe();
-               }
-             });
-           } else {
-             this.isvoted = true;
-           }
+                    this.sharedService.getTimeDifference(
+                      this.findresult.time,
+                      this.timeLeft
+                    ) <= 10000
+                  ) {
+                    console.log("Wihtin 10 seconds");
+                    this.timerS = timer(0, 1000).subscribe((res: any) => {
+                      var differenceFrom =
+                        new Date().getTime() - this.findresult.time;
+                      var dt = this.timeLeft - differenceFrom - res;
+                      if (dt <= 0) {
+                        this.isvoted = false;
+                        this.sharedService.presentToast(
+                          "You can now revote",
+                          3000
+                        );
+                        this.timerS.unsubscribe();
+                        this.sharedService.remoteVoteFromData(this.findresult);
+                      }
+                    });
+                  } else {
+                    this.isvoted = true;
+                  }
          } else {
            this.isvoted = false;
          }
@@ -559,9 +567,10 @@ export class ImagemodalPage implements OnInit {
     var dT = new Date().getTime() - this.findresult.time;
     console.log(dT);
     var timeleft = this.timeLeft - dT;
-    console.log(timeleft);
+    if(timeleft >=0){
     var seconds = Math.floor(((timeleft - timeleft / 60000) / 1000) % 60);
     var minutes = Math.floor(timeleft / 60000);
+    }
     console.log("Minutes" + Math.floor(timeleft / 60000));
     console.log("Seconds " + Math.floor((seconds / 1000) % 60));
     this.sharedService.presentToast(
@@ -664,35 +673,44 @@ export class ImagemodalPage implements OnInit {
               }
               if (this.findresult) {
                 if (
-                  this.timeLeft -
-                    (new Date().getTime() - this.findresult.time) <=
+               this.sharedService.getTimeDifference(
+                      this.findresult.time,
+                      this.timeLeft) <=
                   0
                 ) {
                   this.isvoted = false;
                   console.log("Time over");
+             this.sharedService.remoteVoteFromData(
+               this.items[index].first_name
+             );
+
                 } else if (
-                  this.timeLeft -
-                    (new Date().getTime() - this.findresult.time) <=
-                  10000
-                ) {
-                  console.log("Wihtin 10 seconds");
-                  this.timerS = timer(0, 1000).subscribe((res: any) => {
-                    var dt =
-                      this.timeLeft -
-                      (new Date().getTime() - this.findresult.time) -
-                      res;
-                    if (dt == 0) {
-                      this.isvoted = false;
-                      this.sharedService.presentToast(
-                        "You can now revote",
-                        3000
-                      );
-                      this.timerS.unsubscribe();
-                    }
-                  });
-                } else {
-                  this.isvoted = true;
-                }
+                         this.sharedService.getTimeDifference(
+                           this.findresult.time,
+                           this.timeLeft
+                         ) <= 10000
+                       ) {
+                         console.log("Wihtin 10 seconds");
+                         this.timerS = timer(0, 1000).subscribe((res: any) => {
+                           var dt =
+                             this.timeLeft -
+                             (new Date().getTime() - this.findresult.time) -
+                             res;
+                           if (dt == 0) {
+                             this.isvoted = false;
+                             this.sharedService.remoteVoteFromData(
+                               this.items[index].first_name
+                             );
+                             this.sharedService.presentToast(
+                               "You can now revote",
+                               3000
+                             );
+                             this.timerS.unsubscribe();
+                           }
+                         });
+                       } else {
+                         this.isvoted = true;
+                       }
               } else {
                 this.isvoted = false;
               }

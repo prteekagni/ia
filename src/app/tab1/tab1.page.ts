@@ -87,7 +87,8 @@ export class Tab1Page {
     //Add 'implements OnInit' to the class.
     // this.slider.slideTo(this.segment);
   }
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
+   
     this.sharedService.getUserDetail().then((res: User) => {
       console.log("Response from tab1page" + res);
       this.credits = res.credits;

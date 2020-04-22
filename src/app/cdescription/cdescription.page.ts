@@ -18,13 +18,19 @@ import { ImpageuploadPage } from "../impageupload/impageupload.page";
 import { myEnterAnimation } from "../animations/enter";
 import { myLeaveAnimation } from "../animations/leave";
 import { NativeStorage } from "@ionic-native/native-storage/ngx";
-import { Crop } from '@ionic-native/crop/ngx';
-import { Subscription } from 'rxjs';
-import { async } from '@angular/core/testing';
-import { SharedService } from '../api/shared/shared.service';
-import { User } from '../models/User';
-import { fader } from '../animations/routeranimation';
-import { trigger, transition, style, animate, keyframes } from '@angular/animations';
+import { Crop } from "@ionic-native/crop/ngx";
+import { Subscription } from "rxjs";
+import { async } from "@angular/core/testing";
+import { SharedService } from "../api/shared/shared.service";
+import { User } from "../models/User";
+import { fader } from "../animations/routeranimation";
+import {
+  trigger,
+  transition,
+  style,
+  animate,
+  keyframes,
+} from "@angular/animations";
 
 declare var window;
 
@@ -67,7 +73,7 @@ export class CdescriptionPage implements OnInit {
   userDetail: User;
   isdata;
   @ViewChild("slider", { static: true }) slider: IonSlides;
-  tabvisible=true;
+  tabvisible = true;
   public unsubscribeBackEvent: Subscription;
 
   constructor(
@@ -134,34 +140,32 @@ export class CdescriptionPage implements OnInit {
                 this.imagePicker
                   .getPictures({
                     maximumImagesCount: 1,
-                    height: 300,
-                    width: 300,
-                    quality:100
+                    quality: 100,
                   })
                   .then((results) => {
                     for (var i = 0; i < results.length; i++) {
                       console.log("Image URI: " + results[i]);
                       this.tempUrl = results[i];
-                      this.crop
-                        .crop(this.tempUrl, {
-                          quality: 100,
-                          targetWidth: 300,
-                          targetHeight: 300,
-                        })
-                        .then(
-                          (newImage) =>{
-                            console.log("new image path is: " + newImage)
-                          this.imgUrl = (<any>(
-                            window
-                          )).Ionic.WebView.convertFileSrc(newImage);
-                          },
-                          (error) =>
-                            console.error("Error cropping image", error)
-                        );
-                      // this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(
-                      //   results[i]
-                      // );
-                      // console.log(this.imgUrl);
+                      // this.crop
+                      //   .crop(this.tempUrl, {
+                      //     quality: 100,
+                      //     targetWidth: 300,
+                      //     targetHeight: 300,
+                      //   })
+                      //   .then(
+                      //     (newImage) =>{
+                      //       console.log("new image path is: " + newImage)
+                      //     this.imgUrl = (<any>(
+                      //       window
+                      //     )).Ionic.WebView.convertFileSrc(newImage);
+                      //     },
+                      //     (error) =>
+                      //       console.error("Error cropping image", error)
+                      //   );
+                      this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(
+                        results[i]
+                      );
+                      console.log(this.imgUrl);
 
                       this.readimage();
                     }
@@ -199,9 +203,6 @@ export class CdescriptionPage implements OnInit {
       mediaType: this.camera.MediaType.PICTURE,
       saveToPhotoAlbum: true,
       sourceType: this.camera.PictureSourceType.CAMERA,
-      targetWidth: 300,
-      targetHeight: 300,
-      allowEdit: true,
     };
 
     this.camera.getPicture(options).then((imageData) => {
@@ -235,31 +236,24 @@ export class CdescriptionPage implements OnInit {
   async readimage() {
     let images = [];
 
-    this.storage.getItem("myitem").then((res) => {
-      images = res;
-      console.log(res);
-      if (images.length > 0) {
-        images.push({ imageUrl: this.imgUrl });
-        console.log(images);
+    // this.storage.getItem("myitem").then((res) => {
+    //   images = res;
+    //   console.log(res);
+    //   if (images.length > 0) {
+    //     images.push({ imageUrl: this.imgUrl });
+    //     console.log(images);
 
-        this.storage.setItem("myitem", images).then(
-          (res) => console.log(res),
-          (error) => console.error("Error storing item", error)
-        );
-      } else {
-        this.storage.setItem("myitem", { imageUrl: this.imgUrl }).then(
-          (res) => console.log(res),
-          (error) => console.error("Error storing item", error)
-        );
-      }
-    });
-
-    //   let resolvedImageUrl;
-    //  (<any>window).resolveLocalFileSystemURL(this.tempUrl, res => {
-    //       res.file(resFile => {
-    // resolvedImageUrl = resFile;
-    //       })
-    //     })
+    //     this.storage.setItem("myitem", images).then(
+    //       (res) => console.log(res),
+    //       (error) => console.error("Error storing item", error)
+    //     );
+    //   } else {
+    //     this.storage.setItem("myitem", { imageUrl: this.imgUrl }).then(
+    //       (res) => console.log(res),
+    //       (error) => console.error("Error storing item", error)
+    //     );
+    //   }
+    // });
     const modal = await this.modalController.create({
       component: ImpageuploadPage,
       backdropDismiss: true,
@@ -359,8 +353,6 @@ export class CdescriptionPage implements OnInit {
         } catch (error) {}
         // this.navCtrl.navigateRoot("/tabs/tab1");
         this.router.navigate(["/tabs/tab1"]);
-        // this.router.navigate(["/tabs/enteries"]);
-        // window.history.back();
       }
     );
   }

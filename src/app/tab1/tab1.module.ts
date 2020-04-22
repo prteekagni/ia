@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { SuperTabsModule } from "@ionic-super-tabs/angular";
 import { FeaturecModule } from '../components/featurec.module';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { FeaturecModule } from '../components/featurec.module';
     RouterModule.forChild([{ path: "", component: Tab1Page }]),
     SuperTabsModule,
     FeaturecModule,
-    
+    ImageCropperModule
   ],
   declarations: [Tab1Page]
 })

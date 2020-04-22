@@ -34,6 +34,7 @@ import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 import { Deeplinks } from "@ionic-native/deeplinks/ngx";
 import { AndroidPermissions } from "@ionic-native/android-permissions/ngx";
 import { ThemeDetection } from "@ionic-native/theme-detection/ngx";
+import { ImageCropperModule } from "ngx-image-cropper";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -58,6 +59,7 @@ import { ThemeDetection } from "@ionic-native/theme-detection/ngx";
     NgxMaskIonicModule.forRoot(),
     NotificationPageModule,
     EditprofilemodalPageModule,
+    ImageCropperModule,
   ],
   providers: [
     StatusBar,
