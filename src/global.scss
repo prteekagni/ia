@@ -26,7 +26,6 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
-	
 @import '~animate.css/animate.min.css';
 
 
@@ -103,9 +102,10 @@
 }
 
 .image-modal .modal-wrapper {
-    --width: 90%;
-    --height: 492px;
+    --width: 100%;
+    --height: 100vh;
     --border-radius: 5px;
+    --background: transparent
 }
 .imageupload-modal .modal-wrapper {
      --width: 95vw;
@@ -155,7 +155,51 @@
 ion-title{
   font-size: x-large !important;
 }
+
+.image-modal .modal-wrapper {
+    --width: 90%;
+    --height: 435px;
+    --border-radius: 5px;
 }
+.image-modalimg{
+  height: 250px !important;
+  width: 250px !important;
+}
+
+}
+
+@media screen and (max-width: 400px) {
+
+
+.image-modal .modal-wrapper {
+    --width: 90%;
+    --height: 435px;
+    --border-radius: 5px;
+}
+.image-modalimg{
+  height: 250px !important;
+  width: 250px !important;
+}
+
+}
+@media screen and (max-width: 320px) {
+ion-title{
+  font-size: x-large !important;
+}
+.image-modal .modal-wrapper {
+    --width: 90%;
+    --height: 422px;
+    --border-radius: 5px;
+}
+
+.image-modalimg{
+  height: 230px !important;
+  width: 230px !important;
+}
+
+}
+
+
 
 
 @media screen and (max-height: 850px) and (min-height: 731px){
@@ -245,6 +289,8 @@ ion-button{
   --background:#03A9F4;
   color: white;
   --border-color:#03A9F4;
+  --background-focused: white;
+    --background-hover: transparent;
 }
 
 .supertabtransparentbuttons {
@@ -321,4 +367,8 @@ ion-title{
 
 .footer-md:before{
   display: none;
+}
+
+.image-modal ion-backdrop{
+  opacity: .6 !important;
 }

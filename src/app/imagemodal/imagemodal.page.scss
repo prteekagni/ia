@@ -111,3 +111,12 @@ h5 {
 .iconcolor path{
   fill: red;
 }
+
+
+.slide-zoom, .swiper-slide {
+    text-align: center;
+    width: 100% !important;
+}
+ion-slide >:first-child {
+    width: 100%;
+}

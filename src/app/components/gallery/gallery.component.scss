@@ -9,8 +9,11 @@
 }
 
 ion-thumbnail{
-height: 120px;
-    width: auto;
+height: 300px;
+    width: 300px;
+}
+ion-slide >:first-child {
+    width: 100%;
 }
 
 

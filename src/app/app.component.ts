@@ -19,6 +19,7 @@ import {
   AndroidPermissionResponse,
   AndroidPermissions,
 } from "@ionic-native/android-permissions/ngx";
+import { ThemeDetection, ThemeDetectionResponse } from '@ionic-native/theme-detection/ngx';
 
 @Component({
   selector: "app-root",
@@ -40,7 +41,8 @@ export class AppComponent {
     private router: Router,
     private modalController: ModalController,
     private imagePicker: ImagePicker,
-    private androidPermissions: AndroidPermissions
+    private androidPermissions: AndroidPermissions,
+    private themeDetection: ThemeDetection
   ) {
     this.initializeApp();
   }
@@ -65,17 +67,44 @@ export class AppComponent {
           (err) => {}
         );
       }
+      this.themeDetectionmethod();
+    
     });
 
     this.platform.resume.subscribe((res) => {
       // alert("App Resumed from ");
       this.routeConfig();
-    });
+      this.themeDetectionmethod();
 
-    this.bdarkmode = localStorage.getItem("darkmode") == "true" ? true : false;
-    // console.log(this.bdarkmode);
-    this.setDarkMode(this.bdarkmode);
+    });
   }
+  themeDetectionmethod(){
+    this.themeDetection
+        .isAvailable()
+        .then((res: ThemeDetectionResponse) => {
+          if (res.value) {
+            this.themeDetection
+              .isDarkModeEnabled()
+              .then((res: ThemeDetectionResponse) => {
+                if (res.value) {
+                  this.setDarkMode(true);
+                } else {
+                  this.bdarkmode =
+                    localStorage.getItem("darkmode") == "true" ? true : false;
+                  // console.log(this.bdarkmode);
+                  this.setDarkMode(this.bdarkmode);
+                }
+              })
+              .catch((error: any) => console.error(error));
+          }
+        },err=>{
+           this.bdarkmode =
+             localStorage.getItem("darkmode") == "true" ? true : false;
+           // console.log(this.bdarkmode);
+           this.setDarkMode(this.bdarkmode);
+        })
+        .catch((error: any) => console.error(error));
+      }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.

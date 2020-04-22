@@ -21,7 +21,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CdescriptionPageRoutingModule,
     SuperTabsModule,
     FeaturecModule
-    
   ],
   declarations: [CdescriptionPage]
 })

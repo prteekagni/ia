@@ -33,6 +33,7 @@ import { AppMinimize } from "@ionic-native/app-minimize/ngx";
 import { SocialSharing } from "@ionic-native/social-sharing/ngx";
 import { Deeplinks } from "@ionic-native/deeplinks/ngx";
 import { AndroidPermissions } from "@ionic-native/android-permissions/ngx";
+import { ThemeDetection } from "@ionic-native/theme-detection/ngx";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -62,7 +63,6 @@ import { AndroidPermissions } from "@ionic-native/android-permissions/ngx";
     StatusBar,
     SplashScreen,
     // { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-
     Camera,
     ImagePicker,
     GooglePlus,
@@ -73,6 +73,7 @@ import { AndroidPermissions } from "@ionic-native/android-permissions/ngx";
     SocialSharing,
     Deeplinks,
     AndroidPermissions,
+    ThemeDetection,
   ],
   bootstrap: [AppComponent],
 })

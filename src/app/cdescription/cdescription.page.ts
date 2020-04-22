@@ -136,6 +136,7 @@ export class CdescriptionPage implements OnInit {
                     maximumImagesCount: 1,
                     height: 300,
                     width: 300,
+                    quality:100
                   })
                   .then((results) => {
                     for (var i = 0; i < results.length; i++) {
@@ -148,15 +149,19 @@ export class CdescriptionPage implements OnInit {
                           targetHeight: 300,
                         })
                         .then(
-                          (newImage) =>
-                            console.log("new image path is: " + newImage),
+                          (newImage) =>{
+                            console.log("new image path is: " + newImage)
+                          this.imgUrl = (<any>(
+                            window
+                          )).Ionic.WebView.convertFileSrc(newImage);
+                          },
                           (error) =>
                             console.error("Error cropping image", error)
                         );
-                      this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(
-                        results[i]
-                      );
-                      console.log(this.imgUrl);
+                      // this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(
+                      //   results[i]
+                      // );
+                      // console.log(this.imgUrl);
 
                       this.readimage();
                     }
