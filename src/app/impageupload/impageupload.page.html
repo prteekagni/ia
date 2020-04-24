@@ -41,9 +41,9 @@
               </ion-buttons>
             </ion-toolbar>
           </ion-header>
-          <ng-container>
+          
           <ion-content style="--overflow:hidden">
-  <ion-row  *ngIf="imagenotcropped"
+  <!-- <ion-row  *ngIf="imagenotcropped"
   style="display: flex;
     height: 100vh;
     align-items: center;">
@@ -62,7 +62,8 @@
     cropperMinHeight="1080"
     maintainAspectRatio="true"
     [aspectRatio]="1/1"
-    #cropper
+    [imageURL]="imageurl"
+     format="png"
   ></image-cropper>
         </ion-col>
       </ion-row>
@@ -94,15 +95,15 @@
     </ion-col>
   </ion-row>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
 
  
 
-<ion-row *ngIf="!imagenotcropped" >
+<ion-row  >
   <ion-col size="12" class="ion-align-self-center" style="padding-top:16px">
   <ion-row>
     <ion-col size="12">
-      <img [src]="croppedImage" alt="">
+      <img [src]="imageurl" alt="" style="border-radius: 10px;">
     </ion-col>
   </ion-row>
 <ion-row>
@@ -125,4 +126,4 @@
 <ion-footer *ngIf="!imagenotcropped" style="background: white;
     padding: 5px;">
 </ion-footer>
-</ng-container>
+          

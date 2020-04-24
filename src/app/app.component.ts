@@ -121,53 +121,6 @@ export class AppComponent {
     //  });
   }
 
-  // backButtonEvent() {
-  //   this.platform.backButton.subscribe(async () => {
-  //     try {
-  //       const element = await this.actionSheetCtrl.getTop();
-
-  //       if (element) {
-  //         element.dismiss();
-  //         return;
-  //       }
-  //     } catch (error) {}
-
-  //     try {
-  //       const element = await this.modalCtrl.getTop();
-  //       if (element) {
-  //         element.dismiss();
-  //         return;
-  //       }
-  //     } catch (error) {}
-
-  //     // this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
-
-  //     // if (outlet && outlet.canGoBack()) {
-  //     //   outlet.pop();
-  //     // }
-  //     if (this.router.url == "/tabs/tab1") {
-  //       alert(this.router.url);
-  //       if (
-  //         new Date().getTime() - this.lastTimeBackPress <
-  //         this.timePeriodToExit
-  //       ) {
-  //         console.log("App need to exit");
-  //       } else {
-  //         this.createToast();
-  //         this.lastTimeBackPress = new Date().getTime();
-  //       }
-  //     } else if (
-  //       this.router.url == "/tabs/tab2" ||
-  //       this.router.url == "/tabs/tab2" ||
-  //       this.router.url == "/tabs/tab3" ||
-  //       this.router.url == "/tabs/enteries"
-  //     ) {
-  //       this.router.navigate(["/tabs/tab1"]);
-  //     }
-  //   });
-  //   // });
-  //   // })
-  // }
 
   ionViewDidLeave() {
     this.platform.backButton.unsubscribe();
@@ -184,7 +137,6 @@ export class AppComponent {
 
   setDarkMode(data) {
     document.body.classList.toggle("dark", data);
-    // document.body.classList.toggle("dark", ev.detail.checked);
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
   }
 

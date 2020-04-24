@@ -18,6 +18,7 @@ export class SharedService {
   // subject = new AsyncSubject();
   //  subject = new Subject<any>();
   @Output() credits: EventEmitter<number> = new EventEmitter();
+  loading;
   constructor(
     private toastCtrl: ToastController,
     private socialSharing: SocialSharing,
@@ -143,20 +144,16 @@ export class SharedService {
     });
   }
 
-  async loadingControllerDisplay() {
-    const loading = await this.loadingController.create({
-      spinner: null,
-      message: "Click the backdrop to dismiss early...",
-      translucent: true,
-      cssClass: "custom-class custom-loading",
-      backdropDismiss: true,
+ async  loadingControllerDisplay() {
+     this.loading = await this.loadingController.create({
+      message: "Please wait...",
     });
-    await loading.present();
+     this.loading.present();
   }
 
   async dismissLoadingController() {
-    if (this.loadingController) {
-      this.loadingController.dismiss();
+    if (this.loading) {
+      this.loading.dismiss();
     }
   }
 

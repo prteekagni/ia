@@ -14,7 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ForgotpasswordmodalPageModule } from './forgotpasswordmodal/forgotpasswordmodal.module';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ImagePicker } from "@ionic-native/image-picker/ngx";
 import {  SuperTabsModule } from "@ionic-super-tabs/angular";
 import { AddmodalPageModule } from './addmodal/addmodal.module';
@@ -35,6 +35,9 @@ import { Deeplinks } from "@ionic-native/deeplinks/ngx";
 import { AndroidPermissions } from "@ionic-native/android-permissions/ngx";
 import { ThemeDetection } from "@ionic-native/theme-detection/ngx";
 import { ImageCropperModule } from "ngx-image-cropper";
+import { InterceptorService } from './api/shared/interceptor.service';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -65,6 +68,7 @@ import { ImageCropperModule } from "ngx-image-cropper";
     StatusBar,
     SplashScreen,
     // { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService , multi:true },
     Camera,
     ImagePicker,
     GooglePlus,

@@ -12,18 +12,14 @@ import {
 import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
 import { HttpClient } from "@angular/common/http";
 import { ImagePicker } from "@ionic-native/image-picker/ngx";
-
 import { ImagemodalPage } from "../imagemodal/imagemodal.page";
 import { ImpageuploadPage } from "../impageupload/impageupload.page";
 import { myEnterAnimation } from "../animations/enter";
 import { myLeaveAnimation } from "../animations/leave";
-import { NativeStorage } from "@ionic-native/native-storage/ngx";
-import { Crop } from "@ionic-native/crop/ngx";
 import { Subscription } from "rxjs";
-import { async } from "@angular/core/testing";
 import { SharedService } from "../api/shared/shared.service";
 import { User } from "../models/User";
-import { fader } from "../animations/routeranimation";
+
 import {
   trigger,
   transition,
@@ -33,7 +29,14 @@ import {
 } from "@angular/animations";
 
 declare var window;
-
+declare var plugins;
+export interface CropOptions {
+  quality?: number;
+  targetHeight?: number;
+  targetWidth?: number;
+  widthRatio: number;
+  heightRatio: number;
+}
 @Component({
   selector: "app-cdescription",
   templateUrl: "./cdescription.page.html",
@@ -74,45 +77,29 @@ export class CdescriptionPage implements OnInit {
   isdata;
   @ViewChild("slider", { static: true }) slider: IonSlides;
   tabvisible = true;
+  entryID;
   public unsubscribeBackEvent: Subscription;
-
   constructor(
     private router: Router,
     private actionSheetController: ActionSheetController,
     private camera: Camera,
     public http: HttpClient,
     public imagePicker: ImagePicker,
-    private storage: NativeStorage,
     private modalController: ModalController,
     private popoverController: PopoverController,
     private route: ActivatedRoute,
-    private crop: Crop,
     private platform: Platform,
     private actionSheetCtrl: ActionSheetController,
     private alertController: AlertController,
-    private sharedService: SharedService,
-    private navCtrl: NavController
-  ) {
-    this.items = [
-      { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
-      { position: 2, name: "Helium", weight: 4.0026, symbol: "He" },
-      { position: 3, name: "Lithium", weight: 6.941, symbol: "Li" },
-      { position: 4, name: "Beryllium", weight: 9.0122, symbol: "Be" },
-      { position: 5, name: "Boron", weight: 10.811, symbol: "B" },
-      { position: 6, name: "Carbon", weight: 12.0107, symbol: "C" },
-      { position: 7, name: "Nitrogen", weight: 14.0067, symbol: "N" },
-    ];
-  }
+    private sharedService: SharedService
+  ) {}
 
   ngOnInit() {
-    // this.route.paramMap()
     let contestID = this.route.snapshot.paramMap.get("id");
-    let entryID = +this.route.snapshot.queryParamMap.get("entryId");
-    if (entryID != 0) {
+     this.entryID = +this.route.snapshot.queryParamMap.get("entryId");
+    if (this.entryID != 0) {
       this.openimageModal();
     }
-    console.log("Contests ID is " + contestID);
-    console.log("Entry ID is " + entryID);
   }
 
   ionViewWillEnter() {
@@ -127,13 +114,6 @@ export class CdescriptionPage implements OnInit {
           header: "Select Image",
           buttons: [
             {
-              text: "Camera",
-              icon: "camera",
-              handler: () => {
-                this.openCamera("CAMERA");
-              },
-            },
-            {
               text: "Gallery",
               icon: "arrow-dropright-circle",
               handler: () => {
@@ -146,28 +126,25 @@ export class CdescriptionPage implements OnInit {
                     for (var i = 0; i < results.length; i++) {
                       console.log("Image URI: " + results[i]);
                       this.tempUrl = results[i];
-                      // this.crop
-                      //   .crop(this.tempUrl, {
-                      //     quality: 100,
-                      //     targetWidth: 300,
-                      //     targetHeight: 300,
-                      //   })
-                      //   .then(
-                      //     (newImage) =>{
-                      //       console.log("new image path is: " + newImage)
-                      //     this.imgUrl = (<any>(
-                      //       window
-                      //     )).Ionic.WebView.convertFileSrc(newImage);
-                      //     },
-                      //     (error) =>
-                      //       console.error("Error cropping image", error)
-                      //   );
-                      this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(
-                        results[i]
-                      );
-                      console.log(this.imgUrl);
-
-                      this.readimage();
+                      plugins.crop
+                        .promise(this.tempUrl, {
+                          quality: 100,
+                          targetWidth: 1080,
+                          targetHeight: 1080,
+                          heightRatio: 1,
+                          widthRatio: 1,
+                        })
+                        .then(
+                          (newImage) => {
+                            console.log("new image path is: " + newImage);
+                            this.imgUrl = (<any>(
+                              window
+                            )).Ionic.WebView.convertFileSrc(newImage);
+                            this.readimage();
+                          },
+                          (error) =>
+                            console.error("Error cropping image", error)
+                        );
                     }
                   });
                 (err) => {
@@ -183,6 +160,13 @@ export class CdescriptionPage implements OnInit {
                 console.log("Cancel clicked");
               },
             },
+            {
+              text: "Camera",
+              icon: "camera",
+              handler: () => {
+                this.openCamera();
+              },
+            },
           ],
         });
         await actionSheet.present();
@@ -194,21 +178,34 @@ export class CdescriptionPage implements OnInit {
   onClick() {
     this.router.navigate(["/enteries"]);
   }
-  openCamera(source) {
-    var srcType = "this.camera.PictureSourceType.SAVEDPHOTOALBUM";
+  openCamera() {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
+      encodingType: this.camera.EncodingType.PNG,
       mediaType: this.camera.MediaType.PICTURE,
       saveToPhotoAlbum: true,
       sourceType: this.camera.PictureSourceType.CAMERA,
     };
 
     this.camera.getPicture(options).then((imageData) => {
-      this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(imageData);
-      console.log(this.imgUrl);
-      this.readimage();
+      plugins.crop
+        .promise(imageData, {
+          quality: 100,
+          targetWidth: 1080,
+          targetHeight: 1080,
+          heightRatio: 1,
+          widthRatio: 1,
+        })
+        .then(
+          (newImage) => {
+            console.log("new image path is: " + newImage);
+            this.imgUrl = (<any>window).Ionic.WebView.convertFileSrc(newImage);
+            this.readimage();
+            console.log(plugins.crop);
+          },
+          (error) => console.error("Error cropping image", error)
+        );
     });
   }
 
@@ -234,30 +231,9 @@ export class CdescriptionPage implements OnInit {
   }
 
   async readimage() {
-    let images = [];
-
-    // this.storage.getItem("myitem").then((res) => {
-    //   images = res;
-    //   console.log(res);
-    //   if (images.length > 0) {
-    //     images.push({ imageUrl: this.imgUrl });
-    //     console.log(images);
-
-    //     this.storage.setItem("myitem", images).then(
-    //       (res) => console.log(res),
-    //       (error) => console.error("Error storing item", error)
-    //     );
-    //   } else {
-    //     this.storage.setItem("myitem", { imageUrl: this.imgUrl }).then(
-    //       (res) => console.log(res),
-    //       (error) => console.error("Error storing item", error)
-    //     );
-    //   }
-    // });
     const modal = await this.modalController.create({
       component: ImpageuploadPage,
       backdropDismiss: true,
-      cssClass: "imageupload-modal",
       componentProps: {
         imageUrl: this.imgUrl,
       },
@@ -310,6 +286,7 @@ export class CdescriptionPage implements OnInit {
       leaveAnimation: myLeaveAnimation,
       componentProps: {
         type: "alluploads",
+        entryID: this.entryID
       },
     });
     return await modal.present();
@@ -351,7 +328,6 @@ export class CdescriptionPage implements OnInit {
             return;
           }
         } catch (error) {}
-        // this.navCtrl.navigateRoot("/tabs/tab1");
         this.router.navigate(["/tabs/tab1"]);
       }
     );

@@ -189,7 +189,7 @@ export class LoginPage {
         // }
 
   
-
+this.sharedService.loadingControllerDisplay();
     this.GooglePlus.login({})
       .then((res:any) => {
         if (res.email == this.userData.email && this.userData.loggedVia == "email") {
@@ -202,6 +202,7 @@ export class LoginPage {
             (res) => console.log(res),
             (err) => console.log(err)
           );
+          this.sharedService.dismissLoadingController();
           this.router.navigate(["/tabs/tab1"], { replaceUrl: true });
         } else {
           // this.userData = { ...res };
@@ -216,6 +217,8 @@ export class LoginPage {
             (res) => console.log(res),
             (err) => console.log(err)
           );
+          this.sharedService.dismissLoadingController();
+
           this.router.navigate(["/tabs/tab1"], { replaceUrl: true });
         }
       

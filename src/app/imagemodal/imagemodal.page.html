@@ -102,7 +102,7 @@
           </ion-col>
         </ion-row>
       -->
-      <ng-container *ngIf="items.length >0">
+      <ng-container *ngIf="items.length >0;else noslidertemplate">
   <ion-slides
         mode="ios"
         (ionSlideReachEnd)="isEnd($event)"
@@ -113,7 +113,7 @@
       >
         <ion-slide *ngFor="let item of items">
           <ion-row>
-            <ion-col size="12">
+            <ion-col size="12" >
               <ion-row>
                 <ion-col size="12">
                   <h2 style="color: white;">Prateek Agnihotri</h2>
@@ -249,7 +249,116 @@
       </ion-slides>
 
       </ng-container>
-    
+    <ng-template #noslidertemplate>
+     <ion-row style="    height: 100%;
+    /* display: block; */
+    align-items:center">
+            <ion-col size="12" style="text-align: center;">
+              <ion-row>
+                <ion-col size="12">
+                  <h2 style="color: white;">Prateek Agnihotri</h2>
+                  <h6 style="color: white;">1000 votes</h6>
+                </ion-col>
+                <ion-col size="12">
+                  <div>
+                    <img
+                      src="../../assets/123.png"
+                      alt=""
+                      style="width: 300px; height: 300px;"
+                      class="image-modalimg"
+                    />
+                    <ion-label
+                      (click)="presentPopover($event)"
+                      style="
+                        position: absolute;
+                        color: white;
+                        margin-left: -65px;
+                        color: black;
+                        top: 5px;
+                      "
+                    >
+                      <ion-icon
+                        name="md-more"
+                        style="
+                          font-size: 30px;
+                          background: white;
+                          border-radius: 50%;
+                        "
+                      ></ion-icon>
+                    </ion-label>
+
+                    <ion-label
+                      (click)="closeImageModal($event)"
+                      style="
+                        position: absolute;
+                        color: white;
+                        margin-left: -30px;
+                        color: black;
+                      "
+                    >
+                      <ion-icon
+                        name="md-close"
+                        style="
+                          font-size: 30px;
+                          background: white;
+                          border-radius: 50%;
+                        "
+                      ></ion-icon>
+                    </ion-label>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="12">
+                  <ng-container *ngIf="!iswinner">
+                    <ion-row>
+                      <ion-col size="6">
+                        <ion-button
+                          fill="outline"
+                          expand="block"
+                          (click)="vote(item)"
+                          *ngIf="!isvoted"
+                        >
+                          <ion-icon
+                            name="heart"
+                            style="padding-right: 5px;"
+                          ></ion-icon>
+                          Vote
+                        </ion-button>
+                        <ion-button
+                          fill="outline"
+                          expand="block"
+                          (click)="voted(item)"
+                          *ngIf="isvoted"
+                          style="--opacity: 0.7;"
+                        >
+                          <ion-icon
+                            name="heart"
+                            style="padding-right: 5px;"
+                          ></ion-icon>
+                          Vote
+                        </ion-button>
+                      </ion-col>
+                      <ion-col size="6" class="ion-text-right">
+                        <ion-button
+                          fill="outline"
+                          expand="block"
+                          (click)="superVote()"
+                          class="supervotedbtn"
+                          style="--padding-end: 3px; --padding-start: 7px;"
+                        >
+                          <ion-icon name="heart" slot="start"></ion-icon>
+                          <!-- <ion-icon name="md-close" slot="start" style="margin-right: 0px;"></ion-icon> -->
+                          Super Vote
+                        </ion-button>
+                      </ion-col>
+                    </ion-row>
+                  </ng-container>
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+</ng-template>
     </ng-container>
   </ng-container>
   <!-- <ion-fab

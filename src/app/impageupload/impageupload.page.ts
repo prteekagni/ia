@@ -2,11 +2,16 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { ForgotpasswordmodalPage } from '../forgotpasswordmodal/forgotpasswordmodal.page';
 import { ImageCroppedEvent, ImageCropperComponent, ImageTransform } from 'ngx-image-cropper';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SharedService } from '../api/shared/shared.service';
-import { trigger, transition, style, animate, keyframes } from '@angular/animations';
 import { stepper } from '../animations/routeranimation';
-
+import { DomSanitizer } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
+const httpOptions = {
+  headers: new HttpHeaders({
+    "Access-Control-Allow-Origin": "*",
+  }),
+};
 @Component({
   selector: "app-impageupload",
   templateUrl: "./impageupload.page.html",
@@ -14,35 +19,73 @@ import { stepper } from '../animations/routeranimation';
   animations: [stepper],
 })
 export class ImpageuploadPage implements OnInit {
-  
-  @Input() imageUrl;
+  imageurl;
   transform: ImageTransform = {};
   canvasRotation = 0;
   rotation = 0;
-  imagenotcropped: boolean = true;
+  imagenotcropped: boolean = false;
   isloaded;
   @ViewChild(ImageCropperComponent, { static: false })
   angularComponent: ImageCropperComponent;
+  isnotloaded :boolean = false;
   constructor(
     private modalController: ModalController,
     private httpClient: HttpClient,
     private sharedService: SharedService,
-    private navParams: NavParams
+    private navParams: NavParams,
+    private domSanitizer: DomSanitizer
   ) {
-      var imgUrl = this.navParams.get("imageUrl");
-      console.log(imgUrl);
+   
+    
 
+    // const data = Observable.create((observer) => {
+    //   fetch(this.navParams.get("imageUrl"), {
+    //   method: "GET",
+    //   headers: {
+    //    'Access-Control-Allow-Origin':"*",
+    //    'Access-Control-Allow-Headers':"*"
+    //   }})
+    //     .then((response) => { response.blob()}) // or text() or blob() etc.
+    //     .then((data) => {
+    //       alert(data);
+    //       observer.next(data);
+    //       observer.complete();
+    //     })
+    //     .catch((err) => observer.error(err));
+    // })
+    // this.httpClient
+    //   .get(imagerl, httpOptions)
+    //   .subscribe((res) => console.log(res));
+    //   return this.httpClient
+    //     .get(imagerl)
+    //     .pipe(map(e => this.domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(e))))
+    // }
+
+    // this.httpClient
+    //   .get("url")
+    //   .pipe(
+    //     map((e) =>
+    //       this.domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(e))
+    //     )
+    //   ).subscribe((res:any)=>{
+    //     this.imageUrl = res;
+    //   });
+    //  this.dataURItoBlob(imagerl);
+    // console.log(this.imageUrl);
   }
-  
 
   ngOnInit() {}
 
-
-  ionViewWillEnter(){
-    
-      // this.angularComponent.safeImgDataUrl = this.navParams.get("imageUrl");
-      this.angularComponent.sourceImage = this.navParams.get("imageUrl")
-
+  ionViewWillEnter() {
+     var imagerl = this.navParams.get("imageUrl");
+     console.log(imagerl);
+    // this.angularComponent.safeImgDataUrl = this.navParams.get("imageUrl");
+    // this.angularComponent.sourceImage = this.navParams.get()
+    this.imageurl = imagerl;
+    // this.angularComponent.imageLoaded.subscribe((res:any)=>{
+    //   console.log(res);
+    //   this.isnotloaded = false;
+    // })
   }
   closeModal() {}
   goToTabBar() {}
