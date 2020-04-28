@@ -36,7 +36,7 @@ import { AndroidPermissions } from "@ionic-native/android-permissions/ngx";
 import { ThemeDetection } from "@ionic-native/theme-detection/ngx";
 import { ImageCropperModule } from "ngx-image-cropper";
 import { InterceptorService } from './api/shared/interceptor.service';
-
+import { File } from "@ionic-native/file/ngx";
 
 @NgModule({
   declarations: [AppComponent],
@@ -68,7 +68,7 @@ import { InterceptorService } from './api/shared/interceptor.service';
     StatusBar,
     SplashScreen,
     // { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService , multi:true },
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     Camera,
     ImagePicker,
     GooglePlus,
@@ -80,6 +80,7 @@ import { InterceptorService } from './api/shared/interceptor.service';
     Deeplinks,
     AndroidPermissions,
     ThemeDetection,
+    File,
   ],
   bootstrap: [AppComponent],
 })

@@ -15,6 +15,8 @@ import { CdescriptionPage } from "./cdescription/cdescription.page";
 import { ImagemodalPage } from "./imagemodal/imagemodal.page";
 import { ImpageuploadPage } from "./impageupload/impageupload.page";
 import { ImagePicker } from "@ionic-native/image-picker/ngx";
+import { File } from "@ionic-native/file/ngx";
+
 import {
   AndroidPermissionResponse,
   AndroidPermissions,
@@ -42,7 +44,8 @@ export class AppComponent {
     private modalController: ModalController,
     private imagePicker: ImagePicker,
     private androidPermissions: AndroidPermissions,
-    private themeDetection: ThemeDetection
+    private themeDetection: ThemeDetection,
+    private file: File
   ) {
     this.initializeApp();
   }
@@ -78,9 +81,13 @@ export class AppComponent {
         );
       }
       this.themeDetectionmethod();
-    
+    this.file
+      .checkDir(this.file.externalApplicationStorageDirectory, "mydir")
+      .then((_) => console.log("Directory exists"))
+      .catch((err) => {
+        console.log("Directory doesnt exist");
+      });
     });
-
     this.platform.resume.subscribe((res) => {
       // alert("App Resumed from ");
       this.routeConfig();

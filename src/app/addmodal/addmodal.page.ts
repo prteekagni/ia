@@ -30,7 +30,7 @@ export class AddmodalPage implements OnInit {
 
   ngOnInit() {
     document.addEventListener("admob.rewardvideo.events.LOAD", () => {
-           this.sharedService.dismissLoadingController();
+      this.sharedService.dismissLoadingController();
     });
     document.addEventListener("admob.rewardvideo.events.CLOSE", () => {
       if (this.iscredited) {
@@ -74,9 +74,10 @@ export class AddmodalPage implements OnInit {
         console.log(res);
         this.sharedService.loadingControllerDisplay();
         plugins.AdMob.rewardvideo.show().then(
-          (res) => {console.log("From Show" + res); this.sharedService.dismissLoadingController()},
-          (err) => {console.log(err);
-                    this.sharedService.dismissLoadingController();}
+          (res) => { console.log("From Show" + res) },
+          (err) => {
+            console.log(err);
+          }
         );
       },
       (err) => console.log(err)
@@ -89,5 +90,5 @@ export class AddmodalPage implements OnInit {
     }, 1000);
   }
 
-  ionViewDidLeave() {}
+  ionViewDidLeave() { }
 }
