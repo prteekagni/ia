@@ -20,7 +20,7 @@ import {
 import { SharedService } from "../api/shared/shared.service";
 import { Subscription, timer } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-
+declare var plugins;
 @Component({
   selector: "app-imagemodal",
   templateUrl: "./imagemodal.page.html",
@@ -265,6 +265,18 @@ export class ImagemodalPage implements OnInit {
     if (this.isvoted) {
       this.sharedService.presentToast("Vote is submmited", 3000);
     }
+   plugins.AdMob.interstitial.config({
+     id: "ca-app-pub-3940256099942544/8691691433",
+     autoShow: true,
+     isTesting: true,
+   });
+ 
+  plugins.AdMob.interstitial.prepare().then((res:any)=>{
+    console.log("Reponse formn prepare " + res);
+    plugins.AdMob.interstitial.show().then((res:any)=>{
+      console.log("Response form show " + res); 
+    })
+  })
   }
 
   shareApp() {

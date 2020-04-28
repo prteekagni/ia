@@ -121,6 +121,7 @@ export class CdescriptionPage implements OnInit {
                   .getPictures({
                     maximumImagesCount: 1,
                     quality: 100,
+                    outputType:0
                   })
                   .then((results) => {
                     for (var i = 0; i < results.length; i++) {

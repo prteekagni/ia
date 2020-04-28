@@ -2,13 +2,13 @@ import { Component, OnInit } from "@angular/core";
 import { ModalController } from "@ionic/angular";
 import { Subscription, interval, timer, Observable } from "rxjs";
 import { SharedService } from "../api/shared/shared.service";
-import { fader } from '../animations/routeranimation';
-
+import { fader } from "../animations/routeranimation";
+declare var plugins;
 @Component({
   selector: "app-addmodal",
   templateUrl: "./addmodal.page.html",
   styleUrls: ["./addmodal.page.scss"],
-  animations:[fader]
+  animations: [fader],
 })
 export class AddmodalPage implements OnInit {
   addTimer;
@@ -17,7 +17,10 @@ export class AddmodalPage implements OnInit {
   timeLeft: number = 10;
   minutes: number;
   seconds: number;
-  isloaded:boolean = false;
+  isloaded: boolean = false;
+  credits;
+  iscredited: boolean = false;
+
   constructor(
     private modalController: ModalController,
     private sharedService: SharedService
@@ -25,56 +28,66 @@ export class AddmodalPage implements OnInit {
     // this.timeObs = timer(0,1000);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    document.addEventListener("admob.rewardvideo.events.LOAD", () => {
+           this.sharedService.dismissLoadingController();
+    });
+    document.addEventListener("admob.rewardvideo.events.CLOSE", () => {
+      if (this.iscredited) {
+        setTimeout(() => {
+          this.sharedService.presentToast(
+            "10 Photo rewards added to your account",
+            3000
+          );
+        }, 500);
+      }
+    });
+    document.addEventListener("admob.rewardvideo.events.REWARD", () => {
+      this.sharedService.getUserDetail().then((res: any) => {
+        res.credits = res.credits + 10;
+        this.sharedService.saveUserDetail(res).then(
+          (res: any) => {
+            this.credits = res.credits;
+            this.iscredited = true;
+          },
+          (err) => {
+            console.log(err);
+            return err;
+          }
+        );
+      });
+    });
+  }
 
   closeImageModal(event) {
-    this.modalController.dismiss();
+    this.modalController.dismiss(this.credits);
   }
 
   watchAdsForCredit() {
-    this.sharedService.getUserDetail().then((res: any) => {
-      //  alert("Current Credit " + res.credits);
-      res.credits = res.credits + 10;
-      this.sharedService.saveUserDetail(res).then(
-        (res: any) => {
-          // alert("Updated Credit avaliable " + res.credits);
-          console.log(res.credits);
-          this.sharedService.presentToast(
-            "10 Photo rewards added to your account",
-            2000
-          );
-          this.modalController.dismiss(res.credits);
-        },
-        (err) => {
-          console.log(err);
-          return err;
-        }
-      );
+    plugins.AdMob.rewardvideo.config({
+      id: "ca-app-pub-3940256099942544/5224354917",
+      isTesting: true,
+      autoShow: true,
     });
-    // this.sharedService.addCredits(10).then((res: any) => {
-    //   console.log(res);
-    //   this.sharedService.presentToast("10 Photo rewards added to your account", 2000);
-    //   this.modalController.dismiss();
-    // },err=>{
-    //   console.log(err);
-    // });
+    plugins.AdMob.rewardvideo.prepare().then(
+      (res) => {
+        console.log(res);
+        this.sharedService.loadingControllerDisplay();
+        plugins.AdMob.rewardvideo.show().then(
+          (res) => {console.log("From Show" + res); this.sharedService.dismissLoadingController()},
+          (err) => {console.log(err);
+                    this.sharedService.dismissLoadingController();}
+        );
+      },
+      (err) => console.log(err)
+    );
   }
 
   ionViewWillEnter() {
     setTimeout(() => {
       this.isloaded = true;
     }, 1000);
-    //     this.timingSubs = this.timeObs.subscribe((res:any)=>{
-    //       var timeleft = (this.timeLeft * 60 ) - res;
-    //       console.log(timeleft);
-    //       this.minutes = Math.floor(timeleft/60);
-    //       this.seconds = Math.floor(timeleft - Math.floor(timeleft / 60) * 60);
-    // console.log(Math.floor(timeleft / 60));
-    // console.log()
-    //     })
   }
 
-  ionViewDidLeave() {
-    // this.timingSubs.unsubscribe();
-  }
+  ionViewDidLeave() {}
 }

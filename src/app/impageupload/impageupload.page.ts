@@ -6,7 +6,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SharedService } from '../api/shared/shared.service';
 import { stepper } from '../animations/routeranimation';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+
+
+
 const httpOptions = {
   headers: new HttpHeaders({
     "Access-Control-Allow-Origin": "*",
@@ -19,7 +21,7 @@ const httpOptions = {
   animations: [stepper],
 })
 export class ImpageuploadPage implements OnInit {
-  imageurl;
+  @Input()imageUrl;
   transform: ImageTransform = {};
   canvasRotation = 0;
   rotation = 0;
@@ -27,65 +29,19 @@ export class ImpageuploadPage implements OnInit {
   isloaded;
   @ViewChild(ImageCropperComponent, { static: false })
   angularComponent: ImageCropperComponent;
-  isnotloaded :boolean = false;
+  isnotloaded: boolean = false;
   constructor(
     private modalController: ModalController,
-    private httpClient: HttpClient,
     private sharedService: SharedService,
-    private navParams: NavParams,
-    private domSanitizer: DomSanitizer
-  ) {
-   
-    
-
-    // const data = Observable.create((observer) => {
-    //   fetch(this.navParams.get("imageUrl"), {
-    //   method: "GET",
-    //   headers: {
-    //    'Access-Control-Allow-Origin':"*",
-    //    'Access-Control-Allow-Headers':"*"
-    //   }})
-    //     .then((response) => { response.blob()}) // or text() or blob() etc.
-    //     .then((data) => {
-    //       alert(data);
-    //       observer.next(data);
-    //       observer.complete();
-    //     })
-    //     .catch((err) => observer.error(err));
-    // })
-    // this.httpClient
-    //   .get(imagerl, httpOptions)
-    //   .subscribe((res) => console.log(res));
-    //   return this.httpClient
-    //     .get(imagerl)
-    //     .pipe(map(e => this.domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(e))))
-    // }
-
-    // this.httpClient
-    //   .get("url")
-    //   .pipe(
-    //     map((e) =>
-    //       this.domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(e))
-    //     )
-    //   ).subscribe((res:any)=>{
-    //     this.imageUrl = res;
-    //   });
-    //  this.dataURItoBlob(imagerl);
-    // console.log(this.imageUrl);
-  }
+    private navParams: NavParams
+  ) {}
 
   ngOnInit() {}
 
   ionViewWillEnter() {
-     var imagerl = this.navParams.get("imageUrl");
-     console.log(imagerl);
-    // this.angularComponent.safeImgDataUrl = this.navParams.get("imageUrl");
-    // this.angularComponent.sourceImage = this.navParams.get()
-    this.imageurl = imagerl;
-    // this.angularComponent.imageLoaded.subscribe((res:any)=>{
-    //   console.log(res);
-    //   this.isnotloaded = false;
-    // })
+    var imagerl = this.navParams.get("imageUrl");
+    console.log(imagerl);
+    // this.imageUrl = imagerl;
   }
   closeModal() {}
   goToTabBar() {}

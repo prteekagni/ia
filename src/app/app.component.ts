@@ -58,9 +58,19 @@ export class AppComponent {
         this.androidPermissions.checkPermission("WRITE_EXTERNAL_STORAGE").then(
           (res: any) => {
             console.log(res);
-            if (!res) {
+            if (!res.hasPermission) {
               this.androidPermissions.requestPermission(
                 "WRITE_EXTERNAL_STORAGE"
+              );
+            }
+          },
+          (err) => {}
+        );  this.androidPermissions.checkPermission("READ_EXTERNAL_STORAGE").then(
+          (res: any) => {
+            console.log(res);
+            if (!res.hasPermission) {
+              this.androidPermissions.requestPermission(
+                "READ_EXTERNAL_STORAGE"
               );
             }
           },

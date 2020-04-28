@@ -148,7 +148,11 @@
       "cordova-plugin-android-permissions": {},
       "cordova-plugin-theme-detection": {},
       "com-badrit-base64": {},
-      "cordova-plugin-crop": {}
+      "cordova-plugin-crop": {},
+      "cordova-plugin-admob-free": {
+        "ADMOB_APP_ID": "ca-app-pub-3940256099942544/5224354917"
+      },
+      "cordova-admob-inmobi": {}
     },
     "platforms": [
       "android"
