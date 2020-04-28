@@ -145,11 +145,13 @@ export class SharedService {
   }
 
  async  loadingControllerDisplay() {
+   if(1){
      this.loading = await this.loadingController.create({
       message: "Please wait...",
     });
      this.loading.present();
   }
+}
 
   async dismissLoadingController() {
     if (this.loading) {

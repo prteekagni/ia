@@ -102,14 +102,12 @@
           </ion-col>
         </ion-row>
       -->
-      <ng-container *ngIf="items.length >0;else noslidertemplate">
+      <ng-container *ngIf="1;else noslidertemplate">
   <ion-slides
         mode="ios"
-        (ionSlideReachEnd)="isEnd($event)"
-        (ionSlideReachStart)="isStart($event)"
         #myslides
         [options]="slideOptions"
-        style="height: 100%; display: block; vertical-align: middle;"
+        style="height: 100%;"
       >
         <ion-slide *ngFor="let item of items">
           <ion-row>

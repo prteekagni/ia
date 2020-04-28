@@ -17,34 +17,34 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router , private sharedService: SharedService) {}
   canActivate() {
     
-  //  return this.sharedService.getLoginStatus().then((res)=>{
-  //     if(res == "true"){
-  //       return true
-  //     } else {
-  //       this.router.navigate(["/login"]);
-  //       return false;
-  //     }
-  //   },err=>{
-  //      this.router.navigate(["/login"]);
-  //     return false;
+   return this.sharedService.getLoginStatus().then((res)=>{
+      if(res == "true"){
+        return true
+      } else {
+        this.router.navigate(["/login"]);
+        return false;
+      }
+    },err=>{
+       this.router.navigate(["/login"]);
+      return false;
       
-  //   })
-      return this.sharedService.getLoginStatus().then(
-        (res) => {
-          if (res == "true") {
-            return true;
-          } else {
-        // this.router.navigate(["/login"]);
+    })
+      // return this.sharedService.getLoginStatus().then(
+      //   (res) => {
+      //     if (res == "true") {
+      //       return true;
+      //     } else {
+      //   // this.router.navigate(["/login"]);
 
-            return true;
-          }
-        },
-        (err) => {
-                        //  this.router.navigate(["/login"]);
+      //       return true;
+      //     }
+      //   },
+      //   (err) => {
+      //                   //  this.router.navigate(["/login"]);
 
-                   return true;
-                 }
-      );
+      //              return true;
+      //            }
+      // );
 
     // if (localStorage.getItem("Login") == "true") {
     //   return true;
