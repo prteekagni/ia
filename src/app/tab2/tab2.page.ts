@@ -85,7 +85,7 @@ export class Tab2Page {
     const alert = await this.alertController.create({
       header: "Delete Account",
       subHeader: "",
-      message: " All the data related to the account will no more be available",
+      message: "All the data related to this account will be permanently removed.Please note, It take time to complete the delete process. ",
       buttons: [
         {
           text: "Delete",

@@ -169,7 +169,7 @@ ion-label{
 }
 
 .awardpostext{
-font-weight: 600; color: #737373;
+font-weight: 600; color: var(--ion-color-step-950,#737373);
 }
 
 // @media screen and (max-width:360px){
@@ -189,7 +189,7 @@ font-weight: 600; color: #737373;
         max-width: 20px;
     }
     .awardpostext{
-font-weight: 600; color: #737373; font-size: xx-small;
+font-weight: 600; color: var(--ion-color-step-950,#737373); font-size: xx-small;
 }
 .prizetext{
     font-size: xx-small;
